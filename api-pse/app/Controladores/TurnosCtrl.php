@@ -4,7 +4,7 @@ namespace Pse\Controladores;
 
 use Pse\Modelos\Turnos as turnos;
 
-class SalidasCtrl extends Controlador
+class TurnosCtrl extends Controlador
 {
 	public function Listar($request , $response )
 	{

@@ -118,7 +118,7 @@ $app->group('/Turnos' , function() use($app){
 	$app->post('/CerrarTurnos' , 'TurnosCtrl:CerrarTurnos');
 });
 $app->group('/Usuarios' , function() use($app){
-	$app->post('/Listar' , 'UsuariosCtrl:Listar');
+	$app->get('/Listar' , 'UsuariosCtrl:Listar');
 	$app->post('/ListarId/{id}' , 'UsuariosCtrl:ListarId');
 	$app->post('/ListarDisponible' , 'UsuariosCtrl:ListarDisponible');
 	$app->post('/Login' , 'UsuariosCtrl:Login');
