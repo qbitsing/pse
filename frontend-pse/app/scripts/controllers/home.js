@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name frontendPseApp.controller:VistaCtrl
+ * @name frontendPseApp.controller:HomeCtrl
  * @description
- * # VistaCtrl
+ * # HomeCtrl
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-  .controller('VistaCtrl', function () {
+  .controller('HomeCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

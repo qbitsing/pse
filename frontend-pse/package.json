@@ -1,5 +1,5 @@
 {
-  "name": "lockprines",
+  "name": "frontendPse",
   "private": true,
   "devDependencies": {
     "gulp-useref": "^3.1.2",

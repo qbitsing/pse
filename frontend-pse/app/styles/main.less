@@ -1,1 +1,44 @@
+@gray-base:              #000;
+@gray-darker:            lighten(@gray-base, 13.5%); // #222
+@gray-dark:              lighten(@gray-base, 20%);   // #333
+@gray:                   lighten(@gray-base, 33.5%); // #555
+@gray-light:             lighten(@gray-base, 46.7%); // #777
+@gray-lighter:           lighten(@gray-base, 93.5%); // #eee
+@white :                 #fff;
 
+@brand-primary:         #1565C0;
+@brand-success:         #5cb85c;
+@brand-info:            #5bc0de;
+@brand-warning:         #f0ad4e;
+@brand-danger:          #d9534f;
+
+
+body{
+	padding-top: 50.99px;
+}
+
+.container-fluid{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.jumbotron {
+	background: @brand-primary;
+	border-radius: 0px !important;
+}
+
+.btn-especial , .btn-especial:active{
+	background: none;
+	border-color:  @white;
+	&:hover{
+		background: rgba(255,255,255,0.2);
+		border-color:  @white;
+	}
+}
+
+.color-withe{
+	color: @white !important;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+}

@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name frontendPseApp.controller:MainCtrl
+ * @name lockPrinesApp.controller:LoginCtrl
  * @description
- * # MainCtrl
- * Controller of the frontendPseApp
+ * # LoginCtrl
+ * Controller of the lockPrinesApp
  */
 angular.module('frontendPseApp')
-  .controller('MainCtrl', function () {
+  .controller('LoginCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
