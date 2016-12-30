@@ -4,9 +4,10 @@
 var gulp = require('gulp');
 var karma = require('karma').server;
 var argv = require('yargs').argv;
+var minifyCss = require("gulp-minify-css");
 var $ = require('gulp-load-plugins')();
 
-gulp.task('styles', function() {
+/*gulp.task('styles', function() {
   return gulp.src([
       'bower_components/bootstrap/less/bootstrap.less'
     ])
@@ -16,9 +17,27 @@ gulp.task('styles', function() {
     .pipe(gulp.dest('board/styles'))
     .pipe(gulp.dest('app/styles'))
     .pipe(gulp.dest('.tmp/styles'));
+});*/
+
+var processLess = function(src, board, app, tmp, filename) {
+  return gulp.src(src)
+    .pipe($.concat(filename))
+    .pipe($.less())
+    .pipe($.postcss([$.autoprefixer]))
+    .pipe(minifyCss())
+    .pipe($.replace("app/styles", "app/styles"))
+    .pipe(gulp.dest(board))
+    .pipe(gulp.dest(app))
+    .pipe(gulp.dest(tmp));
+};
+var srcStyles = [
+  "bower_components/bootstrap/less/bootstrap.less"
+];
+ 
+gulp.task("styles", function() {
+  processLess(srcStyles, "board/styles","app/styles",".tmp/styles", "bootstrap.min.css");
+  processLess("app/styles/main.less", "board/styles","app/styles",".tmp/styles", "main.min.css");
 });
-
-
 
 gulp.task('jshint', function() {
   return gulp.src('app/scripts/**/*.js')
