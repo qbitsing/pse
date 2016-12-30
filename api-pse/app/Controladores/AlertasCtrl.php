@@ -10,22 +10,34 @@ class AlertasCtrl extends Controlador
 	{
 		$user=alertas::all()->toJson();
 		if($user!="[]"){
-			$respuesta=$user;
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$user
+			];
 		}else{
-			$respuesta="No hay ninguna alerta";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>'No hay ninguna alerta'
+			];
 		}
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function ListarId($request , $response, $args)
 	{
 		$user=alertas::where('id','=',$args['id'])->get();
 		if($user!="[]"){
-			$respuesta=$user;
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$user
+			];
 		}else{
-			$respuesta="No hay ninguna alerta con ese Id";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>'No hay ninguna alerta con ese Id'
+			];
 		}
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function Create($request , $response)
@@ -37,12 +49,18 @@ class AlertasCtrl extends Controlador
 			'id_prestamo' => $parsedBody->id_prestamo
 		]);
 		if ($user) {
-			$respuesta="Registro completo";
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>'Registro completo'
+			];
 		}
 		else{
-			$respuesta="No se ha podido completar el registro";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>'No se ha podido completar el registro'
+			];
 		}
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function Actualizar($request , $response , $args)
@@ -55,21 +73,33 @@ class AlertasCtrl extends Controlador
 			]
 		);
 		if ($user>0) {
-			$respuesta="Actualizada correctamente";
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>'Actualizada correctamente'
+			];
 		}else{
-			$respuesta="No se pudo actualizar";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>'No se pudo actualizar'
+			];
 		}	
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function Eliminar($request , $response , $args)
 	{
 		$user=alertas::where('id','=',$args['id'])->delete();
 		if ($user>0) {
-			$respuesta="Se ha eliminado exitosamente";
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>'Se ha eliminado exitosamente'
+			];
 		}else{
-			$respuesta="No se ha podido eliminar";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>'No se ha podido eliminar'
+			];
 		}	
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 }

@@ -10,22 +10,35 @@ class ClientesCtrl extends Controlador
 	{
 		$user=clientes::all()->toJson();
 		if($user!="[]"){
-			$respuesta=$user;
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$user
+			];
 		}else{
-			$respuesta="No hay ningun cliente";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>'No hay ningun cliente'
+			];
 		}
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function ListarId($request , $response, $args)
 	{
 		$user=clientes::where('id','=',$args['id'])->get();
 		if($user!="[]"){
-			$respuesta=$user;
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$user
+			];
+			
 		}else{
-			$respuesta="No hay ningun cliente con ese Id";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>'No hay ningun cliente con ese Id'
+			];
 		}
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function Create($request , $response)
@@ -36,12 +49,18 @@ class ClientesCtrl extends Controlador
 			'nombre' => $parsedBody->nombre
 		]);
 		if ($user) {
-			$respuesta="Registro completo";
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>'Registro completo'
+			];
 		}
 		else{
-			$respuesta="No se ha podido completar el registro";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>'No se ha podido completar el registro'
+			];
 		}
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function Actualizar($request , $response , $args)
@@ -52,21 +71,35 @@ class ClientesCtrl extends Controlador
 			]
 		);
 		if ($user>0) {
-			$respuesta="Actualizada correctamente";
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$'Información actualizada correctamente'
+			];
 		}else{
-			$respuesta="No se pudo actualizar";
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>'No se pudo actualizar'
+			];
 		}	
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function Eliminar($request , $response , $args)
 	{
 		$user=clientes::where('id','=',$args['id'])->delete();
 		if ($user>0) {
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$user
+			];
 			$respuesta="Se ha eliminado exitosamente";
 		}else{
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$user
+			];
 			$respuesta="No se ha podido eliminar";
 		}	
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 }
