@@ -3,9 +3,6 @@
 angular.module('frontendPseApp')
   .controller('LoginCtrl', function ($scope, $state , ApiPse,
 	SesionUsuario , $uibModal ){
-  	/*if(SesionUsuario.ObtenerUsuario() != null){
-		$state.go('Home');
-	}*/
 	$scope.userLogin = function () {
 		ApiPse
 			.getResource('Usuarios/Login' , $scope.login)
@@ -16,20 +13,7 @@ angular.module('frontendPseApp')
 					$state.go('Home');
 				}else{
 					$scope.login.contrasenaa = "";
-					console.log(data);
-					/*modalInstance = $uibModal.open({
-						animation: true,
-						ariaLabelledBy: 'modal-title',
-						ariaDescribedBy: 'modal-body',
-						templateUrl: 'myModalContent.html',
-						controller: 'ErrorVerificacionCtrl',
-						size: 'sm',
-						resolve: {
-							Scope : function(){
-								return data.data.Mensaje;
-							}
-					    }
-					});*/
+					alert(data.data.Datos);
 				}
 			},function(data){
 			});
