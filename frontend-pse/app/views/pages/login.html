@@ -3,14 +3,15 @@
 	<div class="row">
 		<div class="col-md-2">
 			<h2 class="color-withe">Proyecto</h2>
-			<form>
+			<form ng-submit="userLogin()" novalidate autocomplete="off">
 				<div class="form-group">
 					<label class="color-withe">Correo</label>
-					<input type="email" class="form-control">
+					<input type="email" class="form-control" ng-model="login.correo" required>
 				</div>
+				
 				<div class="form-group">
 					<label class="color-withe">Contraseña</label>
-					<input type="password" class="form-control">
+					<input type="password" class="form-control" ng-model="login.contrasenaa" required>
 				</div>
 				<button type="submit" class="btn btn-block btn-primary btn-especial">INICIAR SESIÓN</button>
 			</form>
