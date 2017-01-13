@@ -5,6 +5,8 @@
 @gray-light:             lighten(@gray-base, 46.7%); // #777
 @gray-lighter:           lighten(@gray-base, 93.5%); // #eee
 @white :                 #fff;
+@sidenav :               #252528;
+@menu-hover:             rgba(255 , 255 , 255 , .2);
 
 @brand-primary:         #1565C0;
 @brand-success:         #5cb85c;
@@ -12,10 +14,6 @@
 @brand-warning:         #f0ad4e;
 @brand-danger:          #d9534f;
 
-
-body{
-	padding-top: 50.99px;
-}
 
 .container-fluid{
 	padding-left: 0px;
@@ -58,3 +56,95 @@ input:-webkit-autofill {
 	margin-top: 10px;
 	margin-bottom: 60px;
 }
+/*  Estilos del menu  */
+nav.sidenav{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	background: @sidenav;
+	--webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-ms-transition: all .5s;
+	-o-transition: all .5s;
+	transition: all .5s;
+}
+.menu{
+	list-style : none;
+	line-height: 42px;
+	padding-left: 0;
+	width: 13em;
+
+}
+.menu li{
+	box-shadow: 4px 0 @menu-hover inset;
+	padding-left: 1em;
+	margin-bottom: 5px;
+	--webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-ms-transition: all .5s;
+	-o-transition: all .5s;
+	transition: all .5s;
+}
+.menu li:hover , .menu li.active{
+	box-shadow: 13em 0 @menu-hover inset;
+}
+
+.menu a{
+	color: @white;
+	display: block;
+	width: 100%;
+	font-size: 0;
+	text-decoration: none;
+	text-transform: uppercase;
+	--webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-ms-transition: all .5s;
+	-o-transition: all .5s;
+	transition: all .5s;
+}
+.menu a:hover , .menu li.active a{
+	margin-left: 0;
+}
+nav a i{
+	padding-right: 5px;
+	font-size: 14px !important;
+}
+/*  Fin de estilos del menu  */
+
+/*  Estilos del menu en responsive  */	
+nav.sidenav{
+	position: absolute;
+	width: 4em;
+	z-index: 20;
+}
+nav.mostrar{
+	width: 13em;
+}
+nav.mostrar a{
+	font-size: 14px;
+}
+nav.mostrar a i {
+	margin-left: 0;
+}
+#MostrarNav a:hover {
+	margin-left: 0;
+}
+#MostrarNav , #MostrarNav:hover {
+	width: 3em;
+	height: 100%;
+	margin-left: 0em;
+	box-shadow: none;
+}
+
+nav.mostrar #MostrarNav{
+	margin-left: 9em;
+}
+
+nav.mostrar a:hover, nav.mostrar li.active a{
+	margin-left: 1em;
+}
+
+
+/*  Fin de estilos del menu en responsive  */
