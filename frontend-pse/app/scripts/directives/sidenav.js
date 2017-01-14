@@ -27,6 +27,15 @@ angular.module('frontendPseApp')
 						$scope.classMenu = '';
 					}
 				}
+				$scope.sidenav = function (){
+					if ($scope.ClickMenu == 'gn-menu-wrapper gn-open-all') {
+						$scope.ClickMenu = '';
+					}else{
+						$scope.ClickMenu= 'gn-menu-wrapper gn-open-all';
+					}
+					
+				}
 			}
 		};
+
 	});
