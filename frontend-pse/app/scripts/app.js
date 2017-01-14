@@ -35,9 +35,9 @@ angular
     $urlRouterProvider.when('/Dashboard', '/Login');
     $urlRouterProvider.otherwise('/Login');
     $stateProvider
-      .state('plain', {
+      .state('base', {
   	    abstract: true,
-  	    url: '',
+  	    url: '/Dashboard',
   	    templateUrl: 'views/pages/base.html',
         controller : 'BaseCtrl'
       })
@@ -48,6 +48,7 @@ angular
       })
       .state('Home', {
         url: '/Home',
+        parent: 'base',
         templateUrl: 'views/pages/home.html',
         controller: 'HomeCtrl'
       });

@@ -17,14 +17,19 @@ angular.module('frontendPseApp')
 			controller: function($scope){
 				$scope.arrow = 'left';
 				$scope.classMenu = 'mostrar';
+				angular.element('.contenedor-principal').addClass('angosto');
 
 				$scope.mostrarNav = function(){
 					if($scope.arrow == 'right'){
 						$scope.arrow = 'left';
 						$scope.classMenu = 'mostrar';
+						angular.element('.contenedor-principal').removeClass('ancho');
+						angular.element('.contenedor-principal').addClass('angosto');
 					}else{
 						$scope.arrow = 'right';
 						$scope.classMenu = '';
+						angular.element('.contenedor-principal').removeClass('angosto');
+						angular.element('.contenedor-principal').addClass('ancho');
 					}
 				}
 			}
