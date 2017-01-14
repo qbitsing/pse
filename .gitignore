@@ -1,4 +1,5 @@
-/api-pse/vendor/*
-/frontend-pse/node_modules/*
-/frontend-pse/bower_components/*
-/PSE.sublime-project
+api-pse/vendor/
+frontend-pse/node_modules/
+frontend-pse/bower_components/
+PSE.sublime-project
+PSE.sublime-workspace

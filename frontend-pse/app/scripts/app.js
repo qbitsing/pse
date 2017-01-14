@@ -32,8 +32,8 @@ angular
       .setNotify(true, true)
   })
   .config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.when('/Dashboard', '/Login');
-    $urlRouterProvider.otherwise('/Login');
+    //$urlRouterProvider.when('/Dashboard', '/Login');
+    //$urlRouterProvider.otherwise('/Login');
     $stateProvider
       .state('base', {
   	    abstract: true,
