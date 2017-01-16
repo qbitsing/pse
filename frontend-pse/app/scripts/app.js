@@ -32,8 +32,8 @@ angular
       .setNotify(true, true)
   })
   .config(function ($stateProvider, $urlRouterProvider) {
-    //$urlRouterProvider.when('/Dashboard', '/Login');
-    //$urlRouterProvider.otherwise('/Login');
+    $urlRouterProvider.when('/Dashboard', '/Login');
+    $urlRouterProvider.otherwise('/Login');
     $stateProvider
       .state('base', {
   	    abstract: true,
@@ -51,5 +51,11 @@ angular
         parent: 'base',
         templateUrl: 'views/pages/home.html',
         controller: 'HomeCtrl'
+      })
+      .state('Usuarios' , {
+        url: '/Usuarios',
+        parent: 'base',
+        templateUrl: 'views/pages/usuarios.html',
+        controller: 'UsuariosCtrl'
       });
   });

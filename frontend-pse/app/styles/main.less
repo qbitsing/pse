@@ -14,26 +14,14 @@
 @brand-warning:         #f0ad4e;
 @brand-danger:          #d9534f;
 
+.contenedor-principal{
+	margin-top: 60px;
+}
+
 .container-fluid{
 	padding-left: 0px;
 	padding-right: 0px;
 }
-
-.contenedor-principal , nav.sidenav , .menu li , .menu a{
-	--webkit-transition: all .5s;
-	-moz-transition: all .5s;
-	-ms-transition: all .5s;
-	-o-transition: all .5s;
-	transition: all .5s;
-}
-
-.angosto{
-	margin-left: 13.4em;
-}
-.ancho{
-	margin-left: 4.3em; 
-}
-
 .jumbotron {
 	border-radius: 0px !important;
 	margin-bottom: 0;
@@ -70,95 +58,8 @@ input:-webkit-autofill {
 	margin-top: 10px;
 	margin-bottom: 60px;
 }
-/*  Estilos del menu  */
-/*
-nav.sidenav{
-	position: fixed;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	overflow-y: scroll;
-	overflow-x: hidden;
-	background: @sidenav;
-}
-.menu{
-	list-style : none;
-	line-height: 42px;
-	padding-left: 0;
-	width: 13em;
-
-}
-.menu li{
-	box-shadow: 4px 0 @menu-hover inset;
-	padding-left: 1em;
-	margin-bottom: 5px;
-}
-.menu li:hover , .menu li.active{
-	box-shadow: 13em 0 @menu-hover inset;
-}
-
-.menu a{
-	color: @white;
-	display: block;
-	width: 100%;
-	font-size: 0;
-	text-decoration: none;
-	text-transform: uppercase;
-}
-.menu a:hover , .menu li.active a{
-	margin-left: 0;
-}
-nav a i{
-	margin-right: 5px;
-	font-size: 14px !important;
-}
-nav li:first-child a i{
-	margin-right: 0px;
-	
-}
-/*  Fin de estilos del menu  */
-
-/*  Estilos del menu en responsive  */	
-/*
-nav.sidenav{
-	position: absolute;
-	width: 4em;
-	z-index: 20;
-}
-nav.mostrar{
-	width: 13em;
-}
-
-nav.mostrar a{
-	font-size: 14px;
-}
-nav.mostrar a i {
-	margin-left: 0;
-}
-#MostrarNav a:hover {
-	margin-left: 0;
-}
-#MostrarNav , #MostrarNav:hover {
-	width: 3em;
-	height: 100%;
-	margin-left: 0em;
-	box-shadow: none;
-}
-
-nav.mostrar #MostrarNav{
-	margin-left: 9em;
-}
-
-nav.mostrar a:hover, nav.mostrar li.active a{
-	margin-left: 1em;
-}*/
-
-
-/*  Fin de estilos del menu en responsive  */
-
-
 *,
-*:after,
+*::after,
 *::before {
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
