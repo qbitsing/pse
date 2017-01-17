@@ -13,22 +13,21 @@
 <nav class="container">
 	<ul id="gn-menu" class="gn-menu-main">
 		<li class="gn-trigger">
-			<a  ng-click="sidenav()"><i class="fa fa-bars"></i></a>
-			<nav class="gn-menu-wrapper {{ClickMenu}}">
+			<a  class="fa fa-bars" ng-click="sidenav()"></a>
+			<nav class="gn-menu-wrapper gn-open-part {{ClickMenu}}">
 				<div class="gn-scroller">
 					<ul class="gn-menu">
-						<li><a class="gn-icon gn-icon-download">Downloads</a></li>
-						<li><a class="gn-icon gn-icon-cog">Settings</a></li>
-						<li><a class="gn-icon gn-icon-help">Help</a></li>
-						<li><a class="gn-icon gn-icon-archive">Archives</a></li>
+						<li class="{{activate}}"><a ng-click="activate()"><i class="fa fa-address-book"></i>Perfil</a></li>
+						<li class="{{activate}}"><a ng-click="activate()"><i class="fa fa-address-book"></i>Empresas</a></li>
+						<li class="{{activate}}"><a ng-click="activate()"><i class="fa fa-address-book"></i>Sitios</a></li>
+						<li class="{{activate}}"><a ng-click="activate()"><i class="fa fa-address-book"></i>Actividades</a></li>
+						<li class="{{activate}}"><a ng-click="activate()"><i class="fa fa-address-book"></i>Usuarios</a></li>
+						<li class="{{activate}}"><a ng-click="activate()"><i class="fa fa-address-book"></i>Inventario</a></li>
 					</ul>
 				</div>
 			</nav>
 		</li>
-		<li><a href="http://tympanus.net/codrops">Codrops</a></li>
-		<li><a class="codrops-icon codrops-icon-prev" href="http://tympanus.net/Development/HeaderEffects/"><span>Previous Demo</span></a></li>
-		<li><a class="codrops-icon codrops-icon-drop" href="http://tympanus.net/codrops/?p=16030"><span>Back to the Codrops Article</span></a></li>
+		<li><a href="http://tympanus.net/codrops">Paramo extremo</a></li>
+		<li><a><i class="fa fa-address-book"></i><span class="hidden-xs">Salir</span></a></li>
 	</ul>			
 </nav>
-
-<i>class="fa fa-bars"</i>

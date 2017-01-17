@@ -15,25 +15,17 @@ angular.module('frontendPseApp')
 				
 			},
 			controller: function($scope){
-				$scope.arrow = 'left';
-				$scope.classMenu = 'mostrar';
-
-				$scope.mostrarNav = function(){
-					if($scope.arrow == 'right'){
-						$scope.arrow = 'left';
-						$scope.classMenu = 'mostrar';
-					}else{
-						$scope.arrow = 'right';
-						$scope.classMenu = '';
-					}
-				}
+				
 				$scope.sidenav = function (){
-					if ($scope.ClickMenu == 'gn-menu-wrapper gn-open-all') {
+					if ($scope.ClickMenu == 'gn-open-all') {
 						$scope.ClickMenu = '';
 					}else{
-						$scope.ClickMenu= 'gn-menu-wrapper gn-open-all';
+						$scope.ClickMenu= 'gn-open-all';
 					}
 					
+				}
+				$scope.activate = function (){
+					$scope.activate='activate';
 				}
 			}
 		};
