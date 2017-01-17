@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Directive: sidenav', function () {
+describe('Directive: tbas', function () {
 
   // load the directive's module
   beforeEach(module('frontendPseApp'));
@@ -13,8 +13,8 @@ describe('Directive: sidenav', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<sidenav></sidenav>');
+    element = angular.element('<tbas></tbas>');
     element = $compile(element)(scope);
-    expect(element.text()).toBe('this is the sidenav directive');
+    expect(element.text()).toBe('this is the tbas directive');
   }));
 });

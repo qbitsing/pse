@@ -15,7 +15,10 @@ angular.module('frontendPseApp')
 				
 			},
 			controller: function($scope){
+<<<<<<< HEAD
 				
+=======
+>>>>>>> c2dd85720278effe1ad9ed33c084fd4c739421e6
 				$scope.sidenav = function (){
 					if ($scope.ClickMenu == 'gn-open-all') {
 						$scope.ClickMenu = '';
