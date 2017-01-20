@@ -69,5 +69,17 @@ angular
         parent: 'base',
         templateUrl: 'views/pages/items.html',
         controller: 'ItemsCtrl'
+      })
+      .state('Sitios' , {
+        url: '/Gestion_Control_Escenarios',
+        parent: 'base',
+        templateUrl: 'views/pages/sitios.html',
+        controller: 'SitiosCtrl'
+      })
+      .state('Actividades' , {
+        url: '/Gestion_Control_Actividades',
+        parent: 'base',
+        templateUrl: 'views/pages/actividades.html',
+        controller: 'ActividadesCtrl'
       });
   });
