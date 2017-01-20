@@ -1,0 +1,30 @@
+<div>
+	<form name="RegisterForm" novalidate>
+		<div class="form-group">
+			<label for="Documento">NIT</label>
+			<input type="text" class="form-control" id="Documento" placeholder="129753845-1" required ng-model="Register.id">
+		</div>
+		<div class="form-group">
+			<label for="Nombres">Nombres</label>
+			<input type="text" class="form-control" id="Nombres" placeholder="Mundo Aventura" required>
+		</div>
+		<div class="form-group">
+			<label for="Direccion">Dirección</label>
+			<input type="text" class="form-control" id="Direccion" placeholder="Calle # 6b 12 -32" required>
+		</div>
+		<div class="form-group">
+			<label for="Telefono">Telefono</label>
+			<input type="text" class="form-control" id="Telefono" placeholder="3136452345" required>
+		</div>
+		<div class="form-group">
+			<label for="Ciudad">Ciudad</label>
+			<select id="Ciudad" class="form-control" required>
+			</select>
+		</div>
+		<button class="btn btn-primary" type="submit" ng-disabled="RegisterForm.$invalid">Registrar Empresa</button>
+	</form>
+</div>
+
+<div>
+	Espacio Recervado para la tabla de empresas
+</div>
