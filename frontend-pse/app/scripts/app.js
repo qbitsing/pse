@@ -27,8 +27,8 @@ angular
   ])
   .config(function (localStorageServiceProvider) {
     localStorageServiceProvider
-      .setPrefix('lockPrinesApp')
-      .setStorageType('sessionStorage')
+      .setPrefix('pseApp')
+      .setStorageType('localStorage')
       .setNotify(true, true)
   })
   .config(function ($stateProvider, $urlRouterProvider) {
@@ -81,5 +81,11 @@ angular
         parent: 'base',
         templateUrl: 'views/pages/actividades.html',
         controller: 'ActividadesCtrl'
+      })
+      .state('Prestamos' , {
+        url: '/Prestamos',
+        parent: 'base',
+        templateUrl: 'views/pages/prestamos.html',
+        controller: 'PrestamosCtrl'
       });
   });
