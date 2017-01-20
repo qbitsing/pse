@@ -63,5 +63,11 @@ angular
         parent: 'base',
         templateUrl: 'views/pages/empresas.html',
         controller: 'EmpresasCtrl'
+      })
+      .state('Items' , {
+        url: '/Gestion_Control_Equipos',
+        parent: 'base',
+        templateUrl: 'views/pages/items.html',
+        controller: 'ItemsCtrl'
       });
   });
