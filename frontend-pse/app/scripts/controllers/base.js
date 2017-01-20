@@ -8,6 +8,5 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-  .controller('BaseCtrl', function () {
-   
+  .controller('BaseCtrl', function ($scope) {
   });
