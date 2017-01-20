@@ -23,9 +23,6 @@ angular.module('frontendPseApp')
 					}
 					
 				}
-				$scope.activate = function (){
-					$scope.activate='activate';
-				}
 			}
 		};
 
