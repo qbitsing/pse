@@ -8,24 +8,36 @@ class EmpresasCtrl extends Controlador
 {
 	public function Listar($request , $response )
 	{
-		$user=empresas::all()->toJson();
+		$user=empresas::where('estado','=',1)->get();
 		if($user!="[]"){
-			$respuesta=$user;
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$user
+			];
 		}else{
-			$respuesta="No hay ninguna empresa registrada en el sistema";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>"No hay ninguna empresa registrada en el sistema"
+			];
 		}
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function ListarId($request , $response, $args)
 	{
 		$user=empresas::where('id','=',$args['id'])->get();
 		if($user!="[]"){
-			$respuesta=$user;
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$user
+			];
 		}else{
-			$respuesta="No hay ninguna empresa registrada con ese ID";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>"No hay ninguna empresa registrada con ese ID"
+			];
 		}
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function Create($request , $response)
@@ -39,10 +51,16 @@ class EmpresasCtrl extends Controlador
 			'ciudad' => $parsedBody->ciudad
 		]);
 		if ($user) {
-			$respuesta="Registro completo";
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>"Registro completo"
+			];
 		}
 		else{
-			$respuesta="No se ha podido completar el registro";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>"No se ha podido completar el registro"
+			];
 		}
 		$response->getBody()->write($respuesta);
 	}
@@ -58,9 +76,15 @@ class EmpresasCtrl extends Controlador
 			]
 		);
 		if ($user>0) {
-			$respuesta="Información actualizada correctamente";
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>"Información actualizada correctamente"
+			];
 		}else{
-			$respuesta="No se pudo actualizar la información";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>"No se pudo actualizar la información"
+			];
 		}	
 		$response->getBody()->write($respuesta);
 	}
@@ -69,9 +93,15 @@ class EmpresasCtrl extends Controlador
 	{
 		$user=empresas::where('id','=',$args['id'])->delete();
 		if ($user>0) {
-			$respuesta="Se ha eliminado exitosamente la empresa";
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>"Se ha eliminado exitosamente la empresa"
+			];
 		}else{
-			$respuesta="No se ha podido eliminar la empresa";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>"No se ha podido eliminar la empresa"
+			];
 		}	
 		$response->getBody()->write($respuesta);
 	}

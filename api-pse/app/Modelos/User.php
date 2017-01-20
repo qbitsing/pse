@@ -24,4 +24,8 @@ class Usuarios extends Model
 
 	public $timestamps = false;
 	public $incrementing = false;
+
+	public function Empresa(){
+		return $this->belongsTo(Empresas::class , 'id_empresa');
+	}
 }

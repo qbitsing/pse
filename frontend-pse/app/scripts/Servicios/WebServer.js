@@ -8,8 +8,6 @@ angular.module('frontendPseApp')
 					data.userAction = SesionUsuario.ObtenerUsuario().id;
 				}*/
 			}
-
-			console.log(data);
 			var req = {
 				method : 'POST',
 				url : URL,
