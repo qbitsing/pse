@@ -9,9 +9,5 @@
  */
 angular.module('frontendPseApp')
   .controller('BaseCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+   
   });
