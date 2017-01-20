@@ -15,11 +15,16 @@ angular.module('frontendPseApp')
 				
 			},
 			controller: function($scope){
+				if ($scope.ClickMenu != 'gn-open-all') {
+					angular.element('.main-view').css('margin-left', '48px');
+				}
 				$scope.sidenav = function (){
 					if ($scope.ClickMenu == 'gn-open-all') {
 						$scope.ClickMenu = '';
+						angular.element('.main-view').css('margin-left', '48px');
 					}else{
 						$scope.ClickMenu= 'gn-open-all';
+						angular.element('.main-view').css('margin-left', '250px');
 					}
 					
 				}
