@@ -1,0 +1,58 @@
+<div>
+	<form name="RegisterForm" novalidate>
+		<div class="form-group">
+			<label for="Documento">Documento de identidad</label>
+			<input type="text" class="form-control" id="Documento" placeholder="129753845" required ng-model="Register.id">
+		</div>
+		<div class="form-group">
+			<label for="TipoDoc">Tipo de documento de identidad</label>
+			<select name="TipoDocumento" id="TipoDoc" class="form-control" required>
+				<option value="0">Nit</option>
+				<option value="1">Cedula de Ciudadania</option>
+				<option value="2">Cedula de Extranjeria</option>
+				<option value="3">Pasaporte</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="Nombres">Nombres</label>
+			<input type="text" class="form-control" id="Nombres" placeholder="Andrés" required>
+		</div>
+		<div class="form-group">
+			<label for="Apellidos">Apellidos</label>
+			<input type="text" class="form-control" id="Apellidos" placeholder="Ramirez Benites" required>
+		</div>
+		<div class="form-group">
+			<label for="Telefono">Telefono</label>
+			<input type="text" class="form-control" id="Telefono" placeholder="3136452345" required>
+		</div>
+		<div class="form-group">
+			<label for="Direccion">Dirección</label>
+			<input type="text" class="form-control" id="Direccion" placeholder="Calle # 6b 12 -32" required>
+		</div>
+		<div class="form-group">
+			<label for="Correo">Correo Electronico</label>
+			<input type="text" class="form-control" id="Correo" placeholder="example@example.com" required>
+		</div>
+		<div class="form-group">
+			<label for="Rol">Rol</label>
+			<select id="Rol" class="form-control" required>
+				<option value="Super Administrador">Super Administrador</option>
+				<option value="Administrador">Administrador</option>
+				<option value="Controlador">Controlador</option>
+				<option value="Vendedor">Vendedor</option>
+				<option value="Transportador">Transportador</option>
+				<option value="Guía">Guía</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="Empresa">Empresa</label>
+			<select id="Empresa" class="form-control" required>
+			</select>
+		</div>
+		<button class="btn btn-primary" type="submit" ng-disabled="RegisterForm.$invalid">Registrar Usuario</button>
+	</form>
+</div>
+
+<div>
+	Espacio Recervado para la tabla de usuarios
+</div>
