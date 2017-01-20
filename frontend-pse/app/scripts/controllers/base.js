@@ -9,4 +9,7 @@
  */
 angular.module('frontendPseApp')
   .controller('BaseCtrl', function ($scope) {
+  	if(SesionUsuario.ObtenerSesion() != null){
+		$state.go('Login');
+	}
   });

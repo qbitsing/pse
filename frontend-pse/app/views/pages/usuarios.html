@@ -46,7 +46,7 @@
 		<div class="form-group">
 			<label for="Rol">Rol</label>
 			<select id="Rol" class="form-control" required ng-model="Register.rol">
-				<option value="Super Administrador">Super Administrador</option>
+				<option value="Super Administrador" ng-hide="Usuario.rol!='Super Administrador'">Super Administrador</option>
 				<option value="Administrador">Administrador</option>
 				<option value="Controlador">Controlador</option>
 				<option value="Vendedor">Vendedor</option>
@@ -54,7 +54,7 @@
 				<option value="Guía">Guía</option>
 			</select>
 		</div>
-		<div class="form-group">
+		<div class="form-group" ng-hide="Usuario.rol!='Super Administrador'">
 			<label for="Empresa">Empresa</label>
 			<select id="Empresa" class="form-control" required ng-model="Register.id_empresa">
 				<option ng-repeat="empresa in empresas" value="{{empresa.id}}">{{empresa.nombre}}</option>
