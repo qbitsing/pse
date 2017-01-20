@@ -61,18 +61,24 @@ class UsuariosCtrl extends Controlador
 		if($user!="[]"){
 			$r= $user;
 			if(password_verify($parsedBody->contrasenaa, $r[0]->contrasena)){
-				$respuesta=json_encode([
+				$respuesta=[
 					"Estado" => 1,
 					"Mensaje" => "Bienvenido señor@ : ".$r[0]->nombres,
 					"user" => $r[0]
-				]);
+				];
 			}else{
-				$respuesta= "Datos Incorrectos";
+				$respuesta=[
+					"Estado"=>0,
+					"Datos"=>"Datos Incorrectos"
+				];
 			}
 		}else{
-			$respuesta = "Datos Incorrectos";
+			$respuesta=[
+					"Estado"=>0,
+					"Datos"=>"Datos Incorrectos"
+				];
 		}
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function ActualizarPss($request , $response, $args)
@@ -103,21 +109,10 @@ class UsuariosCtrl extends Controlador
 
 	public function Create($request , $response)
 	{
-		/*  Generamos un token de usuario para validar mas adelande sus permisos  */	
-		$token;
-		/*  Con el ciclo while true hacemos que se genere un token hasta que sea valido en vista de que no se pueden repetir en la base de datos  */
-		while (true) {
-			$token = $this->GenerarToken();
-			/*   Validamos que el token generado no esta registrado aun en la base de datos  */
-			if (count(users::where("token" ,"=", $token)->get()) == 0) {
-				//$tokenDefinitivo = password_hash($token , PASSWORD_DEFAULT);
-				/*  Con la instruccion break rompemos el ciclo permitiendo que el flujo del codigo se reanude  */
-				break;
-			}
-		}
+		$pss=$this->GenerarPss();
 		/*  A partir de este momento se reliza la operacion de crear un usuario   */
 		$parsedBody = json_decode($request->getBody()->getContents());
-		$contrasena_hash = password_hash($parsedBody->contrasena , PASSWORD_DEFAULT);
+		$contrasena_hash = password_hash($pss , PASSWORD_DEFAULT);
 		$user = users::create([
 			'id' => $parsedBody->id,
 			'tipo_doc' => $parsedBody->tipo_doc,
@@ -127,16 +122,26 @@ class UsuariosCtrl extends Controlador
 			'direccion' => $parsedBody->direccion,
 			'correo' => $parsedBody->correo,
 			//'id_sucursal' => $parsedBody->id_sucursal,
-			'token' =>$token,
 			'contrasena' => $contrasena_hash
 		]);
 		if ($user) {
-			$respuesta="Registro completo";
+			if(EmailCtrl::enviarEmail($parsedBody->correo,$parsedBody->nombres,$pss,null,$parsedBody->id)){
+				$Datos = 'Registro completo, la contraseña ha sido enviada al correo ingresado';
+			}else{
+				$Datos="No se ha podido enviar el correo";
+			}
+			$respuesta=[
+				"Estado"=>1,
+				"Datos"=>$Datos
+			];
 		}
 		else{
-			$respuesta="No se ha podido completar el registro";
+			$respuesta=[
+				"Estado"=>0,
+				"Datos"=>"No se ha podido completar el registro"
+			];
 		}
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function Actualizar($request , $response , $args)
@@ -152,9 +157,15 @@ class UsuariosCtrl extends Controlador
 			]
 		);
 		if ($user>0) {
-			$respuesta="Actualizado correctamente";
+			$respuesta=[
+				"Estado"=>1,
+				"Datos"=>"Actualizado correctamente"
+			];
 		}else{
-			$respuesta="No se pudo actualizar";
+			$respuesta=[
+				"Estado"=>0,
+				"Datos"=>"No se pudo actualizar"
+			];
 		}	
 		$response->getBody()->write($respuesta);
 	}
@@ -179,7 +190,7 @@ class UsuariosCtrl extends Controlador
 				'codigo_temporal'=>$codigo
 			]);
 			if($update>0){
-				if(mail($parsedBody->Email, 'Codigo de verificación', 'Hola señor@ '.$user[0]->nombres.', su petición de restablecimiento de contraseña ha sido atendida, para continuar por favor digite el siguiente codigo de verificación en la aplicación:'.$codigo,'From: support@prines.com')){
+				if(mail($parsedBody->Email, 'Codigo de verificación', 'Hola señor@ '.$user[0]->nombres.', su petición de restablecimiento de contraseña ha sido atendida, para continuar por favor digite el siguiente codigo de verificación en la aplicación:'.$codigo,'From: support@proyecto.com')){
 					$respuesta=json_encode([
 						"Estado" => 1,
 						"Mensaje" => "El codigo de recuperación ha sido enviado a su correo señor@ ".$user[0]->nombres,
@@ -256,6 +267,23 @@ class UsuariosCtrl extends Controlador
 		}
 
 		return $token;
+	}
+
+	public function GenerarPss(){
+		/*  Esta funcion genera y retorna una cadena de 40 caracteres de manera aleatoria   */
+		$caracteres =[
+		"0","1","2","3","4","5","6","7","8","9"
+		];
+		$codigo = "";
+
+		for ($i=0; $i <5 ; $i++) {
+			$max_value  = count($caracteres)-1;
+			$min_value = 0;
+			$index = rand($max_value , $min_value); 
+			$codigo .= $caracteres[$index];
+		}
+
+		return $codigo;
 	}
 
 	public function GenerarCodigo(){

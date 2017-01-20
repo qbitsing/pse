@@ -10,12 +10,12 @@
 @negro:					 #000000;
 
 @brand-primary:         #304FFE;
-@brand-success:         #00BFA5;
+@brand-success:         #4CAF50;
 @brand-info:            #5bc0de;
 @brand-warning:         #f0ad4e;
 @brand-danger:          #d9534f;
 
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Rubik');
 .main-view {
 	margin-left: 250px;
 	position: absolute;
@@ -25,21 +25,36 @@
 	padding-bottom: 50px;
 	left: 0;
 	background: #EEEEEE;
+	font-family: 'Rubik', sans-serif !important;
 }
 .color-negro{
 	color:@negro;
+}
+.panel{
+	transition:all 0.3s;
+	&:hover{
+		transition:all 0.3s;
+		box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+	}
 }
 .page-title{
 	background:@brand-success;
 	margin-bottom:10px;
 	color:@white;
 	.pull-right{
-		margin-right:10px;
+		margin-right:15px;
+		h1{
+			margin-top:10px;
+			font-family: 'Rubik', sans-serif;
+		}
 	}
-}.panel{
+}
+.panel{
 	border:solid 1px @brand-success;
 	.panel-heading{
 		background: @brand-success;
+		color:@white;
+		letter-spacing: 1px;
 		padding-top:15px ;
 		padding-bottom:15px;
 	}
@@ -48,19 +63,17 @@
 	padding-left: 0px;
 	padding-right: 0px;
 }
-.container-base{
-	padding-left: 15px;
-	padding-right: 15px;
-}
 
 .jumbotron {
 	border-radius: 0px !important;
 	margin-bottom: 0;
 	margin-top: 0;
 }
+
 .jumbotron p{
 	font-size: 15px;
 }
+
 .jumbotron-blue{
 	background: @brand-primary;
 	color: @white;
@@ -167,12 +180,14 @@ input:-webkit-autofill {
 		float: right;
 		border-right: none;
 		border-left: 1px solid @white;
+		font-family: 'Rubik', sans-serif;
 }
 
 .gn-menu-main > li > a {
 		padding: 0 20px;
 		text-transform: uppercase;
 		font-weight: bold;
+
 }
 
 .gn-menu-main:after {
@@ -219,6 +234,8 @@ input:-webkit-autofill {
 		border-bottom: 3px solid @white;
 		text-align: left;
 		font-size: 18px;
+		font-family: 'Rubik', sans-serif;
+		letter-spacing: 1px;
 		a:after{
 			position:absolute;
 			content:'';

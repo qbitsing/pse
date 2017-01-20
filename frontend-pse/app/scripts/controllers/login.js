@@ -3,7 +3,11 @@
 angular.module('frontendPseApp')
   .controller('LoginCtrl', function ($scope, $state , ApiPse,
 	SesionUsuario , $uibModal ){
+  	if(SesionUsuario.ObtenerSesion() != null){
+		$state.go('Home');
+	}
 	$scope.userLogin = function () {
+		$scope.cargando=true;
 		ApiPse
 			.getResource('Usuarios/Login' , $scope.login)
 			.then(function(data){
