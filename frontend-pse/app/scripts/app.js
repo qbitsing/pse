@@ -57,5 +57,11 @@ angular
         parent: 'base',
         templateUrl: 'views/pages/usuarios.html',
         controller: 'UsuariosCtrl'
+      })
+      .state('Empresas' , {
+        url: '/Empresas',
+        parent: 'base',
+        templateUrl: 'views/pages/empresas.html',
+        controller: 'EmpresasCtrl'
       });
   });
