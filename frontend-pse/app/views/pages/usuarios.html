@@ -1,5 +1,15 @@
-<div>
-	<form name="RegisterForm" novalidate ng-submit="Registrar()">
+<div class="row page-title clearfix">
+	<div class="pull-right">
+		<h1>Gestion de usuarios</h1>
+	</div>
+</div>
+<div class="col-sm-12">
+	<div class="panel">
+		<div class="panel-heading">
+			<h3 class="panel-title">panel</h3>
+		</div>
+		<div class="panel-body" >
+			<form name="RegisterForm" novalidate ng-submit="Registrar()">
 		<div class="form-group">
 			<label for="Documento">Documento de identidad</label>
 			<input type="text" class="form-control" id="Documento" placeholder="129753845" required ng-model="Register.id">
@@ -49,9 +59,15 @@
 			<select id="Empresa" class="form-control" required ng-model="Register.id_empresa">
 				<option ng-repeat="empresa in empresas" value="{{empresa.id}}">{{empresa.nombre}}</option>
 			</select>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<button class="btn btn-success color-negro" type="submit" ng-disabled="RegisterForm.$invalid">Registrar Usuario</button>
+			</div>
+			</form>
 		</div>
-		<button class="btn btn-primary" type="submit" ng-disabled="RegisterForm.$invalid">Registrar Usuario</button>
-	</form>
+	</div>
 </div>
 
 <div>

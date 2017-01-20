@@ -157,9 +157,15 @@ class UsuariosCtrl extends Controlador
 			]
 		);
 		if ($user>0) {
-			$respuesta="Actualizado correctamente";
+			$respuesta=[
+				"Estado"=>1,
+				"Datos"=>"Actualizado correctamente"
+			];
 		}else{
-			$respuesta="No se pudo actualizar";
+			$respuesta=[
+				"Estado"=>0,
+				"Datos"=>"No se pudo actualizar"
+			];
 		}	
 		$response->getBody()->write($respuesta);
 	}

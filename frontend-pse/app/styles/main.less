@@ -7,17 +7,43 @@
 @white :                 #ffffff;
 @sidenav :               #252528;
 @menu-hover:             rgba(255 , 255 , 255 , .2);
+@negro:					 #000000;
 
 @brand-primary:         #304FFE;
-@brand-success:         #5cb85c;
+@brand-success:         #00BFA5;
 @brand-info:            #5bc0de;
 @brand-warning:         #f0ad4e;
 @brand-danger:          #d9534f;
 
-.contenedor-principal{
-	margin-top: 60px;
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+.main-view {
+	margin-left: 250px;
+	position: absolute;
+	top: 50px;
+	right: 0;
+	min-height: 100%;
+	padding-bottom: 50px;
+	left: 0;
+	background: #EEEEEE;
 }
-
+.color-negro{
+	color:@negro;
+}
+.page-title{
+	background:@brand-success;
+	margin-bottom:10px;
+	color:@white;
+	.pull-right{
+		margin-right:10px;
+	}
+}.panel{
+	border:solid 1px @brand-success;
+	.panel-heading{
+		background: @brand-success;
+		padding-top:15px ;
+		padding-bottom:15px;
+	}
+}
 .container-fluid{
 	padding-left: 0px;
 	padding-right: 0px;
@@ -61,8 +87,6 @@ input:-webkit-autofill {
 	margin-top: 10px;
 	margin-bottom: 60px;
 }
-<<<<<<< HEAD
-=======
 *,
 *::after,
 *::before {
@@ -70,10 +94,6 @@ input:-webkit-autofill {
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
 }
-
-
-
->>>>>>> c2dd85720278effe1ad9ed33c084fd4c739421e6
 /* Icomoon.com */
 
 .gn-menu-main,
@@ -81,7 +101,7 @@ input:-webkit-autofill {
 		margin: 0;
 		padding: 0;
 		background: @sidenav;
-		color: @brand-primary;
+		color: @brand-success;
 		list-style: none;
 		text-transform: none;
 		font-weight: 300;
@@ -96,9 +116,7 @@ input:-webkit-autofill {
 		width: 100%;
 		height: 50px;
 		font-size: 13px;
-}
-.active{
-	
+		z-index:1;
 }
 
 .gn-menu-main a {
@@ -109,10 +127,10 @@ input:-webkit-autofill {
 		cursor: pointer;
 }
 .gn-trigger>a{
-	color:@brand-primary;
+	color:@brand-success;
 }
 .gn-scroller i{
-	color:@brand-primary;
+	color:@brand-success;
 	margin-right:10px;
 }
 .no-touch .gn-menu-main a:hover,
@@ -191,7 +209,7 @@ input:-webkit-autofill {
 	bottom:0;
 	left: -3px;
 	width:3px;
-	background:@brand-primary;
+	background:@brand-success;
 	transition:all 0.2s;
 }
 .gn-menu li{
@@ -206,13 +224,13 @@ input:-webkit-autofill {
 			bottom:0;
 			left: -3px;
 			width:3px;
-			background:@brand-primary;
+			background:@brand-success;
 			transition:all 0.2s;
 		}
 		
 }
 .gn-menu li:hover{
-	border-bottom: 3px solid @brand-primary;
+	border-bottom: 3px solid @brand-success;
 	a{
 		color:@white;
 	}
@@ -253,7 +271,7 @@ input:-webkit-autofill {
 }
 
 .gn-menu-wrapper.gn-open-all {
-		width: 340px
+		width: 250px
 }
 
 .gn-menu-wrapper.gn-open-all .gn-submenu li {
