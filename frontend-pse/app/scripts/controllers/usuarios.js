@@ -8,9 +8,17 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-  .controller('UsuariosCtrl', function ($scope, ApiPse, SesionUsuario) {
+  .controller('UsuariosCtrl', function ($scope, ApiPse, SesionUsuario, $timeout) {
     $scope.Register={};
     $scope.Usuario=SesionUsuario.ObtenerSesion();
+
+    $scope.panelAnimate='';
+      $scope.pageAnimate='';  
+      $timeout(function () {
+         $scope.pageAnimate='pageAnimate';
+         $scope.panelAnimate='panelAnimate';
+      },100);
+
     $scope.Registrar=function(){
       ApiPse
       .getResource('Usuarios/Crear',$scope.Register)
