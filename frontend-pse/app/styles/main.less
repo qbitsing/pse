@@ -16,6 +16,9 @@
 @brand-danger:          #d9534f;
 
 @import url('https://fonts.googleapis.com/css?family=Rubik');
+body{
+	background: #EEEEEE;
+}
 .main-view {
 	margin-left: 250px;
 	position: absolute;
@@ -73,9 +76,10 @@
 }
 
 .jumbotron {
+	margin-top:50px;
 	border-radius: 0px !important;
 	margin-bottom: 0;
-	margin-top: 0;
+	font-family: 'Rubik', sans-serif !important;
 }
 
 .jumbotron p{
@@ -227,15 +231,19 @@ input:-webkit-autofill {
 		height: 100%;
 		background: @sidenav;
 }
-.activate:after{
-	position:absolute;
-	content:'';
-	top:0;
-	bottom:0;
-	left: -3px;
-	width:3px;
-	background:@brand-success;
-	transition:all 0.2s;
+.activate{
+	border-bottom: 3px solid @brand-success !important;
+	a:after{
+		position:absolute !important;
+		content:'' !important;
+		top:0 !important;
+		bottom:0 !important;
+		left: 0px !important;
+		width:3px !important;
+		background:@brand-success !important;
+		transition:all 0.2s !important;
+	}
+		
 }
 .gn-menu li{
 		position:relative;
