@@ -8,9 +8,9 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-.controller('ItemsCtrl', function ($scope , $uibModal) {
+.controller('ItemsCtrl', function ($scope , $uibModal , SesionUsuario) {
 	var modal = null;
-
+	console.log(SesionUsuario.ObtenerSesion());
 	$scope.AbrirModal = function(){
 		modal = $uibModal.open({
 			animation: true,
