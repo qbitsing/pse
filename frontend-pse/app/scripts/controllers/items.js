@@ -24,6 +24,7 @@ angular.module('frontendPseApp')
 				}
 		    }
 		});
+		
 	}
 })
 .controller('CrearHerramientaCtrl' , function($scope , Scope){
