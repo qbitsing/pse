@@ -9,9 +9,5 @@
  */
 angular.module('frontendPseApp')
   .controller('SitiosCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  	
   });

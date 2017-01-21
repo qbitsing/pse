@@ -109,37 +109,45 @@ class UsuariosCtrl extends Controlador
 
 	public function Create($request , $response)
 	{
-		$pss=$this->GenerarPss();
-		/*  A partir de este momento se reliza la operacion de crear un usuario   */
 		$parsedBody = json_decode($request->getBody()->getContents());
-		$contrasena_hash = password_hash($pss , PASSWORD_DEFAULT);
-		$user = users::create([
-			'id' => $parsedBody->id,
-			'tipo_doc' => $parsedBody->tipo_doc,
-			'nombres' => $parsedBody->nombres,
-			'apellidos' => $parsedBody->apellidos,
-			'telefono' => $parsedBody->telefono,
-			'direccion' => $parsedBody->direccion,
-			'correo' => $parsedBody->correo,
-			//'id_sucursal' => $parsedBody->id_sucursal,
-			'contrasena' => $contrasena_hash
-		]);
-		if ($user) {
-			if(EmailCtrl::enviarEmail($parsedBody->correo,$parsedBody->nombres,$pss,null,$parsedBody->id)){
-				$Datos = 'Registro completo, la contraseña ha sido enviada al correo ingresado';
-			}else{
-				$Datos="No se ha podido enviar el correo";
+		$query=users::where('id','=',$parsedBody->id)->count();
+		if($query>0){
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>"Ya existe un Usuario registrado con ese documento"
+			];
+		}else{
+			$pss=$this->GenerarPss();
+			/*  A partir de este momento se reliza la operacion de crear un usuario   */
+			$contrasena_hash = password_hash($pss , PASSWORD_DEFAULT);
+			$user = users::create([
+				'id' => $parsedBody->id,
+				'tipo_doc' => $parsedBody->tipo_doc,
+				'nombres' => $parsedBody->nombres,
+				'apellidos' => $parsedBody->apellidos,
+				'telefono' => $parsedBody->telefono,
+				'direccion' => $parsedBody->direccion,
+				'correo' => $parsedBody->correo,
+				//'id_sucursal' => $parsedBody->id_sucursal,
+				'contrasena' => $contrasena_hash
+			]);
+			if ($user) {
+				if(EmailCtrl::enviarEmail($parsedBody->correo,$parsedBody->nombres,$pss,null,$parsedBody->id)){
+					$Datos = 'Registro completo, la contraseña ha sido enviada al correo ingresado';
+				}else{
+					$Datos="No se ha podido enviar el correo";
+				}
+				$respuesta=[
+					"Estado"=>1,
+					"Datos"=>$Datos
+				];
 			}
-			$respuesta=[
-				"Estado"=>1,
-				"Datos"=>$Datos
-			];
-		}
-		else{
-			$respuesta=[
-				"Estado"=>0,
-				"Datos"=>"No se ha podido completar el registro"
-			];
+			else{
+				$respuesta=[
+					"Estado"=>0,
+					"Datos"=>"No se ha podido completar el registro"
+				];
+			}
 		}
 		$response->getBody()->write(json_encode($respuesta));
 	}
