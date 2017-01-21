@@ -3,6 +3,8 @@
 namespace Pse\Controladores;
 
 use Pse\Modelos\Empresas as empresas;
+use Pse\Modelos\Ciudades as ciudades;
+use Pse\Modelos\Departamentos as departamentos;
 
 class EmpresasCtrl extends Controlador
 {
@@ -18,6 +20,42 @@ class EmpresasCtrl extends Controlador
 			$respuesta=[
 				'Estado'=>0,
 				'Datos'=>"No hay ninguna empresa registrada en el sistema"
+			];
+		}
+		$response->getBody()->write(json_encode($respuesta));
+	}
+
+	public function ListarDepartamentos($request , $response)
+	{
+		$parsedBody = json_decode($request->getBody()->getContents());
+		$result=departamentos::where('id_pais','=','170')->orderBy('nombre')->get();
+		if($result!="[]"){
+			$respuesta = [
+				'Estado' => 1,
+				'Datos' => $result
+			];
+		}else{
+			$respuesta = [
+				'Estado' => 0,
+				'Datos' => 'No hay ningun departamento registrado en este pais'
+			];
+		}
+		$response->getBody()->write(json_encode($respuesta));
+	}
+	
+	public function ListarCiudades($request , $response)
+	{
+		$parsedBody = json_decode($request->getBody()->getContents());
+		$result=ciudades::all();
+		if($result!="[]"){
+			$respuesta = [
+				'Estado' => 1,
+				'Datos' => $result
+			];
+		}else{
+			$respuesta = [
+				'Estado' => 0,
+				'Datos' => 'No hay ninguna ciudad registrada'
 			];
 		}
 		$response->getBody()->write(json_encode($respuesta));
@@ -43,26 +81,34 @@ class EmpresasCtrl extends Controlador
 	public function Create($request , $response)
 	{
 		$parsedBody = json_decode($request->getBody()->getContents());
-		$user = empresas::create([
-			'id' => $parsedBody->id,
-			'nombre' => $parsedBody->nombre,
-			'direccion' => $parsedBody->direccion,
-			'telefono' => $parsedBody->telefono,
-			'ciudad' => $parsedBody->ciudad
-		]);
-		if ($user) {
-			$respuesta=[
-				'Estado'=>1,
-				'Datos'=>"Registro completo"
-			];
-		}
-		else{
+		$query=empresas::where('id','=',$parsedBody->id)->count();
+		if($query>0){
 			$respuesta=[
 				'Estado'=>0,
-				'Datos'=>"No se ha podido completar el registro"
+				'Datos'=>"Ya existe una empresa registrada con ese Nit"
 			];
+		}else{
+			$user = empresas::create([
+				'id' => $parsedBody->id,
+				'nombre' => $parsedBody->nombre,
+				'direccion' => $parsedBody->direccion,
+				'telefono' => $parsedBody->telefono,
+				'ciudad' => $parsedBody->ciudad
+			]);
+			if ($user) {
+				$respuesta=[
+					'Estado'=>1,
+					'Datos'=>"Registro completo"
+				];
+			}
+			else{
+				$respuesta=[
+					'Estado'=>0,
+					'Datos'=>"No se ha podido completar el registro"
+				];
+			}
 		}
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function Actualizar($request , $response , $args)

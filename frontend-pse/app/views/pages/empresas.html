@@ -1,24 +1,31 @@
 <div>
-	<form name="RegisterForm" novalidate>
+	<form name="RegisterForm" novalidate ng-submit="Registrar()">
 		<div class="form-group">
 			<label for="Documento">NIT</label>
-			<input type="text" class="form-control" id="Documento" placeholder="129753845-1" required ng-model="Register.id">
+			<input type="text" class="form-control" id="Documento" placeholder="129753845-1" required ng-model="Register.id" ng-model="Register.id">
 		</div>
 		<div class="form-group">
 			<label for="Nombres">Nombres</label>
-			<input type="text" class="form-control" id="Nombres" placeholder="Mundo Aventura" required>
+			<input type="text" class="form-control" id="Nombres" placeholder="Mundo Aventura" required ng-model="Register.nombre">
 		</div>
 		<div class="form-group">
 			<label for="Direccion">Dirección</label>
-			<input type="text" class="form-control" id="Direccion" placeholder="Calle # 6b 12 -32" required>
+			<input type="text" class="form-control" id="Direccion" placeholder="Calle # 6b 12 -32" required ng-model="Register.direccion">
 		</div>
 		<div class="form-group">
 			<label for="Telefono">Telefono</label>
-			<input type="text" class="form-control" id="Telefono" placeholder="3136452345" required>
+			<input type="text" class="form-control" id="Telefono" placeholder="3136452345" required ng-model="Register.telefono">
+		</div>
+		<div class="form-group">
+			<label for="Departamento">Departamento</label>
+			<select id="Departamento" class="form-control" required ng-model="Register.id_departamento">
+			<option ng-repeat="departamento in departamentos" value="{{departamento.id}}">{{departamento.nombre}}</option>
+			</select>
 		</div>
 		<div class="form-group">
 			<label for="Ciudad">Ciudad</label>
-			<select id="Ciudad" class="form-control" required>
+			<select id="Ciudad" class="form-control" required ng-model="Register.ciudad">
+			<option ng-repeat="ciudad in ciudades" ng-if="ciudad.id_departamento == Register.id_departamento " value="{{ciudad.id}}">{{ciudad.nombre}}</option>
 			</select>
 		</div>
 		<button class="btn btn-primary" type="submit" ng-disabled="RegisterForm.$invalid">Registrar Empresa</button>
@@ -26,5 +33,5 @@
 </div>
 
 <div>
-	Espacio Recervado para la tabla de empresas
+	Espacio Reservado para la tabla de empresas
 </div>
