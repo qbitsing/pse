@@ -60,6 +60,8 @@ $app->group('/Documentos' , function() use($app){
 	$app->post('/Eliminar/{id}' , 'DocumentosCtrl:Eliminar');
 });
 $app->group('/Empresas' , function() use($app){
+	$app->post('/ListarDepartamentos' , 'EmpresasCtrl:ListarDepartamentos');
+	$app->post('/ListarCiudades' , 'EmpresasCtrl:ListarCiudades');
 	$app->post('/Listar' , 'EmpresasCtrl:Listar');
 	$app->post('/ListarId/{id}' , 'EmpresasCtrl:ListarId');
 	$app->post('/Crear' , 'EmpresasCtrl:Create');
