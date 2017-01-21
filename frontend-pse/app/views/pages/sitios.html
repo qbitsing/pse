@@ -1,16 +1,28 @@
-<div>
-	<form name="RegisterForm" novalidate>
-		<div class="form-group">
-			<label for="Nombre">Nombre</label>
-			<input type="text" class="form-control" id="Nombre" placeholder="Cuava Antigua" required>
+<div class="page-title clearfix">
+	<div class="pull-right">
+		<h1>Gestion de Escenarios</h1>
+	</div>
+</div>
+<div class="col-sm-12">
+	<div class="panel">
+		<div class="panel-heading">
+			<h3 class="panel-title">Registrar sitios</h3>
 		</div>
-		<div class="form-group">
-			<label for="Ciudad">Ciudad</label>
-			<select id="Ciudad" class="form-control" required>
-			</select>
+		<div class="panel-body" >
+			<form name="RegisterForm" novalidate>
+				<div class="form-group col-sm-6">
+					<label for="Nombre">Nombre</label>
+					<input type="text" class="form-control" id="Nombre" placeholder="Cuava Antigua" required>
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="Ciudad">Ciudad</label>
+					<select id="Ciudad" class="form-control" required>
+					</select>
+				</div>
+				<button class="btn btn-success" type="submit" ng-disabled="RegisterForm.$invalid">Registrar Escenario</button>
+			</form>
 		</div>
-		<button class="btn btn-primary" type="submit" ng-disabled="RegisterForm.$invalid">Registrar Escenario</button>
-	</form>
+	</div>
 </div>
 
 <div>
