@@ -11,7 +11,8 @@ class Escenarios extends Model
 	protected $fillable = [
 		'id',
 		'nombre',
-		'id_ciudad'
+		'id_ciudad',
+		'estado'
 	];
 
 	public $timestamps = false;

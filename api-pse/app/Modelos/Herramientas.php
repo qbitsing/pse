@@ -10,7 +10,8 @@ class Herramientas extends Model
 	protected $table = "herramientas";
 	protected $fillable = [
 		'id',
-		'nombre'
+		'nombre',
+		'estado'
 	];
 
 	public $timestamps = false;

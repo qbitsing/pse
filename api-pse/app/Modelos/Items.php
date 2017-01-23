@@ -12,7 +12,9 @@ class Items extends Model
 		'id',
 		'id_herramienta',
 		'modelo',
-		'codigo_unico'
+		'codigo_unico',
+		'id_empresa',
+		'estado'
 	];
 
 	public $timestamps = false;

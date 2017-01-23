@@ -8,64 +8,112 @@ class HerramientasCtrl extends Controlador
 {
 	public function Listar($request , $response )
 	{
-		$user=herramientas::all()->toJson();
-		if($user!="[]"){
-			$respuesta=$user;
+		$user=herramientas::all();
+		if($user){
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$user
+			];
 		}else{
-			$respuesta="No hay ninguna herramienta registrada en el sistema";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>"No hay ninguna herramienta registrada en el sistema"
+			];
 		}
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
+	}
+
+	public function ListarDisponible($request , $response )
+	{
+		$user=herramientas::where('estado','=',1)->get();
+		if($user!="[]"){
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$user
+			];
+		}else{
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>"No hay ninguna herramienta registrada en el sistema"
+			];
+		}
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function ListarId($request , $response, $args)
 	{
 		$user=herramientas::where('id','=',$args['id'])->get();
 		if($user!="[]"){
-			$respuesta=$user;
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$user
+			];
 		}else{
-			$respuesta="No hay ninguna herramienta registrada con ese ID";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>"No hay ninguna herramienta registrada con ese ID"
+			];
 		}
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function Create($request , $response)
 	{
 		$parsedBody = json_decode($request->getBody()->getContents());
 		$user = herramientas::create([
-			'nombre' => $parsedBody->nombre
+			'nombre' => $parsedBody->nombre,
+			'id_empresa'=>$parsedBody->id_empresa
 		]);
 		if ($user) {
-			$respuesta="Registro completo";
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$user
+			];
 		}
 		else{
-			$respuesta="No se ha podido completar el registro";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>"No se ha podido completar el registro"
+			];
 		}
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function Actualizar($request , $response , $args)
 	{
 		$parsedBody = json_decode($request->getBody()->getContents());
 		$user=herramientas::where('id','=',$args['id'])->limit(1)->update([
-			'nombre' => $parsedBody->nombre
+			'nombre' => $parsedBody->nombre,
+			'id_empresa'=>$parsedBody->id_empresa
 			]
 		);
 		if ($user>0) {
-			$respuesta="Información actualizada correctamente";
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>"Información actualizada correctamente"
+			];
 		}else{
-			$respuesta="No se pudo actualizar la información";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>"No se pudo actualizar la información"
+			];
 		}	
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function Eliminar($request , $response , $args)
 	{
 		$user=herramientas::where('id','=',$args['id'])->delete();
-		if ($user>0) {
-			$respuesta="Se ha eliminado exitosamente la herramienta";
+		if ($user>0) {$respuesta=[
+				'Estado'=>1,
+				'Datos'=>"Se ha eliminado exitosamente la herramienta"
+			];
 		}else{
-			$respuesta="No se ha podido eliminar la herramienta";
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>"No se ha podido eliminar la herramienta"
+			];
 		}	
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 }

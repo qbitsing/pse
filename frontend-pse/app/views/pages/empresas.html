@@ -35,7 +35,7 @@
 				<div class="form-group col-sm-6">
 					<label for="Ciudad">Ciudad</label>
 					<select id="Ciudad" class="form-control" required ng-model="Register.ciudad">
-					<option ng-repeat="ciudad in ciudades" ng-if="ciudad.id_departamento == Register.id_departamento " value="{{ciudad.id}}">{{ciudad.nombre}}</option>
+						<option ng-repeat="ciudad in ciudades" ng-if="ciudad.id_departamento == Register.id_departamento " value="{{ciudad.id}}">{{ciudad.nombre}}</option>
 					</select>
 				</div>
 				<div class="col-xs-12">	

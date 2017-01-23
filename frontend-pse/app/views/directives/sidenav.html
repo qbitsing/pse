@@ -8,9 +8,9 @@
 						<li ng-class="{activate: $state.includes('Home')}" ng-mouseenter="hover = true"ng-mouseleave="hover = false" ng-click="menu()"><a ui-sref="Home"><i class="fa fa-address-card animated" ng-class="{wobble:hover}"></i>Perfil</a></li>
 						<li ng-class="{activate: $state.includes('Empresas')}" ng-mouseenter="hover2 = true"ng-mouseleave="hover2 = false" ng-click="menu()"><a ui-sref="Empresas"><i class="fa fa-building animated" ng-class="{wobble:hover2}"></i>Empresas</a></li>
 						<li ng-class="{activate: $state.includes('Sitios')}" ng-mouseenter="hover3 = true"ng-mouseleave="hover3 = false" ng-click="menu()"><a ui-sref="Sitios"><i class="fa fa-map animated" ng-class="{wobble:hover3}"></i>Sitios</a></li>
-						<li ng-class="{activate: $state.includes('Actividades')}" ng-mouseenter="hover4 = true"ng-mouseleave="hover4 = false" ng-click="menu()"><a ui-sref="Actividades"><i class="fa fa-location-arrow animated" ng-class="{wobble:hover4}"></i>Actividades</a></li>
+						<li ng-class="{activate: $state.includes('Actividades')}" ng-mouseenter="hover4 = true"ng-mouseleave="hover4 = false" ng-click="menu()" ng-hide="Usuario.rol=='Super Administrador'"><a ui-sref="Actividades"><i class="fa fa-location-arrow animated" ng-class="{wobble:hover4}"></i>Actividades</a></li>
 						<li ng-class="{activate: $state.includes('Usuarios')}" ng-mouseenter="hover5 = true"ng-mouseleave="hover5 = false" ng-click="menu()"><a ui-sref="Usuarios"><i class="fa fa-user-circle animated" ng-class="{wobble:hover5}"></i>Usuarios</a></li>
-						<li ng-class="{activate: $state.includes('Items')}" ng-mouseenter="hover6 = true"ng-mouseleave="hover6 = false" ng-click="menu()"><a ui-sref="Items"><i class="fa fa-book animated" ng-class="{wobble:hover6}"></i>Herramienta</a></li>
+						<li ng-class="{activate: $state.includes('Items')}" ng-mouseenter="hover6 = true"ng-mouseleave="hover6 = false" ng-click="menu()" ng-hide="Usuario.rol=='Super Administrador'"><a ui-sref="Items"><i class="fa fa-book animated" ng-class="{wobble:hover6}"></i>Herramienta</a></li>
 					</ul>
 				</div>
 			</nav>

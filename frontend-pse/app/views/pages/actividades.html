@@ -9,14 +9,15 @@
 			<h3 class="panel-title">Registrar actividades</h3>
 		</div>
 		<div class="panel-body" >
-			<form name="RegisterForm" novalidate>
+			<form name="RegisterForm" novalidate ng-submit="Registrar()">
 				<div class="form-group col-sm-6">
 					<label for="Nombre">Nombre</label>
-					<input type="text" class="form-control" id="Nombre" placeholder="Cuava Antigua" required>
+					<input type="text" class="form-control" id="Nombre" placeholder="Cueva Antigua" required ng-model="Register.nombre">
 				</div>
 				<div class="form-group col-sm-6">
 					<label for="Escenario">Escenario</label>
-					<select id="Escenario" class="form-control" required>
+					<select id="Escenario" class="form-control" required ng-model="Register.id_escenario">
+						<option ng-repeat="sitio in sitios" value="{{sitio.id}}">{{sitio.nombre}}</option>
 					</select>
 				</div>
 				<button class="btn btn-success" type="submit" ng-disabled="RegisterForm.$invalid">Registrar Actividad</button>

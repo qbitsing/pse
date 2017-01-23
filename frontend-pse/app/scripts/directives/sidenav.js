@@ -14,7 +14,8 @@ angular.module('frontendPseApp')
 			link: function(scope, element, attrs) {
 				
 			},
-			controller: function($scope){
+			controller: function($scope, SesionUsuario){
+				$scope.Usuario=SesionUsuario.ObtenerSesion();
 				if ($scope.ClickMenu != 'gn-open-all') {
 					angular.element('.main-view').css('margin-left', '48px');
 				}
