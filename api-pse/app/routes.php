@@ -9,7 +9,8 @@ $app->get('/' , function($request , $response){
 });
 
 $app->group('/Actividades' , function() use($app){
-	$app->post('/Listar' , 'ActividadesCtrl:Listar');
+	$app->post('/ListarDisponible/{id}' , 'ActividadesCtrl:ListarDisponible');
+	$app->post('/ListarNoDisponible/{id}' , 'ActividadesCtrl:ListarNoDisponible');
 	$app->post('/ListarId/{id}' , 'ActividadesCtrl:ListarId');
 	$app->post('/Crear' , 'ActividadesCtrl:Create');
 	$app->post('/Actualizar/{id}' , 'ActividadesCtrl:Actualizar');
@@ -70,7 +71,7 @@ $app->group('/Empresas' , function() use($app){
 });
 $app->group('/Sitios' , function() use($app){
 	$app->post('/Listar' , 'EscenariosCtrl:Listar');
-	$app->post('/ListarDisponible' , 'EscenariosCtrl:ListarDisponible');
+	$app->post('/ListarDisponible/{id}' , 'EscenariosCtrl:ListarDisponible');
 	$app->post('/ListarId/{id}' , 'EscenariosCtrl:ListarId');
 	$app->post('/Crear' , 'EscenariosCtrl:Create');
 	$app->post('/Actualizar/{id}' , 'EscenariosCtrl:Actualizar');

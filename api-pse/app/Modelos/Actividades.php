@@ -15,5 +15,4 @@ class Actividades extends Model
 	];
 
 	public $timestamps = false;
-	public $incrementing = false;
 }

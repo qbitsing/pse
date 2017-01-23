@@ -6,9 +6,25 @@ use Pse\Modelos\Actividades as actividades;
 
 class ActividadesCtrl extends Controlador
 {
-	public function Listar($request , $response )
+	public function ListarDisponible($request , $response,$args )
 	{
-		$user=actividades::all()->toJson();
+		$user=actividades::join('escenarios','actividades.id_escenario','=','escenarios.id')->select('actividades.*','escenarios.nombre as sitio')->where( 'actividades.estado' , '=' , 1 )->where('actividades.id_empresa','=',$args['id'])->get();
+		if($user!="[]"){
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$user
+			];
+		}else{
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>'No hay ninguna actividad registrada'
+			];
+		}
+		$response->getBody()->write(json_encode($respuesta));
+	}
+	public function ListarNoDisponible($request , $response ,$args)
+	{
+		$user=actividades::join('escenarios','actividades.id_escenario','=','escenarios.id')->select('actividades.*','escenarios.nombre as sitio')->where( 'actividades.estado' , '=' , 0 )->where('actividades.id_empresa','=',$args['id'])->get();
 		if($user!="[]"){
 			$respuesta=[
 				'Estado'=>1,
@@ -50,7 +66,7 @@ class ActividadesCtrl extends Controlador
 		if ($user) {
 			$respuesta=[
 				'Estado'=>1,
-				'Datos'=>'Registro completo'
+				'Datos'=>$user
 			];
 		}
 		else{
