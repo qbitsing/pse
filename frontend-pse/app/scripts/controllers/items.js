@@ -8,9 +8,10 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-.controller('ItemsCtrl', function ($scope , $uibModal , SesionUsuario) {
+.controller('ItemsCtrl', function ($scope , $uibModal , SesionUsuario , $state) {
 	var modal = null;
-	console.log(SesionUsuario.ObtenerSesion());
+	if(SesionUsuario.ObtenerSesion().rol == "Super Administrador")
+		$state.go('Home');
 	$scope.AbrirModal = function(){
 		modal = $uibModal.open({
 			animation: true,
@@ -24,7 +25,7 @@ angular.module('frontendPseApp')
 				}
 		    }
 		});
-		
+
 	}
 })
 .controller('CrearHerramientaCtrl' , function($scope , Scope){
