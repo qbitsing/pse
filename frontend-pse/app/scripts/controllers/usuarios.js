@@ -25,9 +25,10 @@ angular.module('frontendPseApp')
       .then(
         function(data){
           if(data.data.Estado==1){
-            $scope.empresas=data.data.Datos
+
           }
         }
+        
         ,function(data){
 
       }

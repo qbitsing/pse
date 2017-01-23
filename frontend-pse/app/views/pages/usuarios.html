@@ -10,6 +10,7 @@
 		</div>
 		<div class="panel-body" >
 			<form name="RegisterForm" novalidate ng-submit="Registrar()">
+<<<<<<< HEAD
 				<div class="form-group col-sm-6">
 					<label for="Documento">Documento de identidad</label>
 					<input type="text" class="form-control" id="Documento" placeholder="129753845" required ng-model="Register.id">
@@ -59,6 +60,57 @@
 					<select id="Empresa" class="form-control" required ng-model="Register.id_empresa">
 						<option ng-repeat="empresa in empresas" value="{{empresa.id}}">{{empresa.nombre}}</option>
 					</select>
+=======
+		<div class="form-group col-sm-6">
+			<label for="Documento">Documento de identidad</label>
+			<input type="text" class="form-control" id="Documento" placeholder="129753845" required ng-model="Register.id">
+		</div>
+		<div class="form-group col-sm-6">
+			<label for="TipoDoc">Tipo de documento de identidad</label>
+			<select name="TipoDocumento" id="TipoDoc" class="form-control" required ng-model="Register.tipo_doc">
+				<option value="0">Nit</option>
+				<option value="1">Cedula de Ciudadania</option>
+				<option value="2">Cedula de Extranjeria</option>
+				<option value="3">Pasaporte</option>
+			</select>
+		</div>
+		<div class="form-group col-sm-6">
+			<label for="Nombres">Nombres</label>
+			<input type="text" class="form-control" id="Nombres" placeholder="Andrés" required ng-model="Register.nombres">
+		</div>
+		<div class="form-group col-sm-6">
+			<label for="Apellidos">Apellidos</label>
+			<input type="text" class="form-control" id="Apellidos" placeholder="Ramirez Benites" required ng-model="Register.apellidos">
+		</div>
+		<div class="form-group col-sm-6">
+			<label for="Telefono">Telefono</label>
+			<input type="text" class="form-control" id="Telefono" placeholder="3136452345" required ng-model="Register.telefono">
+		</div>
+		<div class="form-group col-sm-6">
+			<label for="Direccion">Dirección</label>
+			<input type="text" class="form-control" id="Direccion" placeholder="Calle # 6b 12 -32" required ng-model="Register.direccion">
+		</div>
+		<div class="form-group col-sm-6">
+			<label for="Correo">Correo Electronico</label>
+			<input type="text" class="form-control" id="Correo" placeholder="example@example.com" required ng-model="Register.correo">
+		</div>
+		<div class="form-group col-sm-6">
+			<label for="Rol">Rol</label>
+			<select id="Rol" class="form-control" required ng-model="Register.rol">
+				<option value="Super Administrador" ng-hide="Usuario.rol!='Super Administrador'">Super Administrador</option>
+				<option value="Administrador">Administrador</option>
+				<option value="Controlador">Controlador</option>
+				<option value="Vendedor">Vendedor</option>
+				<option value="Transportador">Transportador</option>
+				<option value="Guía">Guía</option>
+			</select>
+		</div>
+		<div class="form-group col-sm-6" ng-hide="Usuario.rol!='Super Administrador'">
+			<label for="Empresa">Empresa</label>
+			<select id="Empresa" class="form-control" required ng-model="Register.id_empresa">
+				<option ng-repeat="e in empresas" value="{{e.id}}">{{e.nombre}}</option>
+			</select>
+>>>>>>> d0e272368f56880495f04cd89240641d4614dd41
 				</div>
 				<div class="col-sm-12">
 					<button class="btn btn-success" type="submit" ng-disabled="RegisterForm.$invalid">Registrar Usuario</button>
