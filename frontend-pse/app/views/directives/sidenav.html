@@ -1,21 +1,21 @@
 <nav class="container">
 	<ul id="gn-menu" class="gn-menu-main">
 		<li class="gn-trigger">
-			<a  class="fa fa-bars" ng-click="sidenav()"></a>
+			<a  class="fa fa-bars animated" ng-class="{rubberBand:hover1}" ng-click="sidenav()" ng-mouseenter="hover1 = true"ng-mouseleave="hover1 = false" ></a>
 			<nav class="gn-menu-wrapper gn-open-part {{ClickMenu}}">
 				<div class="gn-scroller">
 					<ul class="gn-menu">
-						<li ng-class="{activate: $state.includes('Home')}"><a ui-sref="Home"><i class="fa fa-address-card"></i>Perfil</a></li>
-						<li ng-class="{activate: $state.includes('Empresas')}"><a ui-sref="Empresas"><i class="fa fa-building"></i>Empresas</a></li>
-						<li ng-class="{activate: $state.includes('Sitios')}" ng-hide="Usuario.rol=='Super Administrador'"><a ui-sref="Sitios"><i class="fa fa-map"></i>Escenarios</a></li>
-						<li ng-class="{activate: $state.includes('Actividades')}" ng-hide="Usuario.rol=='Super Administrador'"><a ui-sref="Actividades"><i class="fa fa-location-arrow"></i>Actividades</a></li>
-						<li ng-class="{activate: $state.includes('Usuarios')}"><a ui-sref="Usuarios"><i class="fa fa-user-circle"></i>Usuarios</a></li>
-						<li ng-class="{activate: $state.includes('Items')}" ng-hide="Usuario.rol=='Super Administrador'"><a ui-sref="Items"><i class="fa fa-book"></i>Herramienta</a></li>
+						<li ng-class="{activate: $state.includes('Home')}" ng-mouseenter="hover = true"ng-mouseleave="hover = false" ng-click="menu()"><a ui-sref="Home"><i class="fa fa-address-card animated" ng-class="{wobble:hover}"></i>Perfil</a></li>
+						<li ng-class="{activate: $state.includes('Empresas')}" ng-mouseenter="hover2 = true"ng-mouseleave="hover2 = false" ng-click="menu()"><a ui-sref="Empresas"><i class="fa fa-building animated" ng-class="{wobble:hover2}"></i>Empresas</a></li>
+						<li ng-class="{activate: $state.includes('Sitios')}" ng-mouseenter="hover3 = true"ng-mouseleave="hover3 = false" ng-click="menu()"><a ui-sref="Sitios"><i class="fa fa-map animated" ng-class="{wobble:hover3}"></i>Sitios</a></li>
+						<li ng-class="{activate: $state.includes('Actividades')}" ng-mouseenter="hover4 = true"ng-mouseleave="hover4 = false" ng-click="menu()" ng-hide="Usuario.rol=='Super Administrador'"><a ui-sref="Actividades"><i class="fa fa-location-arrow animated" ng-class="{wobble:hover4}"></i>Actividades</a></li>
+						<li ng-class="{activate: $state.includes('Usuarios')}" ng-mouseenter="hover5 = true"ng-mouseleave="hover5 = false" ng-click="menu()"><a ui-sref="Usuarios"><i class="fa fa-user-circle animated" ng-class="{wobble:hover5}"></i>Usuarios</a></li>
+						<li ng-class="{activate: $state.includes('Items')}" ng-mouseenter="hover6 = true"ng-mouseleave="hover6 = false" ng-click="menu()" ng-hide="Usuario.rol=='Super Administrador'"><a ui-sref="Items"><i class="fa fa-book animated" ng-class="{wobble:hover6}"></i>Herramienta</a></li>
 					</ul>
 				</div>
 			</nav>
 		</li>
 		<li><a>Paramo extremo</a></li>
-		<li><a class="salir"><i class="fa fa-sign-out"></i><span class="hidden-xs">Salir</span></a></li>
+		<li><a class="salir" ng-mouseenter="hovers = true"ng-mouseleave="hovers = false"><i class="fa fa-sign-out animated" ng-class="{wobble:hovers}"></i><span class="hidden-xs">Salir</span></a></li>
 	</ul>			
 </nav>

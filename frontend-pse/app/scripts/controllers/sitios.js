@@ -8,7 +8,13 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-  .controller('SitiosCtrl', function ($state, $scope, ApiPse, SesionUsuario) {
+  .controller('SitiosCtrl', function ($state, $scope, ApiPse, SesionUsuario, $timeout) {
+  		$scope.panelAnimate='';
+  		$scope.pageAnimate=''; 	
+  		$timeout(function () {
+  			 $scope.pageAnimate='pageAnimate';
+  			 $scope.panelAnimate='panelAnimate';
+  		},100);
   		$scope.Usuario=SesionUsuario.ObtenerSesion();
 	  	if($scope.Usuario.rol=="Super Administrador"){
 	  		$state.go('Home');
@@ -47,5 +53,4 @@ angular.module('frontendPseApp')
 		}
 		listarDepartamentos();
 		ListarCiudades();
-
   });

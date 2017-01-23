@@ -123,6 +123,7 @@ $app->group('/Turnos' , function() use($app){
 });
 $app->group('/Usuarios' , function() use($app){
 	$app->get('/Listar' , 'UsuariosCtrl:Listar');
+	$app->post('/ListarEmpresa/{empresa}' , 'UsuariosCtrl:ListarEmpresa');
 	$app->post('/ListarId/{id}' , 'UsuariosCtrl:ListarId');
 	$app->post('/ListarDisponible' , 'UsuariosCtrl:ListarDisponible');
 	$app->post('/Login' , 'UsuariosCtrl:Login');

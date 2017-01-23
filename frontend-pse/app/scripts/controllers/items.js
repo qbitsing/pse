@@ -8,6 +8,7 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
+<<<<<<< HEAD
 .controller('ItemsCtrl', function ($scope ,$uibModal,ApiPse,SesionUsuario) {
 	var modal = null;
 	$scope.Registrar=function(){
@@ -54,6 +55,18 @@ angular.module('frontendPseApp')
 			}
 		);
 	}
+=======
+.controller('ItemsCtrl', function ($scope , $uibModal , SesionUsuario,$timeout) {
+	var modal = null;
+	$scope.panelAnimate='';
+  	$scope.pageAnimate='';  
+	$timeout(function () {
+		$scope.pageAnimate='pageAnimate';
+		$scope.panelAnimate='panelAnimate';
+	},100);
+	if(SesionUsuario.ObtenerSesion().rol == "Super Administrador")
+		$state.go('Home');
+>>>>>>> 9cbc2a9e0dcb654ff108c4b785c5404d3f6c972e
 	$scope.AbrirModal = function(){
 		modal = $uibModal.open({
 			animation: true,
@@ -67,6 +80,7 @@ angular.module('frontendPseApp')
 				}
 		    }
 		});
+
 	}
 	$scope.cerrarModal = function(){
 		$scope.Herramienta={};

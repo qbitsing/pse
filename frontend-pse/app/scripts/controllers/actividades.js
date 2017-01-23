@@ -8,7 +8,13 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-  .controller('ActividadesCtrl', function ($state, $scope, ApiPse,SesionUsuario) {
+  .controller('ActividadesCtrl', function ($state, $scope, ApiPse,SesionUsuario,$timeout) {
+  	$scope.panelAnimate='';
+  		$scope.pageAnimate=''; 	
+  		$timeout(function () {
+  			 $scope.pageAnimate='pageAnimate';
+  			 $scope.panelAnimate='panelAnimate';
+  		},100);
   	$scope.Usuario=SesionUsuario.ObtenerSesion();
   	if($scope.Usuario.rol=="Super Administrador"){
   		$state.go('Home');

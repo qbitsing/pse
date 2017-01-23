@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * @ngdoc function
  * @name frontendPseApp.controller:EmpresasCtrl
@@ -8,7 +7,16 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-  .controller('EmpresasCtrl', function ($scope, SesionUsuario, ApiPse, $state) {
+  .controller('EmpresasCtrl', function ($scope, SesionUsuario, ApiPse, $state, $timeout) { 
+  		$scope.panelAnimate='';
+  		$scope.pageAnimate=''; 	
+  		$timeout(function () {
+  			 $scope.pageAnimate='pageAnimate';
+  			 $scope.panelAnimate='panelAnimate';
+  		},100);
+  		
+  	
+
   	$scope.Usuario=SesionUsuario.ObtenerSesion();
   	if($scope.Usuario.rol!="Super Administrador"){
   		$state.go('Home');
