@@ -11,6 +11,7 @@ class Herramientas extends Model
 	protected $fillable = [
 		'id',
 		'nombre',
+		'id_empresa',
 		'estado'
 	];
 

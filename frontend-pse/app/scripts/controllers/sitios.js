@@ -22,6 +22,7 @@ angular.module('frontendPseApp')
 	  	}
 	  	$scope.Registrar=function(){
 	  		$scope.cargando = true;
+	  		$scope.Register.id_empresa=$scope.Usuario.id_empresa;
 	  		ApiPse.getResource('Sitios/Crear',$scope.Register)
 	  		.then(
 	  			function(data){

@@ -79,7 +79,7 @@ $app->group('/Sitios' , function() use($app){
 });
 $app->group('/Herramientas' , function() use($app){
 	$app->post('/Listar' , 'HerramientasCtrl:Listar');
-	$app->post('/ListarDisponible' , 'HerramientasCtrl:ListarDisponible');
+	$app->post('/ListarDisponible/{id}' , 'HerramientasCtrl:ListarDisponible');
 	$app->post('/ListarId/{id}' , 'HerramientasCtrl:ListarId');
 	$app->post('/Crear' , 'HerramientasCtrl:Create');
 	$app->post('/Actualizar/{id}' , 'HerramientasCtrl:Actualizar');

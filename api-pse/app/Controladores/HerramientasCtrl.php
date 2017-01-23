@@ -23,9 +23,9 @@ class HerramientasCtrl extends Controlador
 		$response->getBody()->write(json_encode($respuesta));
 	}
 
-	public function ListarDisponible($request , $response )
+	public function ListarDisponible($request , $response ,$args)
 	{
-		$user=herramientas::where('estado','=',1)->get();
+		$user=herramientas::where('estado','=',1)->where('id_empresa','=',$args['id'])->get();
 		if($user!="[]"){
 			$respuesta=[
 				'Estado'=>1,
