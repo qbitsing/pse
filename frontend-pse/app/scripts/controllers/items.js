@@ -8,7 +8,7 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-.controller('ItemsCtrl', function ($scope , $uibModal , SesionUsuario,$timeout) {
+.controller('ItemsCtrl', function ($scope , $uibModal , SesionUsuario, $state,$timeout) {
 	var modal = null;
 	$scope.panelAnimate='';
   	$scope.pageAnimate='';  
@@ -16,8 +16,6 @@ angular.module('frontendPseApp')
 		$scope.pageAnimate='pageAnimate';
 		$scope.panelAnimate='panelAnimate';
 	},100);
-	if(SesionUsuario.ObtenerSesion().rol == "Super Administrador")
-		$state.go('Home');
 	$scope.AbrirModal = function(){
 		modal = $uibModal.open({
 			animation: true,
