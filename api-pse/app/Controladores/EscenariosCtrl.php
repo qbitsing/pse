@@ -8,13 +8,35 @@ class EscenariosCtrl extends Controlador
 {
 	public function Listar($request , $response )
 	{
-		$user=escenarios::all()->toJson();
+		$user=escenarios::all();
 		if($user!="[]"){
-			$respuesta=$user;
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$user
+			];
 		}else{
-			$respuesta="No hay ningun escenario registrado en el sistema";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>'No hay ningun escenario registrado en el sistema'
+			];
 		}
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
+	}
+	public function ListarDisponible($request , $response )
+	{
+		$user=escenarios::where('estado','=',1)->get();
+		if($user!="[]"){
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$user
+			];
+		}else{
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>'No hay ningun escenario registrado en el sistema'
+			];
+		}
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function ListarId($request , $response, $args)
@@ -33,15 +55,21 @@ class EscenariosCtrl extends Controlador
 		$parsedBody = json_decode($request->getBody()->getContents());
 		$user = escenarios::create([
 			'nombre' => $parsedBody->nombre,
-			'ciudad' => $parsedBody->ciudad
+			'ciudad' => $parsedBody->id_ciudad
 		]);
 		if ($user) {
-			$respuesta="Registro completo";
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>'Registro completo'
+			];
 		}
 		else{
-			$respuesta="No se ha podido completar el registro";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>'No se ha podido completar el registro'
+			];
 		}
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function Actualizar($request , $response , $args)

@@ -7,10 +7,10 @@
 					<ul class="gn-menu">
 						<li ng-class="{activate: $state.includes('Home')}"><a ui-sref="Home"><i class="fa fa-address-card"></i>Perfil</a></li>
 						<li ng-class="{activate: $state.includes('Empresas')}"><a ui-sref="Empresas"><i class="fa fa-building"></i>Empresas</a></li>
-						<li ng-class="{activate: $state.includes('Sitios')}"><a ui-sref="Sitios"><i class="fa fa-map"></i>Sitios</a></li>
-						<li ng-class="{activate: $state.includes('Actividades')}"><a ui-sref="Actividades"><i class="fa fa-location-arrow"></i>Actividades</a></li>
+						<li ng-class="{activate: $state.includes('Sitios')}" ng-hide="Usuario.rol=='Super Administrador'"><a ui-sref="Sitios"><i class="fa fa-map"></i>Escenarios</a></li>
+						<li ng-class="{activate: $state.includes('Actividades')}" ng-hide="Usuario.rol=='Super Administrador'"><a ui-sref="Actividades"><i class="fa fa-location-arrow"></i>Actividades</a></li>
 						<li ng-class="{activate: $state.includes('Usuarios')}"><a ui-sref="Usuarios"><i class="fa fa-user-circle"></i>Usuarios</a></li>
-						<li ng-class="{activate: $state.includes('Items')}"><a ui-sref="Items"><i class="fa fa-book"></i>Herramienta</a></li>
+						<li ng-class="{activate: $state.includes('Items')}" ng-hide="Usuario.rol=='Super Administrador'"><a ui-sref="Items"><i class="fa fa-book"></i>Herramienta</a></li>
 					</ul>
 				</div>
 			</nav>

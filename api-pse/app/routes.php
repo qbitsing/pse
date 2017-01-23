@@ -68,8 +68,9 @@ $app->group('/Empresas' , function() use($app){
 	$app->post('/Actualizar/{id}' , 'EmpresasCtrl:Actualizar');
 	$app->post('/Eliminar/{id}' , 'EmpresasCtrl:Eliminar');
 });
-$app->group('/Escenarios' , function() use($app){
+$app->group('/Sitios' , function() use($app){
 	$app->post('/Listar' , 'EscenariosCtrl:Listar');
+	$app->post('/ListarDisponible' , 'EscenariosCtrl:ListarDisponible');
 	$app->post('/ListarId/{id}' , 'EscenariosCtrl:ListarId');
 	$app->post('/Crear' , 'EscenariosCtrl:Create');
 	$app->post('/Actualizar/{id}' , 'EscenariosCtrl:Actualizar');
@@ -77,6 +78,7 @@ $app->group('/Escenarios' , function() use($app){
 });
 $app->group('/Herramientas' , function() use($app){
 	$app->post('/Listar' , 'HerramientasCtrl:Listar');
+	$app->post('/ListarDisponible' , 'HerramientasCtrl:ListarDisponible');
 	$app->post('/ListarId/{id}' , 'HerramientasCtrl:ListarId');
 	$app->post('/Crear' , 'HerramientasCtrl:Create');
 	$app->post('/Actualizar/{id}' , 'HerramientasCtrl:Actualizar');
