@@ -12,11 +12,11 @@ angular.module('frontendPseApp')
 	var modal = null;
 
 	$scope.panelAnimate='';
-      $scope.pageAnimate='';  
-      $timeout(function () {
-         $scope.pageAnimate='pageAnimate';
-         $scope.panelAnimate='panelAnimate';
-      },100);
+  	$scope.pageAnimate='';  
+	$timeout(function () {
+		$scope.pageAnimate='pageAnimate';
+		$scope.panelAnimate='panelAnimate';
+	},100);
 	console.log(SesionUsuario.ObtenerSesion());
 	$scope.AbrirModal = function(){
 		modal = $uibModal.open({
