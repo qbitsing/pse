@@ -28,6 +28,7 @@ angular.module('frontendPseApp')
 
           }
         }
+        
         ,function(data){
 
       }
