@@ -10,7 +10,6 @@
 		</div>
 		<div class="panel-body" >
 			<form name="RegisterForm" novalidate ng-submit="Registrar()">
-<<<<<<< HEAD
 				<div class="form-group col-sm-6">
 					<label for="Documento">Documento de identidad</label>
 					<input type="text" class="form-control" id="Documento" placeholder="129753845" required ng-model="Register.id">
@@ -60,7 +59,7 @@
 					<select id="Empresa" class="form-control" required ng-model="Register.id_empresa">
 						<option ng-repeat="empresa in empresas" value="{{empresa.id}}">{{empresa.nombre}}</option>
 					</select>
-=======
+
 		<div class="form-group col-sm-6">
 			<label for="Documento">Documento de identidad</label>
 			<input type="text" class="form-control" id="Documento" placeholder="129753845" required ng-model="Register.id">
@@ -110,7 +109,7 @@
 			<select id="Empresa" class="form-control" required ng-model="Register.id_empresa">
 				<option ng-repeat="e in empresas" value="{{e.id}}">{{e.nombre}}</option>
 			</select>
->>>>>>> d0e272368f56880495f04cd89240641d4614dd41
+
 				</div>
 				<div class="col-sm-12">
 					<button class="btn btn-success" type="submit" ng-disabled="RegisterForm.$invalid">Registrar Usuario</button>
