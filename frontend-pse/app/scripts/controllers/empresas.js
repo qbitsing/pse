@@ -7,7 +7,8 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-  .controller('EmpresasCtrl', function ($scope, SesionUsuario, ApiPse, $state, $timeout) { 
+  .controller('EmpresasCtrl', function ($scope, SesionUsuario, ApiPse, $state, $timeout) {
+      $scope.cargando = false; 
   		$scope.panelAnimate='';
   		$scope.pageAnimate=''; 	
   		$timeout(function () {
@@ -19,9 +20,11 @@ angular.module('frontendPseApp')
   		$state.go('Home');
   	}
   	$scope.Registrar=function(){
+      $scope.cargando = true;
   		ApiPse.getResource('Empresas/Crear',$scope.Register)
   		.then(
   			function(data){
+          $scope.cargando = false;
   				console.log(data.data);
   			},function(data){
 

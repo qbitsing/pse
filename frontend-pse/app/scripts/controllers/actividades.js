@@ -9,6 +9,7 @@
  */
 angular.module('frontendPseApp')
   .controller('ActividadesCtrl', function ($state, $scope, ApiPse,SesionUsuario,$timeout, Tabla) {
+  	$scope.cargando = false;
   	$scope.panelAnimate='';
 	$scope.pageAnimate=''; 	
 	$timeout(function () {
@@ -38,8 +39,10 @@ angular.module('frontendPseApp')
   		$state.go('Home');
   	}
   	$scope.Registrar=function(){
+  		$scope.cargando = true;
   		ApiPse.getResource("Actividades/Crear",$scope.Register)
 		.then(function(data){
+			$scope.cargando = false;
 			if(data.data.Estado==1){
 				for (var i = 0; i < $scope.sitios.length; i++) {
 					if($scope.sitios[i].id==parseInt($scope.Register.id_escenario)){

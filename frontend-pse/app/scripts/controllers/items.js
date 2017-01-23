@@ -9,6 +9,7 @@
  */
 angular.module('frontendPseApp')
 .controller('ItemsCtrl', function ($scope , $uibModal ,ApiPse, SesionUsuario, $state,$timeout) {
+	$scope.cargando = false;
 	var modal = null;
 	$scope.panelAnimate='';
   	$scope.pageAnimate='';  
@@ -17,10 +18,12 @@ angular.module('frontendPseApp')
 		$scope.panelAnimate='panelAnimate';
 	},100);
 	$scope.Registrar=function(){
+		$scope.cargando = true;
 		$scope.Register.id_empresa=SesionUsuario.ObtenerSesion().id_empresa;
 		ApiPse.getResource('Items/Crear',$scope.Register)
 		.then(
 			function(data){
+				$scope.cargando = false;
 				if(data.data.Estado==1){
 					alert(data.data.Datos);
 				}else{
@@ -31,10 +34,12 @@ angular.module('frontendPseApp')
 		);
 	}
 	$scope.RegistrarHerramienta=function(Herramienta){
+		$scope.cargando = true;
 		Herramienta.id_empresa=SesionUsuario.ObtenerSesion().id_empresa;
 		ApiPse.getResource('Herramientas/Crear',Herramienta)
 		.then(
 			function(data){
+				$scope.cargando = false;
 				if(data.data.Estado==1){
 					Herramienta.id=data.data.Datos.id;
 					Herramienta.estado=1;
