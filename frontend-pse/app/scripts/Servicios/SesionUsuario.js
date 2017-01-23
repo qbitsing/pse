@@ -6,6 +6,9 @@ angular.module('frontendPseApp')
 		},
 		ObtenerSesion : function(){
 			return localStorageService.get("SesionUsuario");
+		},
+		CerrarSesion : function(){
+			return localStorageService.remove("SesionUsuario");
 		}
 	};
 });
