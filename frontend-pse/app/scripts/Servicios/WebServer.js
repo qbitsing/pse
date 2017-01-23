@@ -3,11 +3,16 @@ angular.module('frontendPseApp')
 	return{
 		getResource: function(resource , data) {
 			var URL = "http://Api-pse/"+resource;
-			if(data != undefined){
-				/*if(SesionUsuario.ObtenerUsuario() != null){
-					data.userAction = SesionUsuario.ObtenerUsuario().id;
-				}*/
+			if(SesionUsuario.ObtenerSesion() != null){
+				if(data != undefined)
+					data.userAction = SesionUsuario.ObtenerSesion().id;
+				else{
+					data = {
+						userAction : SesionUsuario.ObtenerSesion().id
+					}
+				}
 			}
+			
 			var req = {
 				method : 'POST',
 				url : URL,

@@ -19,6 +19,24 @@ class UsuariosCtrl extends Controlador
 		$response->getBody()->write($respuesta);
 	}
 
+	public function ListarEmpresa($request , $response , $args){
+		$parsedBody = json_decode($request->getBody()->getContents());
+		$users = users::where('id_empresa' , '=' , $args['empresa'])
+		->where('id' , '!=' , $parsedBody->userAction)->get();
+		if($users!="[]"){
+			$respuesta=[
+				"Estado" => 1,
+				"Datos" => $users
+			];
+		}else{
+			$respuesta=[
+				"Estado" => 0,
+				"Datos" => 'No hay ningun usuarios registrado en la empresa'
+			];
+		}
+		$response->getBody()->write(json_encode($respuesta));
+	}
+
 	public function ListarDisponible($request , $response, $args)
 	{
 		$user=users::where('estado','=','1')->get();
@@ -128,7 +146,7 @@ class UsuariosCtrl extends Controlador
 				'telefono' => $parsedBody->telefono,
 				'direccion' => $parsedBody->direccion,
 				'correo' => $parsedBody->correo,
-				//'id_sucursal' => $parsedBody->id_sucursal,
+				'id_empresa' => $parsedBody->id_empresa,
 				'contrasena' => $contrasena_hash
 			]);
 			if ($user) {
