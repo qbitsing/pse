@@ -14,7 +14,6 @@ angular.module('frontendPseApp')
   			 $scope.pageAnimate='pageAnimate';
   			 $scope.panelAnimate='panelAnimate';
   		},100);
- 
   	$scope.Usuario=SesionUsuario.ObtenerSesion();
   	if($scope.Usuario.rol!="Super Administrador"){
   		$state.go('Home');
