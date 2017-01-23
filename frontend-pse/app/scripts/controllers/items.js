@@ -8,12 +8,14 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-<<<<<<< HEAD
 .controller('ItemsCtrl', function ($scope , $uibModal , SesionUsuario, $state,$timeout) {
-=======
-<<<<<<< HEAD
-.controller('ItemsCtrl', function ($scope ,$uibModal,ApiPse,SesionUsuario) {
 	var modal = null;
+	$scope.panelAnimate='';
+  	$scope.pageAnimate='';  
+	$timeout(function () {
+		$scope.pageAnimate='pageAnimate';
+		$scope.panelAnimate='panelAnimate';
+	},100);
 	$scope.Registrar=function(){
 		$scope.Register.id_empresa=SesionUsuario.ObtenerSesion().id_empresa;
 		ApiPse.getResource('Items/Crear',$scope.Register)
@@ -58,22 +60,9 @@ angular.module('frontendPseApp')
 			}
 		);
 	}
-=======
-.controller('ItemsCtrl', function ($scope , $uibModal , SesionUsuario,$timeout) {
->>>>>>> 4e3cb23713cdc5258ec07afe8a198776e8fb51b2
-	var modal = null;
-	$scope.panelAnimate='';
-  	$scope.pageAnimate='';  
-	$timeout(function () {
-		$scope.pageAnimate='pageAnimate';
-		$scope.panelAnimate='panelAnimate';
-	},100);
-<<<<<<< HEAD
-=======
 	if(SesionUsuario.ObtenerSesion().rol == "Super Administrador")
 		$state.go('Home');
->>>>>>> 9cbc2a9e0dcb654ff108c4b785c5404d3f6c972e
->>>>>>> 4e3cb23713cdc5258ec07afe8a198776e8fb51b2
+
 	$scope.AbrirModal = function(){
 		modal = $uibModal.open({
 			animation: true,
