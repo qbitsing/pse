@@ -9,7 +9,7 @@
  */
 angular.module('frontendPseApp')
   .controller('SitiosCtrl', function ($scope , $timeout) {
-  	$scope.panelAnimate='';
+  		$scope.panelAnimate='';
   		$scope.pageAnimate=''; 	
   		$timeout(function () {
   			 $scope.pageAnimate='pageAnimate';
