@@ -13,14 +13,17 @@ angular.module('frontendPseApp')
 	$scope.Register={};
 	$scope.Usuario=SesionUsuario.ObtenerSesion();
 	$scope.panelAnimate='';
-	$scope.pageAnimate='';  
+	$scope.pageAnimate='';
+	$scope.Saludar = function(){
+		alert('Saludando ...');
+	} 
 	$timeout(function () {
 		$scope.pageAnimate='pageAnimate';
 		$scope.panelAnimate='panelAnimate';
 	},100);
-	var casillaDeBotones = '<div><a type="button" class="btn btn-info btn-bordered btn-xs" ng-click="grid.appScope.Detalles(row.entity.id)">Detalles</a>';
-	casillaDeBotones +='<a type="button" class="btn btn-info btn-bordered btn-xs" ng-click="grid.appScope.Editar(row.entity.id)">Editar</a>';
-	casillaDeBotones +='<a type="button" class="btn btn-info btn-bordered btn-xs" ng-click="grid.appScope.Borrar(row.entity.id)">Borrar</a></div>';
+	var casillaDeBotones = '<div>';
+	casillaDeBotones+='<tabla-botones data="{{row.entity}}" text="Detalles"></tabla-botones>';
+	casillaDeBotones+='</div>';
 	$scope.gridOptions = {
 		columnDefs: [
 			{ field: 'nombres'},
