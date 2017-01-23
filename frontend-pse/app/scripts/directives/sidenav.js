@@ -14,10 +14,14 @@ angular.module('frontendPseApp')
 			link: function(scope, element, attrs) {
 				
 			},
-			controller: function($scope, SesionUsuario){
+			controller: function($scope, SesionUsuario,$state){
 				$scope.Usuario=SesionUsuario.ObtenerSesion();
 				if ($scope.ClickMenu != 'gn-open-all') {
 					angular.element('.main-view').css('margin-left', '48px');
+				}
+				$scope.CerrarSesion=function(){
+					SesionUsuario.CerrarSesion();
+					$state.go('Login');
 				}
 				$scope.menu= function(){
 					if(typeof window.orientation !== 'undefined'){
