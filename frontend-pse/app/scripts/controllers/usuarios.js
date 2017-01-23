@@ -22,7 +22,7 @@ angular.module('frontendPseApp')
 		$scope.panelAnimate='panelAnimate';
 	},100);
 	var casillaDeBotones = '<div>';
-	casillaDeBotones+='<tabla-botones data="{{row.entity}}" text="Detalles"></tabla-botones>';
+	casillaDeBotones+='<a tabla-botones="{{row.entity.id}},{{row.entity.estado}},Detalles"></a>';
 	casillaDeBotones+='</div>';
 	$scope.gridOptions = {
 		columnDefs: [
