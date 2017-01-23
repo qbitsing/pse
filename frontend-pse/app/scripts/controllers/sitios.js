@@ -30,7 +30,6 @@ angular.module('frontendPseApp')
 
 	  		});
 	  	}
-
   		function listarDepartamentos(){
 			ApiPse.getResource("Empresas/ListarDepartamentos")
 			.then(function(data){

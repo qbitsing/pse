@@ -8,7 +8,7 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-.controller('ItemsCtrl', function ($scope , $uibModal , SesionUsuario, $state,$timeout) {
+.controller('ItemsCtrl', function ($scope , $uibModal ,ApiPse, SesionUsuario, $state,$timeout) {
 	var modal = null;
 	$scope.panelAnimate='';
   	$scope.pageAnimate='';  
@@ -76,7 +76,6 @@ angular.module('frontendPseApp')
 				}
 		    }
 		});
-
 	}
 	$scope.cerrarModal = function(){
 		$scope.Herramienta={};
