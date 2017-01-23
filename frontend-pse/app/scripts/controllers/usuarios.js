@@ -79,7 +79,4 @@ angular.module('frontendPseApp')
 	}
 	ListarEmpresa();
 	ListarUsuarios();
-	if($scope.Usuario.rol!='Super Administrador'){
-	$scope.Register.id_empresa=$scope.Usuario.id_empresa;
-	}
 });

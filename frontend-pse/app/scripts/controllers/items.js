@@ -10,14 +10,14 @@
 angular.module('frontendPseApp')
 .controller('ItemsCtrl', function ($scope , $uibModal , SesionUsuario,$timeout) {
 	var modal = null;
-
 	$scope.panelAnimate='';
   	$scope.pageAnimate='';  
 	$timeout(function () {
 		$scope.pageAnimate='pageAnimate';
 		$scope.panelAnimate='panelAnimate';
 	},100);
-	console.log(SesionUsuario.ObtenerSesion());
+	if(SesionUsuario.ObtenerSesion().rol == "Super Administrador")
+		$state.go('Home');
 	$scope.AbrirModal = function(){
 		modal = $uibModal.open({
 			animation: true,
