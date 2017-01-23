@@ -18,14 +18,9 @@ angular.module('frontendPseApp')
 		$scope.pageAnimate='pageAnimate';
 		$scope.panelAnimate='panelAnimate';
 	},100);
-	var casillaDeBotones = '<div>' + 
-	'<a type="button" class="btn btn-info btn-bordered btn-xs"'+
-	' ng-click="grid.appScope.Detalles(row.entity.id)">Detalles</a>'+
-	'<a type="button" class="btn btn-info btn-bordered btn-xs"'+
-	' ng-click="grid.appScope.Editar(row.entity.id)">Editar</a>'+
-	'<a type="button" class="btn btn-info btn-bordered btn-xs"'+
-	' ng-click="grid.appScope.Borrar(row.entity.id)">Borrar</a>'+
-	'</div>';
+	var casillaDeBotones = '<div><a type="button" class="btn btn-info btn-bordered btn-xs" ng-click="grid.appScope.Detalles(row.entity.id)">Detalles</a>';
+	casillaDeBotones +='<a type="button" class="btn btn-info btn-bordered btn-xs" ng-click="grid.appScope.Editar(row.entity.id)">Editar</a>';
+	casillaDeBotones +='<a type="button" class="btn btn-info btn-bordered btn-xs" ng-click="grid.appScope.Borrar(row.entity.id)">Borrar</a></div>';
 	$scope.gridOptions = {
 		columnDefs: [
 			{ field: 'nombres'},
