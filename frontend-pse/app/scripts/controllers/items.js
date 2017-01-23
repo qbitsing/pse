@@ -76,7 +76,6 @@ angular.module('frontendPseApp')
 				}
 		    }
 		});
-
 	}
 	$scope.cerrarModal = function(){
 		$scope.Herramienta={};
