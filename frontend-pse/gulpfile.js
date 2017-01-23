@@ -100,7 +100,7 @@ gulp.task('connect', ['styles'], function() {
   var serveStatic = require('serve-static');
   var serveIndex = require('serve-index');
   var app = require('connect')()
-    .use(require('connect-livereload')({port: 35728}))
+    .use(require('connect-livereload')({port: 35729}))
     .use(serveStatic('.tmp'))
     .use(serveStatic('app'))
     // paths to bower_components should be relative to the current file
