@@ -10,13 +10,19 @@ class UsuariosCtrl extends Controlador
 	
 	public function Listar($request , $response )
 	{
-		$user=users::all()->toJson();
+		$user=users::all();
 		if($user!="[]"){
-			$respuesta=$user;
+			$respuesta=[
+				"Estado" => 1,
+				"Datos" => $user
+			];
 		}else{
-			$respuesta="No hay ningun usuario registrado";
+			$respuesta=[
+				"Estado" => 0,
+				"Datos" => 'No hay ningun usuario registrado'
+			];
 		}
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function ListarEmpresa($request , $response , $args){
@@ -31,7 +37,7 @@ class UsuariosCtrl extends Controlador
 		}else{
 			$respuesta=[
 				"Estado" => 0,
-				"Datos" => 'No hay ningun usuarios registrado en la empresa'
+				"Datos" => 'No hay ningun usuario registrado en la empresa'
 			];
 		}
 		$response->getBody()->write(json_encode($respuesta));
@@ -147,6 +153,7 @@ class UsuariosCtrl extends Controlador
 				'direccion' => $parsedBody->direccion,
 				'correo' => $parsedBody->correo,
 				'id_empresa' => $parsedBody->id_empresa,
+				'rol' => $parsedBody->rol,
 				'contrasena' => $contrasena_hash
 			]);
 			if ($user) {
@@ -174,12 +181,15 @@ class UsuariosCtrl extends Controlador
 	{
 		$parsedBody = json_decode($request->getBody()->getContents());
 		$user=users::where('id','=',$args['id'])->limit(1)->update([
-			'nombres' => $parsedBody->nombres,
-			'apellidos' => $parsedBody->apellidos,
-			'telefono' => $parsedBody->telefono,
-			'direccion' => $parsedBody->direccion,
-			'correo' => $parsedBody->correo
-			//'id_sucursal' => $parsedBody->id_sucursal
+				'id' => $parsedBody->id,
+				'tipo_doc' => $parsedBody->tipo_doc,
+				'nombres' => $parsedBody->nombres,
+				'apellidos' => $parsedBody->apellidos,
+				'telefono' => $parsedBody->telefono,
+				'direccion' => $parsedBody->direccion,
+				'correo' => $parsedBody->correo,
+				'id_empresa' => $parsedBody->id_empresa,
+				'rol' => $parsedBody->rol,
 			]
 		);
 		if ($user>0) {
@@ -193,7 +203,7 @@ class UsuariosCtrl extends Controlador
 				"Datos"=>"No se pudo actualizar"
 			];
 		}	
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function Eliminar($request , $response , $args)
