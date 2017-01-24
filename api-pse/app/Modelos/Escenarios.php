@@ -12,6 +12,7 @@ class Escenarios extends Model
 		'id',
 		'nombre',
 		'id_ciudad',
+		'id_empresa',
 		'estado'
 	];
 

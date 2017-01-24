@@ -1,3 +1,5 @@
+<cargando ng-show="cargando"></cargando>
+<div ng-hide="cargando">
 <div class="page-title clearfix {{pageAnimate}}">
 	<div class="pull-right">
 		<h1>Gestion de Herramientas</h1>
@@ -14,7 +16,7 @@
 			</div>
 			<form name="RegisterForm" novalidate ng-submit="Registrar()">
 				<div class="form-group col-sm-6">
-					<label for="Herramienta">Herremienta</label>
+					<label for="Herramienta">Herramienta</label>
 					<select id="Herramienta" class="form-control" required ng-model="Register.id_herramienta">
 					<option ng-repeat="herramienta in herramientas" value="{{herramienta.id}}">{{herramienta.nombre}}</option>
 					</select>
@@ -56,3 +58,4 @@
 		<button class="btn btn-danger" type="button" ng-click="cerrar()">Cerrar</button>
 	</div>
 </script>
+</div>
