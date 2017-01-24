@@ -14,25 +14,28 @@ angular.module('frontendPseApp')
 	$scope.Usuario=SesionUsuario.ObtenerSesion();
 	$scope.panelAnimate='';
 	$scope.pageAnimate='';
-	$scope.Saludar = function(){
-		alert('Saludando ...');
-	} 
 	$timeout(function () {
 		$scope.pageAnimate='pageAnimate';
 		$scope.panelAnimate='panelAnimate';
 	},100);
 	var casillaDeBotones = '<div>';
-	casillaDeBotones+='<a tabla-botones="{{row.entity.id}},{{row.entity.estado}},Detalles"></a>';
+	casillaDeBotones+='<a tablabotones="{{row.entity.estado}},Toggle" ng-click="grid.appScope.Toggle(row.entity.id)"></a>';
+	casillaDeBotones+='<a tablabotones="{{row.entity.estado}},Editar" ng-click="grid.appScope.Editar(row.entity.id)"></a>';
+	casillaDeBotones+='<a tablabotones="{{row.entity.estado}},Detalles" ng-click="grid.appScope.Detalles(row.entity.id)"></a>';
+	casillaDeBotones+='<a tablabotones="{{row.entity.estado}},Borrar" ng-click="grid.appScope.Borrar(row.entity.id)"></a>';
 	casillaDeBotones+='</div>';
 	$scope.gridOptions = {
 		columnDefs: [
 			{ field: 'nombres'},
+			{ field: 'apellidos'},
 			{ name: 'Documento' ,field: 'id' },
 			{ field: 'correo'},
-			{ field: 'telefono'},
 			{ name: 'Opciones', enableFiltering: false, cellTemplate : casillaDeBotones}
 
 	    ]
+	}
+	$scope.Toggle = function(id) {
+		console.log(id);
 	}
 	angular.extend($scope.gridOptions , Tabla);
 	$scope.Registrar=function(){
