@@ -54,6 +54,8 @@ module.exports = function(config) {
       '../bower_components/angular-local-storage/dist/angular-local-storage.js',
       '../bower_components/angular-ui-grid/ui-grid.js',
       '../bower_components/angular-ui-grid/ui-grid.min.js',
+      '../bower_components/aos/dist/aos.js',
+      '../bower_components/angular-scroll/angular-scroll.js',
       '../bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

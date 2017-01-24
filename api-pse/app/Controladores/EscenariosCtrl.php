@@ -55,7 +55,8 @@ class EscenariosCtrl extends Controlador
 		$parsedBody = json_decode($request->getBody()->getContents());
 		$user = escenarios::create([
 			'nombre' => $parsedBody->nombre,
-			'ciudad' => $parsedBody->id_ciudad
+			'id_ciudad' => $parsedBody->id_ciudad,
+			'id_empresa' =>$parsedBody->id_empresa
 		]);
 		if ($user) {
 			$respuesta=[
@@ -77,7 +78,8 @@ class EscenariosCtrl extends Controlador
 		$parsedBody = json_decode($request->getBody()->getContents());
 		$user=escenarios::where('id','=',$args['id'])->limit(1)->update([
 			'nombre' => $parsedBody->nombre,
-			'ciudad' => $parsedBody->ciudad
+			'id_ciudad' => $parsedBody->id_ciudad,
+			'id_empresa' =>$parsedBody->id_empresa
 			]
 		);
 		if ($user>0) {

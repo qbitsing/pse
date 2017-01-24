@@ -8,9 +8,26 @@ use Pse\Modelos\Departamentos as departamentos;
 
 class EmpresasCtrl extends Controlador
 {
-	public function Listar($request , $response )
+	public function ListarDisponible($request , $response )
 	{
-		$user=empresas::where('estado','=',1)->get();
+		$user=empresas::join('ciudad','empresas.ciudad','=','ciudad.id')->select('empresas.*','ciudad.nombre as nombre_ciudad')->where('empresas.estado','=',1)->get();
+		if($user!="[]"){
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$user
+			];
+		}else{
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>"No hay ninguna empresa registrada en el sistema"
+			];
+		}
+		$response->getBody()->write(json_encode($respuesta));
+	}
+
+	public function ListarNoDisponible($request , $response )
+	{
+		$user=empresas::where('estado','=',0)->get();
 		if($user!="[]"){
 			$respuesta=[
 				'Estado'=>1,

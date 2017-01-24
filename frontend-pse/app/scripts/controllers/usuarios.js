@@ -57,7 +57,7 @@ angular.module('frontendPseApp')
 	}
 	function ListarEmpresa(){
 		ApiPse
-		.getResource('Empresas/Listar')
+		.getResource('Empresas/ListarDisponible')
 		.then(function(data){
 			if(data.data.Estado==1){
 				$scope.empresas=data.data.Datos;

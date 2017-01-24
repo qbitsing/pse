@@ -63,7 +63,8 @@ $app->group('/Documentos' , function() use($app){
 $app->group('/Empresas' , function() use($app){
 	$app->post('/ListarDepartamentos' , 'EmpresasCtrl:ListarDepartamentos');
 	$app->post('/ListarCiudades' , 'EmpresasCtrl:ListarCiudades');
-	$app->post('/Listar' , 'EmpresasCtrl:Listar');
+	$app->post('/ListarDisponible' , 'EmpresasCtrl:ListarDisponible');
+	$app->post('/ListarNoDisponible' , 'EmpresasCtrl:ListarNoDisponible');
 	$app->post('/ListarId/{id}' , 'EmpresasCtrl:ListarId');
 	$app->post('/Crear' , 'EmpresasCtrl:Create');
 	$app->post('/Actualizar/{id}' , 'EmpresasCtrl:Actualizar');
@@ -79,14 +80,14 @@ $app->group('/Sitios' , function() use($app){
 });
 $app->group('/Herramientas' , function() use($app){
 	$app->post('/Listar' , 'HerramientasCtrl:Listar');
-	$app->post('/ListarDisponible' , 'HerramientasCtrl:ListarDisponible');
+	$app->post('/ListarDisponible/{id}' , 'HerramientasCtrl:ListarDisponible');
 	$app->post('/ListarId/{id}' , 'HerramientasCtrl:ListarId');
 	$app->post('/Crear' , 'HerramientasCtrl:Create');
 	$app->post('/Actualizar/{id}' , 'HerramientasCtrl:Actualizar');
 	$app->post('/Eliminar/{id}' , 'HerramientasCtrl:Eliminar');
 });
 $app->group('/Items' , function() use($app){
-	$app->post('/Listar' , 'ItemsCtrl:Listar');
+	$app->post('/ListarDisponible/{id}' , 'ItemsCtrl:ListarDisponible');
 	$app->post('/ListarId/{id}' , 'ItemsCtrl:ListarId');
 	$app->post('/Crear' , 'ItemsCtrl:Create');
 	$app->post('/Actualizar/{id}' , 'ItemsCtrl:Actualizar');

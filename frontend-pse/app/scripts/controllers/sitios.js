@@ -9,6 +9,7 @@
  */
 angular.module('frontendPseApp')
   .controller('SitiosCtrl', function ($state, $scope, ApiPse, SesionUsuario, $timeout) {
+  		$scope.cargando = false;
   		$scope.panelAnimate='';
   		$scope.pageAnimate=''; 	
   		$timeout(function () {
@@ -20,9 +21,12 @@ angular.module('frontendPseApp')
 	  		$state.go('Home');
 	  	}
 	  	$scope.Registrar=function(){
+	  		$scope.cargando = true;
+	  		$scope.Register.id_empresa=$scope.Usuario.id_empresa;
 	  		ApiPse.getResource('Sitios/Crear',$scope.Register)
 	  		.then(
 	  			function(data){
+	  				$scope.cargando = false;
 	  				if(data.data.Estado==1){
 
 	  				}
