@@ -40,6 +40,7 @@ angular.module('frontendPseApp')
   	}
   	$scope.Registrar=function(){
   		$scope.cargando = true;
+  		$scope.Register.id_empresa=$scope.Usuario.id_empresa;
   		ApiPse.getResource("Actividades/Crear",$scope.Register)
 		.then(function(data){
 			$scope.cargando = false;
@@ -75,6 +76,10 @@ angular.module('frontendPseApp')
 			if(data.data.Estado==1){
 				$scope.actividades=data.data.Datos;
 				$scope.gridOptions.data = $scope.actividades;
+			}else{
+				$scope.actividades=[];
+				$scope.gridOptions.data = $scope.actividades;
+				alert(data.data.Datos);
 			}
 		},function(data){
 			console.log(data);

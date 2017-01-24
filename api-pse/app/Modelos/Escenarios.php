@@ -17,5 +17,4 @@ class Escenarios extends Model
 	];
 
 	public $timestamps = false;
-	public $incrementing = false;
 }
