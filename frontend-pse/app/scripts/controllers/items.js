@@ -10,7 +10,7 @@
 angular.module('frontendPseApp')
 .controller('ItemsCtrl', function ($scope , $uibModal ,ApiPse, SesionUsuario, $state, $timeout, Tabla) {
 	$scope.cargando = false;
-	$scope.cargando2 = false;
+	$scope.cargandodos = false;
 	var modal = null;
 	$scope.Usuario=SesionUsuario.ObtenerSesion();
 	$scope.panelAnimate='';
@@ -27,6 +27,12 @@ angular.module('frontendPseApp')
     '<a type="button" class="btn btn-info btn-bordered btn-xs"'+
     ' ng-click="grid.appScope.Borrar(row.entity.id)">Borrar</a>'+
     '</div>';
+    var casillaDeBotonesDates = '<div>'+
+    '<a type="button" class="btn btn-info btn-bordered btn-xs"'+
+    ' ng-click="grid.appScope.Editar(row.entity.id)">Editar</a>'+
+    '<a type="button" class="btn btn-info btn-bordered btn-xs"'+
+    ' ng-click="grid.appScope.Borrar(row.entity.id)">Borrar</a>'+
+    '</div>';
     $scope.gridOptions = {
       columnDefs: [
         { field: 'id'},
@@ -36,7 +42,15 @@ angular.module('frontendPseApp')
         { name: 'Opciones', enableFiltering: false, cellTemplate : casillaDeBotones}
         ]
     }
+    $scope.gridDates = {
+      columnDefs: [
+        { field: 'id'},
+        { field: 'nombre'},
+        { name: 'Opciones', enableFiltering: false, cellTemplate : casillaDeBotonesDates}
+        ]
+    }
     angular.extend($scope.gridOptions , Tabla);
+    angular.extend($scope.gridDates , Tabla);
 	if(SesionUsuario.ObtenerSesion().rol == "Super Administrador"){
 		$state.go('Home');
 	}
@@ -63,25 +77,7 @@ angular.module('frontendPseApp')
 			}
 		);
 	}
-	$scope.RegistrarHerramienta=function(Herramienta){
-		$scope.cargando = true;
-		Herramienta.id_empresa=$scope.Usuario.id_empresa;
-		ApiPse.getResource('Herramientas/Crear',Herramienta)
-		.then(
-			function(data){
-				$scope.cargando = false;
-				if(data.data.Estado==1){
-					Herramienta.id=data.data.Datos.id;
-					Herramienta.estado=1;
-					$scope.herramientas.push(Herramienta);
-					$scope.cerrarModal();
-				}else{
-					alert(data.data.Datos);
-				}
-			},function(data){
-			}
-		);
-	}
+	
 	function listarItems(){
 		ApiPse.getResource('Items/ListarDisponible/'+$scope.Usuario.id_empresa)
 		.then(
@@ -104,8 +100,12 @@ angular.module('frontendPseApp')
 			function(data){
 				if(data.data.Estado==1){
 					$scope.herramientas=data.data.Datos;
+					$scope.herras=data.data.Datos;
+          			$scope.gridDates.data = $scope.herras;
 				}else{
 					$scope.herramientas=[];
+					$scope.herras=[];
+					$scope.gridDates.data = $scope.herras;
 					alert(data.data.Datos);
 				}
 			},function(data){
@@ -114,6 +114,7 @@ angular.module('frontendPseApp')
 	}
 
 	$scope.AbrirModal = function(){
+
 		modal = $uibModal.open({
 			animation: true,
 			ariaLabelledBy: 'modal-title',
@@ -135,9 +136,28 @@ angular.module('frontendPseApp')
 	listarItems();
 })
 .controller('CrearHerramientaCtrl' , function($scope , Scope, $uibModal,ApiPse){
+	$scope.cargandodos=false;
+	$scope.gridDates=Scope.gridDates;
+	
 	$scope.RegisterHerramienta=function(){
-		Scope.RegistrarHerramienta($scope.Herramienta);
+		$scope.cargandodos=true;
+		$scope.Herramienta.id_empresa=Scope.Usuario.id_empresa;
+		ApiPse.getResource('Herramientas/Crear',$scope.Herramienta)
+		.then(
+			function(data){
+				$scope.cargandodos = false;
+				if(data.data.Estado==1){
+					$scope.Herramienta.id=data.data.Datos.id;
+					$scope.Herramienta.estado=1;
+					Scope.herramientas.push($scope.Herramienta);
+				}else{
+					alert(data.data.Datos);
+				}
+			},function(data){
+			}
+		);
 	}
+
 	$scope.cerrar=function(){
 		Scope.cerrarModal();
 	}
