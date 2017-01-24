@@ -4,6 +4,7 @@ angular.module('frontendPseApp')
 	.value('duScrollDuration', 700)
   	.value('duScrollOffset',50)
   	.value('duScrollActiveClass', 'active-login')
+  	.value('duScrollBottomSpy', true)
   	.controller('LoginCtrl', function ($scope, $state , ApiPse, SesionUsuario , $uibModal,$document){
 	  	if(SesionUsuario.ObtenerSesion() != null){
 			$state.go('Home');
