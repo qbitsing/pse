@@ -24,7 +24,7 @@ class EscenariosCtrl extends Controlador
 	}
 	public function ListarDisponible($request , $response ,$args)
 	{
-		$user=escenarios::where('estado','=',1)->where('id_empresa','=',$args['id'])->get();
+		$user=escenarios::join('ciudad','escenarios.id_ciudad','=','ciudad.id')->select('escenarios.*','ciudad.nombre as ciudad')->where('escenarios.estado','=',1)->where('escenarios.id_empresa','=',$args['id'])->get();
 		if($user!="[]"){
 			$respuesta=[
 				'Estado'=>1,
@@ -61,7 +61,7 @@ class EscenariosCtrl extends Controlador
 		if ($user) {
 			$respuesta=[
 				'Estado'=>1,
-				'Datos'=>'Registro completo'
+				'Datos'=>$user
 			];
 		}
 		else{
