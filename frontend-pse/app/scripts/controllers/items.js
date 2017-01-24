@@ -8,7 +8,7 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-.controller('ItemsCtrl', function ($scope , $uibModal ,ApiPse, SesionUsuario, $state,$timeout) {
+.controller('ItemsCtrl', function ($scope , $uibModal ,ApiPse, SesionUsuario, $state, $timeout, Tabla) {
 	$scope.cargando = false;
 	$scope.cargando2 = false;
 	var modal = null;
@@ -19,6 +19,24 @@ angular.module('frontendPseApp')
 		$scope.pageAnimate='pageAnimate';
 		$scope.panelAnimate='panelAnimate';
 	},100);
+	var casillaDeBotones = '<div>' + 
+    '<a type="button" class="btn btn-info btn-bordered btn-xs"'+
+    ' ng-click="grid.appScope.Detalles(row.entity.id)">Detalles</a>'+
+    '<a type="button" class="btn btn-info btn-bordered btn-xs"'+
+    ' ng-click="grid.appScope.Editar(row.entity.id)">Editar</a>'+
+    '<a type="button" class="btn btn-info btn-bordered btn-xs"'+
+    ' ng-click="grid.appScope.Borrar(row.entity.id)">Borrar</a>'+
+    '</div>';
+    $scope.gridOptions = {
+      columnDefs: [
+        { field: 'id'},
+        { field: 'herramienta'},
+        { field: 'modelo'},
+        { field: 'codigo_unico'},
+        { name: 'Opciones', enableFiltering: false, cellTemplate : casillaDeBotones}
+        ]
+    }
+    angular.extend($scope.gridOptions , Tabla);
 	if(SesionUsuario.ObtenerSesion().rol == "Super Administrador"){
 		$state.go('Home');
 	}
@@ -30,7 +48,14 @@ angular.module('frontendPseApp')
 			function(data){
 				$scope.cargando = false;
 				if(data.data.Estado==1){
-					alert(data.data.Datos);
+					for (var i = 0; i < $scope.herramientas.length; i++) {
+						if($scope.herramientas[i].id==parseInt($scope.Register.id_herramienta)){
+							$scope.Register.herramienta=$scope.herramientas[i].nombre;
+						}
+					}
+					$scope.Register.id=data.data.Datos.id;
+					$scope.items.push($scope.Register);
+					$scope.Register={};
 				}else{
 					alert(data.data.Datos);
 				}
@@ -51,6 +76,22 @@ angular.module('frontendPseApp')
 					$scope.herramientas.push(Herramienta);
 					$scope.cerrarModal();
 				}else{
+					alert(data.data.Datos);
+				}
+			},function(data){
+			}
+		);
+	}
+	function listarItems(){
+		ApiPse.getResource('Items/ListarDisponible/'+$scope.Usuario.id_empresa)
+		.then(
+			function(data){
+				if(data.data.Estado==1){
+					$scope.items=data.data.Datos;
+          			$scope.gridOptions.data = $scope.items;
+				}else{
+					$scope.items=[];
+					$scope.gridOptions.data = $scope.items;
 					alert(data.data.Datos);
 				}
 			},function(data){
@@ -91,6 +132,7 @@ angular.module('frontendPseApp')
 		modal.close();
 	}
 	ListarHerramientas();
+	listarItems();
 })
 .controller('CrearHerramientaCtrl' , function($scope , Scope, $uibModal,ApiPse){
 	$scope.RegisterHerramienta=function(){
