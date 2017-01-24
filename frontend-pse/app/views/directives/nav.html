@@ -1,23 +1,23 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
-			 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#toggle-menu" aria-expanded="false">
 		        <span class="sr-only">Desplegar/Ocultar Menu</span>
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		        <span class="icon-bar"></span>
 		      </button>
-			<a class="navbar-brand" href="#">
+			<a class="navbar-brand" ng-click="topLogin()">
 				Espacio del Logo
 			</a>
 		</div>
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<div class="collapse navbar-collapse" id="toggle-menu">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#Login">Inicio de Sesion</a></li>
-				<li><a href="#Mision">Mision</a></li>
-				<li><a href="#Vision">Vision</a></li>
-				<li><a href="#Objetivos">Objetivos</a></li>
-				<li><a href="#Contactenos">Contactenos</a></li>
+				<li><a du-smooth-scroll="Login" du-scrollspy>Inicio de Sesion</a></li>
+				<li><a du-smooth-scroll="Mision" du-scrollspy>Mision</a></li>
+				<li><a du-smooth-scroll="Vision" du-scrollspy>Vision</a></li>
+				<li><a du-smooth-scroll="Objetivos" du-scrollspy>Objetivos</a></li>
+				<li><a du-smooth-scroll="Contactenos" du-scrollspy>Contactenos</a></li>
 			</ul>
 		</div>
 	</div>
