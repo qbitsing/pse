@@ -24,6 +24,7 @@ angular
     'ui.grid',
     'ui.grid.pagination', 
     'ui.grid.cellNav',
+    'duScroll'
   ])
   .config(function (localStorageServiceProvider) {
     localStorageServiceProvider

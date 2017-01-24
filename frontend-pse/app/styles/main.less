@@ -30,6 +30,17 @@ body{
 	background: #EEEEEE;
 	font-family: 'Rubik', sans-serif !important;
 }
+section{
+	overflow:hidden;
+}
+.active-login{
+	background: @brand-primary;
+	color:@white !important;
+	&:hover{
+		background: @brand-primary !important;
+		color:@white !important;
+	}
+}
 .color-negro{
 	color:@negro;
 }
@@ -92,9 +103,7 @@ body{
 	padding-left: 0px;
 	padding-right: 0px;
 }
-
 .jumbotron {
-	margin-top:50px;
 	border-radius: 0px !important;
 	margin-bottom: 0;
 	font-family: 'Rubik', sans-serif !important;
@@ -107,6 +116,10 @@ body{
 .jumbotron-blue{
 	background: @brand-primary;
 	color: @white;
+	
+}
+.primer{
+	margin-top:50px !important;
 }
 .jumbotron-white{
 	background: @white;
