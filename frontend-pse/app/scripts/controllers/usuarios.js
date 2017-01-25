@@ -204,12 +204,6 @@ angular.module('frontendPseApp')
 	}
 	ListarEmpresa();
 	ListarUsuarios();
-<<<<<<< HEAD
-	
-=======
-	$scope.recargar = function (){
-		angular.element('.recargar');
-	}
 })
 .controller('DetalleUsuarioModalCtrl', function ($scope ,Scope) {
 	$scope.Detalle=Scope.obj;
@@ -217,5 +211,5 @@ angular.module('frontendPseApp')
 	$scope.Cerrar=function(){
 		Scope.cerrarModal();
 	}
->>>>>>> 839569f1f67d00aedb7720445d369ba9853fc6fa
+
 });
