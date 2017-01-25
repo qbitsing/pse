@@ -190,6 +190,7 @@ class UsuariosCtrl extends Controlador
 				'correo' => $parsedBody->correo,
 				'id_empresa' => $parsedBody->id_empresa,
 				'rol' => $parsedBody->rol,
+				'estado' => $parsedBody->estado
 			]
 		);
 		if ($user>0) {
@@ -210,11 +211,17 @@ class UsuariosCtrl extends Controlador
 	{
 		$user=users::where('id','=',$args['id'])->delete();
 		if ($user>0) {
-			$respuesta="Se ha eliminado exitosamente";
+			$respuesta=[
+				"Estado"=>1,
+				"Datos"=>"Se ha eliminado exitosamente"
+			];
 		}else{
-			$respuesta="No se ha podido eliminar";
+			$respuesta=[
+				"Estado"=>0,
+				"Datos"=>"No se ha podido eliminar"
+			];
 		}	
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function EnviarCodigo($request , $response){

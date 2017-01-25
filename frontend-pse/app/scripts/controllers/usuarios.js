@@ -8,7 +8,8 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-.controller('UsuariosCtrl', function ($scope, ApiPse, SesionUsuario, $timeout , Tabla , Estados) {
+.controller('UsuariosCtrl', function ($scope, ApiPse, SesionUsuario, $timeout , Tabla , 
+		Estados , CasillaBotones) {
 	$scope.PanelTitulo = "Registro de usuarios";
 	$scope.BotonTitulo = "Registrar Usuario";
 	$scope.cargando = false;
@@ -22,34 +23,29 @@ angular.module('frontendPseApp')
 		$scope.panelAnimate='panelAnimate';
 	},100);
 	var casillaDeBotones = '<div>';
-	casillaDeBotones+='<a tablabotones="{{row.entity.estado}},Toggle" ng-click="grid.appScope.Toggle(row.entity.id)"></a>';
-	casillaDeBotones+='<a tablabotones="{{row.entity.estado}},Editar" ng-click="grid.appScope.Editar(row.entity.id)"></a>';
-	casillaDeBotones+='<a tablabotones="{{row.entity.estado}},Detalles" ng-click="grid.appScope.Detalles(row.entity.id)"></a>';
-	casillaDeBotones+='<a tablabotones="{{row.entity.estado}},Borrar" ng-click="grid.appScope.Borrar(row.entity.id)"></a>';
+	casillaDeBotones+=CasillaBotones.Toggle;
+	casillaDeBotones+=CasillaBotones.Editar;
+	casillaDeBotones+=CasillaBotones.Detalles;
+	casillaDeBotones+=CasillaBotones.Borrar;
 	casillaDeBotones+='</div>';
 	$scope.gridOptions = {
 		columnDefs: [
 			{ 
-				field: 'nombres'
-				 
+				field: 'nombres' 
 			},
 			{ 
-				field: 'apellidos'
-				 
+				field: 'apellidos' 
 			},
 			{ 
 				name: 'Documento',
 				field: 'id'
-				 
 			},
 			{ 
 				field: 'rol'
-				 
 			},
 			{ 
 				field: 'estado', 
-				cellTemplate : '<div>{{grid.appScope.Estados[row.entity.estado]}}</div>'
-				 
+				cellTemplate : '<div>{{grid.appScope.Estados.Estados[row.entity.estado]}}</div>'
 			},
 			{ 
 				name: 'Opciones', 
@@ -58,22 +54,6 @@ angular.module('frontendPseApp')
 			}
 
 	    ]
-	}
-	$scope.Toggle = function(id) {
-		var obj = $scope.Identifiar(id);
-	}
-	$scope.Editar = function(id) {
-		var obj = $scope.Identifiar(id);
-		$scope.Register = obj;
-		$scope.PanelTitulo = "Editar usuario";
-		$scope.BotonTitulo = "Guardar Cambios";
-
-	}
-	$scope.Detalles = function(id) {
-		var obj = $scope.Identifiar(id);
-	}
-	$scope.Borrar = function(id) {
-		var obj = $scope.Identifiar(id);
 	}
 	angular.extend($scope.gridOptions , Tabla);
 	$scope.Registrar=function(){
@@ -105,10 +85,77 @@ angular.module('frontendPseApp')
 			}
 		);
 	}
+	$scope.Editar = function(id) {
+		var obj = $scope.Identifiar(id);
+		$scope.Register = obj;
+		$scope.PanelTitulo = "Editar usuario";
+		$scope.BotonTitulo = "Guardar Cambios";
+	}
+	$scope.Borrar = function(id) {
+		$scope.cargando = true;
+		var obj = $scope.Identifiar(id);
+		var ruta = "Usuarios/Eliminar/"+obj.id;
+		ApiPse.getResource(ruta)
+		.then(function(data){
+			if(data.data.Estado == 1){
+				$scope.Usuarios.splice(obj.index , 1);
+			}
+			$scope.cargando = false;
+		},function(data){
+			$scope.cargando = false;
+			console.log(data);
+		});
+
+	}
+	$scope.Toggle = function(id) {
+		$scope.cargando = true;
+		var obj = $scope.Identifiar(id);
+		if(obj.estado == 1){
+			obj.estado = 0;
+		}else{
+			obj.estado = 1;
+		}
+		var ruta = "Usuarios/Actualizar/"+obj.id;
+		ApiPse.getResource(ruta , obj)
+		.then(function(data){
+			if(data.data.Estado == 1){
+				$scope.Usuarios[obj.index] = obj;
+			}
+			$scope.cargando = false;
+		},function(data){
+			$scope.cargando = false;
+			console.log(data);
+		});
+		console.log(obj);
+	}
+	$scope.Detalles = function(id) {
+		var obj = $scope.Identifiar(id);
+	}
 	$scope.CancelarEditar = function(){
 		$scope.PanelTitulo = "Registro de usuarios";
 		$scope.BotonTitulo = "Registrar Usuario";
 		$scope.Register = {};
+	}
+	$scope.Identifiar = function(_id){
+		var obj = {};
+		$scope.Usuarios.forEach(function(ele , index){
+			if(ele.id == _id){
+				obj.index = index;
+				obj.id = ele.id;
+				obj.rol = ele.rol;
+				obj.nombres = ele.nombres;
+				obj.apellidos = ele.apellidos;
+				obj.telefono = ele.telefono;
+				obj.direccion = ele.direccion;
+				obj.correo = ele.correo;
+				obj.estado = ele.estado;
+				obj.id_empresa = ele.id_empresa;
+				obj.tipo_doc = ele.tipo_doc.toString();
+
+			}
+		});
+
+		return obj;
 	}
 	function ListarEmpresa(){
 		ApiPse
@@ -137,27 +184,6 @@ angular.module('frontendPseApp')
 		},function(data){
 			
 		});
-	}
-	$scope.Identifiar = function(_id){
-		var obj = {};
-		$scope.Usuarios.forEach(function(ele , index){
-			if(ele.id == _id){
-				obj.index = index;
-				obj.id = ele.id;
-				obj.rol = ele.rol;
-				obj.nombres = ele.nombres;
-				obj.apellidos = ele.apellidos;
-				obj.telefono = ele.telefono;
-				obj.direccion = ele.direccion;
-				obj.correo = ele.correo;
-				obj.estado = ele.estado;
-				obj.id_empresa = ele.id_empresa;
-				obj.tipo_doc = ele.tipo_doc.toString();
-
-			}
-		});
-
-		return obj;
 	}
 	ListarEmpresa();
 	ListarUsuarios();
