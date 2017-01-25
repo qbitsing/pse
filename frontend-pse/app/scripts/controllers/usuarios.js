@@ -187,4 +187,7 @@ angular.module('frontendPseApp')
 	}
 	ListarEmpresa();
 	ListarUsuarios();
+	$scope.recargar = function (){
+		angular.element('.recargar');
+	}
 });
