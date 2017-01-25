@@ -51,7 +51,8 @@ angular.module('frontendPseApp')
 			{ 
 				name: 'Opciones', 
 				enableFiltering: false, 
-				cellTemplate : casillaDeBotones
+				cellTemplate : casillaDeBotones,
+				width: '25%'
 			}
 
 	    ]
@@ -170,7 +171,6 @@ angular.module('frontendPseApp')
 
 			}
 		});
-
 		return obj;
 	}
 	function ListarEmpresa(){
@@ -204,9 +204,6 @@ angular.module('frontendPseApp')
 	}
 	ListarEmpresa();
 	ListarUsuarios();
-	$scope.recargar = function (){
-		angular.element('.recargar');
-	}
 })
 .controller('DetalleUsuarioModalCtrl', function ($scope ,Scope) {
 	$scope.Detalle=Scope.obj;
@@ -214,4 +211,5 @@ angular.module('frontendPseApp')
 	$scope.Cerrar=function(){
 		Scope.cerrarModal();
 	}
+
 });
