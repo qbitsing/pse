@@ -10,7 +10,8 @@ class UsuariosCtrl extends Controlador
 	
 	public function Listar($request , $response )
 	{
-		$user=users::all();
+		$parsedBody = json_decode($request->getBody()->getContents());
+		$user=users::where('id','!=',$parsedBody->userAction)->get();
 		if($user!="[]"){
 			$respuesta=[
 				"Estado" => 1,
@@ -81,7 +82,7 @@ class UsuariosCtrl extends Controlador
 		
 		$parsedBody = json_decode($request->getBody()->getContents());
 
-		$user=users::where('correo','=',$parsedBody->correo)->get();
+		$user=users::where('correo','=',$parsedBody->correo)->where('estado','=',1)->get();
 		if($user!="[]"){
 			$r= $user;
 			if(password_verify($parsedBody->contrasenaa, $r[0]->contrasena)){
