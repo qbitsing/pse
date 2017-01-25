@@ -22,6 +22,7 @@ angular
     'LocalStorageModule',
     'perfect_scrollbar',
     'ui.grid',
+    'ui.grid.autoResize',
     'ui.grid.pagination', 
     'ui.grid.cellNav',
     'duScroll'

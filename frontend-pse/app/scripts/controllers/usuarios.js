@@ -50,7 +50,8 @@ angular.module('frontendPseApp')
 			{ 
 				name: 'Opciones', 
 				enableFiltering: false, 
-				cellTemplate : casillaDeBotones
+				cellTemplate : casillaDeBotones,
+				width: '25%'
 			}
 
 	    ]
@@ -154,7 +155,6 @@ angular.module('frontendPseApp')
 
 			}
 		});
-
 		return obj;
 	}
 	function ListarEmpresa(){
@@ -187,7 +187,5 @@ angular.module('frontendPseApp')
 	}
 	ListarEmpresa();
 	ListarUsuarios();
-	$scope.recargar = function (){
-		angular.element('.recargar');
-	}
+	
 });
