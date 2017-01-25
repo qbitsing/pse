@@ -105,7 +105,6 @@ angular.module('frontendPseApp')
 			$scope.cargando = false;
 			console.log(data);
 		});
-
 	}
 	$scope.Toggle = function(id) {
 		$scope.cargando = true;

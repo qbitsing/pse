@@ -166,6 +166,6 @@ class EmpresasCtrl extends Controlador
 				'Datos'=>"No se ha podido eliminar la empresa"
 			];
 		}	
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 }

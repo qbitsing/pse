@@ -7,81 +7,166 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-  .controller('EmpresasCtrl', function ($scope, SesionUsuario, ApiPse, $state, $timeout, Tabla) {
-    $scope.cargando = false; 
-		$scope.panelAnimate='';
-		$scope.pageAnimate=''; 	
-		$timeout(function () {
-			 $scope.pageAnimate='pageAnimate';
-			 $scope.panelAnimate='panelAnimate';
-		},100);
-    var casillaDeBotones = '<div>' + 
-    '<a type="button" class="btn btn-info btn-bordered btn-xs"'+
-    ' ng-click="grid.appScope.Detalles(row.entity.id)">Detalles</a>'+
-    '<a type="button" class="btn btn-info btn-bordered btn-xs"'+
-    ' ng-click="grid.appScope.Editar(row.entity.id)">Editar</a>'+
-    '<a type="button" class="btn btn-info btn-bordered btn-xs"'+
-    ' ng-click="grid.appScope.Borrar(row.entity.id)">Borrar</a>'+
-    '</div>';
-    $scope.gridOptions = {
-      columnDefs: [
-        { field: 'id'},
-        { field: 'nombre'},
-        { field: 'direccion'},
-        { field: 'telefono'},
-        { name: 'Opciones', enableFiltering: false, cellTemplate : casillaDeBotones}
+.controller('EmpresasCtrl', function ($scope, SesionUsuario, ApiPse, $state, $timeout, Tabla ,
+		Estados , CasillaBotones) {
+	$scope.Usuario=SesionUsuario.ObtenerSesion();
+	if($scope.Usuario.rol!="Super Administrador"){
+		$state.go('Home');
+	}
+	$scope.PanelTitulo = "Registro de empresas";
+	$scope.BotonTitulo = "Registrar empresa";
+	$scope.cargando = false; 
+	$scope.Estados = Estados;
+	$scope.panelAnimate='';
+	$scope.pageAnimate=''; 	
+	$timeout(function () {
+		$scope.pageAnimate='pageAnimate';
+		$scope.panelAnimate='panelAnimate';
+	},100);
+	var casillaDeBotones = '<div>';
+	casillaDeBotones+=CasillaBotones.Toggle;
+	casillaDeBotones+=CasillaBotones.Editar;
+	casillaDeBotones+=CasillaBotones.Detalles;
+	casillaDeBotones+=CasillaBotones.Borrar;
+	casillaDeBotones +='</div>';
+	$scope.gridOptions = {
+		columnDefs: [
+			{ 
+				name:'NIT', 
+				field: 'id'
+			},
+			{ 
+				field: 'nombre'
+			},
+			{ 
+				field: 'direccion'
+			},
+			{ 
+				field: 'telefono'
+			},
+			{ 
+				field: 'estado',
+				cellTemplate : '<div>{{grid.appScope.Estados.Estados[row.entity.estado]}}</div>'
+			},
+			{ 
+				name: 'Opciones', 
+				enableFiltering: false, 
+				cellTemplate : casillaDeBotones
+			}
+		]
+	}
+	angular.extend($scope.gridOptions , Tabla);
+	$scope.Registrar=function(){
+		$scope.cargando = true;
+		ApiPse.getResource('Empresas/Crear',$scope.Register)
+		.then(function(data){
+			$scope.empresas.push($scope.Register);
+			$scope.cargando = false;
+		},function(data){
+			$scope.cargando = false;
+		});
+	}
+	$scope.Editar = function(id) {
+		var obj = $scope.Identifiar(id);
+		$scope.Register = obj;
+		$scope.PanelTitulo = "Editar empresa";
+		$scope.BotonTitulo = "Guardar Cambios";
+	}
+	$scope.Borrar = function(id) {
+		$scope.cargando = true;
+		var obj = $scope.Identifiar(id);
+		var ruta = "Empresas/Eliminar/"+obj.id;
+		ApiPse.getResource(ruta)
+		.then(function(data){
+			if(data.data.Estado == 1){
+				$scope.empresas.splice(obj.index , 1);
+			}
+			$scope.cargando = false;
+		},function(data){
+			$scope.cargando = false;
+			console.log(data);
+		});
+	}
+	$scope.Toggle = function(id) {
+		$scope.cargando = true;
+		var obj = $scope.Identifiar(id);
+		if(obj.estado == 1){
+			obj.estado = 0;
+		}else{
+			obj.estado = 1;
+		}
+		var ruta = "Empresas/Actualizar/"+obj.id;
+		ApiPse.getResource(ruta , obj)
+		.then(function(data){
+			if(data.data.Estado == 1){
+				$scope.empresas[obj.index] = obj;
+			}
+			$scope.cargando = false;
+		},function(data){
+			$scope.cargando = false;
+			console.log(data);
+		});
+		console.log(obj);
+	}
+	$scope.Detalles = function(id) {
+		var obj = $scope.Identifiar(id);
+	}
+	$scope.CancelarEditar = function(){
+		$scope.PanelTitulo = "Registro de empresas";
+		$scope.BotonTitulo = "Registrar empresa";
+		$scope.Register = {};
+	}
+	$scope.Identifiar = function(_id){
+		var obj = {};
+		$scope.empresas.forEach(function(ele , index){
+			if(ele.id == _id){
+				obj.index = index;
+				obj.id = ele.id;
+				obj.nombre = ele.nombre;
+				obj.telefono = ele.telefono;
+				obj.direccion = ele.direccion;
+				obj.id_departamento = ele.id_departamento;
+				obj.ciudad = ele.ciudad;
+				obj.estado = ele.estado;
+			}
+		});
+		return obj;
+	}
 
-        ]
-    }
-    angular.extend($scope.gridOptions , Tabla);
-  	$scope.Usuario=SesionUsuario.ObtenerSesion();
-  	if($scope.Usuario.rol!="Super Administrador"){
-  		$state.go('Home');
-  	}
-  	$scope.Registrar=function(){
-      $scope.cargando = true;
-  		ApiPse.getResource('Empresas/Crear',$scope.Register)
-  		.then(
-  			function(data){
-          $scope.cargando = false;
-          $scope.empresas.push($scope.Register);
-  				console.log(data.data);
-  			},function(data){
 
-  		});
-  	}
-    function listarDepartamentos(){
-			ApiPse.getResource("Empresas/ListarDepartamentos")
-			.then(function(data){
-				if(data.data.Estado==1){
-					$scope.departamentos = data.data.Datos;
-				}
-			},function(data){
+	function listarDepartamentos(){
+		ApiPse.getResource("Empresas/ListarDepartamentos")
+		.then(function(data){
+			if(data.data.Estado==1){
+				$scope.departamentos = data.data.Datos;
+			}
+		},function(data){
+			console.log(data);
+		});
+	}
+	function ListarCiudades(){
+		ApiPse.getResource("Empresas/ListarCiudades")
+		.then(function(data){
+			if(data.data.Estado==1){
+				$scope.ciudades = data.data.Datos;
+			}
+		},function(data){
+
+		});
+	}
+	function listarEmpresas(){
+		ApiPse.getResource("Empresas/ListarDisponible")
+		.then(function(data){
+			if(data.data.Estado==1){
+				$scope.empresas=data.data.Datos;
 				console.log(data);
-			});
-		}
-		function ListarCiudades(){
-			ApiPse.getResource("Empresas/ListarCiudades")
-			.then(function(data){
-				if(data.data.Estado==1){
-					$scope.ciudades = data.data.Datos;
-				}
-			},function(data){
-
-			});
-		}
-    function listarEmpresas(){
-      ApiPse.getResource("Empresas/ListarDisponible")
-      .then(function(data){
-        if(data.data.Estado==1){
-          $scope.empresas=data.data.Datos;
-          $scope.gridOptions.data = $scope.empresas;
-        }
-      },function(data){
-        console.log(data);
-      });
-    }
-		listarDepartamentos();
-		ListarCiudades();
-    listarEmpresas();
-  });
+				$scope.gridOptions.data = $scope.empresas;
+			}
+		},function(data){
+			console.log(data);
+		});
+	}
+	listarDepartamentos();
+	ListarCiudades();
+	listarEmpresas();
+});

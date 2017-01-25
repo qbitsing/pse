@@ -8,13 +8,13 @@
 <div class="col-sm-12">
 	<div class="panel {{panelAnimate}}">
 		<div class="panel-heading">
-			<h3 class="panel-title">Registrar empresa</h3>
+			<h3 class="panel-title">{{PanelTitulo}}</h3>
 		</div>
 		<div class="panel-body" >
 			<form name="RegisterForm" novalidate ng-submit="Registrar()">
 				<div class="form-group col-sm-6">
 					<label for="Documento">NIT</label>
-					<input type="text" class="form-control" id="Documento" placeholder="129753845-1" required ng-model="Register.id" ng-model="Register.id">
+					<input type="text" class="form-control" id="Documento" placeholder="129753845-1" required ng-model="Register.id" ng-model="Register.id" ng-disabled="BotonTitulo == 'Guardar Cambios'">
 				</div>
 				<div class="form-group col-sm-6">
 					<label for="Nombres">Nombres</label>
@@ -41,7 +41,8 @@
 					</select>
 				</div>
 				<div class="col-xs-12">	
-					<button class="btn btn-success" type="submit" ng-disabled="RegisterForm.$invalid">Registrar Empresa</button>
+					<button class="btn btn-success" type="submit" ng-disabled="RegisterForm.$invalid">{{BotonTitulo}}</button>
+					<button class="btn btn-danger" type="button" ng-show="BotonTitulo == 'Guardar Cambios'" ng-click="CancelarEditar()">Cancelar</button>
 				</div>
 			</form>
 		</div>
