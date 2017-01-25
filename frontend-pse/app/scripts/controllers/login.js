@@ -2,7 +2,7 @@
 
 angular.module('frontendPseApp')
 	.value('duScrollDuration', 700)
-  	.value('duScrollOffset',50)
+  	.value('duScrollOffset',60)
   	.value('duScrollActiveClass', 'active-login')
   	.value('duScrollBottomSpy', true)
   	.controller('LoginCtrl', function ($scope, $state , ApiPse, SesionUsuario , $uibModal,$document){
@@ -29,6 +29,5 @@ angular.module('frontendPseApp')
 	    $scope.topLogin= function() {
 	      $document.scrollToElementAnimated(angular.element(document.getElementById('Login')));
 	    }
-	    
 
   });
