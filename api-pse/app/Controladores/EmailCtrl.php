@@ -228,18 +228,18 @@ class EmailCtrl extends Controlador
 							<td text-align="center">
 								<h2 text-align="justify">Hi, '.$nombre.'</h2>
 								<p class="lead">';
-		if(is_null($codigo)){
-			$mensaje.='Usted ha sido registrado en nuestro sistema, Para iniciar sesión sus datos serán los siguientes:<br>Correo electronico:'.$email.'.<br>Contraseña:
-								</p>
-								<div class="contenedorcodigo" align="center"><h3 class="codigo">'.$password.'</h3></div>';
-			$asunto="Datos de acceso al sistema";
-		}else{
-			$mensaje.='su petici&oacute;n de restablecimiento de contrase&ntilde;a ha sido atendida, para continuar por favor digite el siguiente c&oacute;digo de verificaci&oacute;n en la aplicaci&oacute;n:
-								</p>
-								<div class="contenedorcodigo" align="center"><h3 class="codigo">'.$codigo.'</h3></div>';
-			$asunto="Recuperación de contraseña";
-		}
-		$mensaje.='
+								if(is_null($codigo)){
+									$mensaje.='Usted ha sido registrado en nuestro sistema, Para iniciar sesión sus datos serán los siguientes:<br>Correo electronico:'.$email.'.<br>Contraseña:
+														</p>
+														<div class="contenedorcodigo" align="center"><h3 class="codigo">'.$password.'</h3></div>';
+									$asunto="Datos de acceso al sistema";
+								}else{
+									$mensaje.='su petici&oacute;n de restablecimiento de contrase&ntilde;a ha sido atendida, para continuar por favor digite el siguiente c&oacute;digo de verificaci&oacute;n en la aplicaci&oacute;n:
+														</p>
+														<div class="contenedorcodigo" align="center"><h3 class="codigo">'.$codigo.'</h3></div>';
+									$asunto="Recuperación de contraseña";
+								}
+								$mensaje.='
 								<p class="callout" align="center">
 									Este correo ha sido auto-generado por PRINES S.A.S
 								</p>
