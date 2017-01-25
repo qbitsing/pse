@@ -10,7 +10,7 @@ class EmpresasCtrl extends Controlador
 {
 	public function ListarDisponible($request , $response )
 	{
-		$user=empresas::join('ciudad','empresas.ciudad','=','ciudad.id')->select('empresas.*','ciudad.nombre as nombre_ciudad')->where('empresas.estado','=',1)->get();
+		$user=empresas::join('ciudad','empresas.ciudad','=','ciudad.id')->select('empresas.*','ciudad.nombre as nombre_ciudad','ciudad.id_departamento')->where('empresas.estado','=',1)->get();
 		if($user!="[]"){
 			$respuesta=[
 				'Estado'=>1,
@@ -166,6 +166,6 @@ class EmpresasCtrl extends Controlador
 				'Datos'=>"No se ha podido eliminar la empresa"
 			];
 		}	
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 }

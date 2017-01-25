@@ -9,7 +9,7 @@
  */
 angular.module('frontendPseApp')
 .controller('UsuariosCtrl', function ($scope, ApiPse, SesionUsuario, $timeout , Tabla , 
-		Estados , CasillaBotones) {
+		Estados , CasillaBotones, $uibModal) {
 	$scope.PanelTitulo = "Registro de usuarios";
 	$scope.BotonTitulo = "Registrar Usuario";
 	$scope.cargando = false;
@@ -18,6 +18,7 @@ angular.module('frontendPseApp')
 	$scope.Usuario=SesionUsuario.ObtenerSesion();
 	$scope.panelAnimate='';
 	$scope.pageAnimate='';
+	var modalInstance = null;
 	$timeout(function () {
 		$scope.pageAnimate='pageAnimate';
 		$scope.panelAnimate='panelAnimate';
@@ -106,7 +107,6 @@ angular.module('frontendPseApp')
 			$scope.cargando = false;
 			console.log(data);
 		});
-
 	}
 	$scope.Toggle = function(id) {
 		$scope.cargando = true;
@@ -130,7 +130,23 @@ angular.module('frontendPseApp')
 		console.log(obj);
 	}
 	$scope.Detalles = function(id) {
-		var obj = $scope.Identifiar(id);
+		console.log('Entro');
+		$scope.obj = $scope.Identifiar(id);
+		modalInstance = $uibModal.open({
+			animation: true,
+			ariaLabelledBy: 'modal-title',
+			ariaDescribedBy: 'modal-body',
+			templateUrl: 'myModalContent.html',
+			controller: 'DetalleUsuarioModalCtrl',
+			resolve: {
+				Scope : function(){
+					return $scope;
+				}
+		    }
+		});
+	}
+	$scope.cerrarModal = function(){
+		modalInstance.close();
 	}
 	$scope.CancelarEditar = function(){
 		$scope.PanelTitulo = "Registro de usuarios";
@@ -169,11 +185,12 @@ angular.module('frontendPseApp')
 		});
 	}
 	function ListarUsuarios() {
-		var ruta;
-		if($scope.Usuario.rol == "Administrador")
+		var ruta="";
+		if($scope.Usuario.rol == "Administrador"){
 			ruta = 'Usuarios/ListarEmpresa/'+$scope.Usuario.id_empresa;
-		else if($scope.Usuario.rol == "Super Administrador")
+		}else if($scope.Usuario.rol == "Super Administrador"){
 			ruta = 'Usuarios/Listar';
+		}
 		ApiPse
 		.getResource(ruta)
 		.then(function(data){
@@ -187,5 +204,18 @@ angular.module('frontendPseApp')
 	}
 	ListarEmpresa();
 	ListarUsuarios();
+<<<<<<< HEAD
 	
+=======
+	$scope.recargar = function (){
+		angular.element('.recargar');
+	}
+})
+.controller('DetalleUsuarioModalCtrl', function ($scope ,Scope) {
+	$scope.Detalle=Scope.obj;
+	console.log($scope.Detalle);
+	$scope.Cerrar=function(){
+		Scope.cerrarModal();
+	}
+>>>>>>> 839569f1f67d00aedb7720445d369ba9853fc6fa
 });
