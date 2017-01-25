@@ -23,6 +23,8 @@ angular
     'perfect_scrollbar',
     'ui.grid',
     'ui.grid.autoResize',
+    'ui.grid.resizeColumns',
+    'ui.grid.moveColumns',
     'ui.grid.pagination', 
     'ui.grid.cellNav',
     'duScroll'
