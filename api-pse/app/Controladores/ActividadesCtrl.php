@@ -61,7 +61,8 @@ class ActividadesCtrl extends Controlador
 		$parsedBody = json_decode($request->getBody()->getContents());
 		$user = actividades::create([
 			'nombre' => $parsedBody->nombre,
-			'id_escenario' => $parsedBody->id_escenario
+			'id_escenario' => $parsedBody->id_escenario,
+			'id_empresa' =>$parsedBody->id_empresa
 		]);
 		if ($user) {
 			$respuesta=[
