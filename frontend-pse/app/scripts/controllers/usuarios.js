@@ -135,7 +135,6 @@ angular.module('frontendPseApp')
 		console.log(obj);
 	}
 	$scope.Detalles = function(id) {
-		console.log('Entro');
 		$scope.obj = $scope.Identifiar(id);
 		modalInstance = $uibModal.open({
 			animation: true,
