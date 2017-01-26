@@ -8,7 +8,9 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-.controller('ItemsCtrl', function ($scope , $uibModal ,ApiPse, SesionUsuario, $state, $timeout, Tabla) {
+.controller('ItemsCtrl', function ($scope , $uibModal ,ApiPse, SesionUsuario, $state, $timeout, Tabla,
+		Estados , CasillaBotones) {
+	$scope.Estados = Estados;
 	$scope.cargando = false;
 	$scope.cargandodos = false;
 	var modal = null;
@@ -19,20 +21,12 @@ angular.module('frontendPseApp')
 		$scope.pageAnimate='pageAnimate';
 		$scope.panelAnimate='panelAnimate';
 	},100);
-	var casillaDeBotones = '<div>' + 
-    '<a type="button" class="btn btn-info btn-bordered btn-xs"'+
-    ' ng-click="grid.appScope.Detalles(row.entity.id)">Detalles</a>'+
-    '<a type="button" class="btn btn-info btn-bordered btn-xs"'+
-    ' ng-click="grid.appScope.Editar(row.entity.id)">Editar</a>'+
-    '<a type="button" class="btn btn-info btn-bordered btn-xs"'+
-    ' ng-click="grid.appScope.Borrar(row.entity.id)">Borrar</a>'+
-    '</div>';
-    var casillaDeBotonesDates = '<div>'+
-    '<a type="button" class="btn btn-info btn-bordered btn-xs"'+
-    ' ng-click="grid.appScope.Editar(row.entity.id)">Editar</a>'+
-    '<a type="button" class="btn btn-info btn-bordered btn-xs"'+
-    ' ng-click="grid.appScope.Borrar(row.entity.id)">Borrar</a>'+
-    '</div>';
+	var casillaDeBotones = '<div>';
+	casillaDeBotones+=CasillaBotones.Borrar;
+	casillaDeBotones+='</div>';
+	var casillaDeBotonesDates = '<div>';
+	casillaDeBotonesDates+=CasillaBotones.Borrar;
+	casillaDeBotonesDates+='</div>';
     $scope.gridOptions = {
       columnDefs: [
         { field: 'id'},
@@ -135,7 +129,8 @@ angular.module('frontendPseApp')
 	ListarHerramientas();
 	listarItems();
 })
-.controller('CrearHerramientaCtrl' , function($scope , Scope, $uibModal,ApiPse){
+.controller('CrearHerramientaCtrl' , function($scope , Scope, $uibModal,ApiPse , Estados){
+	$scope.Estados = Estados;
 	$scope.cargandodos=false;
 	$scope.gridDates=Scope.gridDates;
 	
