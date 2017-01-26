@@ -8,7 +8,7 @@
  */
 angular.module('frontendPseApp')
 .controller('EmpresasCtrl', function ($scope, SesionUsuario, ApiPse, $state, $timeout, Tabla ,
-		Estados , CasillaBotones) {
+		Estados , CasillaBotones, $uibModal) {
 	$scope.Usuario=SesionUsuario.ObtenerSesion();
 	if($scope.Usuario.rol!="Super Administrador"){
 		$state.go('Home');
@@ -18,7 +18,8 @@ angular.module('frontendPseApp')
 	$scope.cargando = false; 
 	$scope.Estados = Estados;
 	$scope.panelAnimate='';
-	$scope.pageAnimate=''; 	
+	$scope.pageAnimate='';
+	var modalInstance=null; 	
 	$timeout(function () {
 		$scope.pageAnimate='pageAnimate';
 		$scope.panelAnimate='panelAnimate';
@@ -109,7 +110,22 @@ angular.module('frontendPseApp')
 		console.log(obj);
 	}
 	$scope.Detalles = function(id) {
-		var obj = $scope.Identifiar(id);
+		$scope.obj = $scope.Identifiar(id);
+		modalInstance = $uibModal.open({
+			animation: true,
+			ariaLabelledBy: 'modal-title',
+			ariaDescribedBy: 'modal-body',
+			templateUrl: 'myModalContent.html',
+			controller: 'DetalleEmpresaModalCtrl',
+			resolve: {
+				Scope : function(){
+					return $scope;
+				}
+		    }
+		});
+	}
+	$scope.cerrarModal = function(){
+		modalInstance.close();
 	}
 	$scope.CancelarEditar = function(){
 		$scope.PanelTitulo = "Registro de empresas";
@@ -169,4 +185,12 @@ angular.module('frontendPseApp')
 	listarDepartamentos();
 	ListarCiudades();
 	listarEmpresas();
+})
+.controller('DetalleEmpresaModalCtrl', function ($scope ,Scope) {
+	$scope.Detalle=Scope.obj;
+	console.log($scope.Detalle);
+	$scope.Cerrar=function(){
+		Scope.cerrarModal();
+	}
+
 });

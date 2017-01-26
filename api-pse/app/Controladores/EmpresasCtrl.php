@@ -149,7 +149,7 @@ class EmpresasCtrl extends Controlador
 				'Datos'=>"No se pudo actualizar la información"
 			];
 		}	
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function Eliminar($request , $response , $args)
