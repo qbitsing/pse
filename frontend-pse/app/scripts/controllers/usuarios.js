@@ -32,27 +32,32 @@ angular.module('frontendPseApp')
 	$scope.gridOptions = {
 		columnDefs: [
 			{ 
-				field: 'nombres' 
+				field: 'nombres',
+				width: '15%', minWidth: 170
 			},
 			{ 
-				field: 'apellidos' 
+				field: 'apellidos',
+				width: '15%', minWidth: 170
 			},
 			{ 
 				name: 'Documento',
-				field: 'id'
+				field: 'id',
+				width: '15%', minWidth: 170
 			},
 			{ 
-				field: 'rol'
+				field: 'rol',
+				width: '15%', minWidth: 170
 			},
 			{ 
 				field: 'estado', 
-				cellTemplate : '<div>{{grid.appScope.Estados.Estados[row.entity.estado]}}</div>'
+				cellTemplate : '<div>{{grid.appScope.Estados.Estados[row.entity.estado]}}</div>',
+				width: '15%', minWidth: 170
 			},
 			{ 
 				name: 'Opciones', 
 				enableFiltering: false, 
 				cellTemplate : casillaDeBotones,
-				width: '25%'
+				width: '25%',minWidth: 250
 			}
 
 	    ]

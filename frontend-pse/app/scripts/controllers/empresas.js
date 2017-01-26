@@ -62,6 +62,7 @@ angular.module('frontendPseApp')
 		ApiPse.getResource('Empresas/Crear',$scope.Register)
 		.then(function(data){
 			$scope.empresas.push($scope.Register);
+			$scope.Register = {};
 			$scope.cargando = false;
 		},function(data){
 			$scope.cargando = false;
