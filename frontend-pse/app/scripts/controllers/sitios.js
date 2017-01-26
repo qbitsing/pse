@@ -8,29 +8,43 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-  .controller('SitiosCtrl', function ($state, $scope, ApiPse, SesionUsuario, $timeout, Tabla) {
+  .controller('SitiosCtrl', function ($state, $scope, ApiPse, SesionUsuario, $timeout, Tabla,
+  		Estados , CasillaBotones, $uibModal) {
+  		$scope.PanelTitulo = "Registro de sitios";
+		$scope.BotonTitulo = "Registrar sitios";
   		$scope.cargando = false;
+  		$scope.Estados = Estados;
   		$scope.panelAnimate='';
   		$scope.pageAnimate=''; 	
   		$timeout(function () {
   			 $scope.pageAnimate='pageAnimate';
   			 $scope.panelAnimate='panelAnimate';
   		},100);
-  		var casillaDeBotones = '<div>' + 
-	    '<a type="button" class="btn btn-info btn-bordered btn-xs"'+
-	    ' ng-click="grid.appScope.Detalles(row.entity.id)">Detalles</a>'+
-	    '<a type="button" class="btn btn-info btn-bordered btn-xs"'+
-	    ' ng-click="grid.appScope.Editar(row.entity.id)">Editar</a>'+
-	    '<a type="button" class="btn btn-info btn-bordered btn-xs"'+
-	    ' ng-click="grid.appScope.Borrar(row.entity.id)">Borrar</a>'+
-	    '</div>';
+  		var casillaDeBotones = '<div>';
+		casillaDeBotones+=CasillaBotones.Editar;
+		casillaDeBotones+=CasillaBotones.Borrar;
+		casillaDeBotones+='</div>';
 	    $scope.gridOptions = {
 	      columnDefs: [
-	        { field: 'id'},
-	        { field: 'nombre'},
-	        { field: 'ciudad'},
-	        { name: 'Opciones', enableFiltering: false, cellTemplate : casillaDeBotones}
-	        ]
+	        { 
+	        	field: 'id',
+	        	minWidth: 170
+	        },
+	        { 
+	        	field: 'nombre',
+	        	minWidth: 170
+	        },
+	        { 
+	        	field: 'ciudad',
+	        	minWidth: 170
+	        },
+	        { 
+	        	name: 'Opciones', 
+	        	enableFiltering: false, 
+	        	cellTemplate : casillaDeBotones,
+	        	minWidth: 170
+	        }
+	    ]
 	    }
 	    angular.extend($scope.gridOptions , Tabla);
   		$scope.Usuario=SesionUsuario.ObtenerSesion();
@@ -58,11 +72,52 @@ angular.module('frontendPseApp')
 
 	  		});
 	  	}
+	  	$scope.Editar = function(id) {
+			var obj = $scope.Identifiar(id);
+			$scope.Register = obj;
+			$scope.PanelTitulo = "Editar Sitio";
+			$scope.BotonTitulo = "Guardar Cambios";
+		}
+		$scope.Borrar = function(id) {
+			$scope.cargando = true;
+			var obj = $scope.Identifiar(id);
+			// var ruta = "Usuarios/Eliminar/"+obj.id;
+			// ApiPse.getResource(ruta)
+			// .then(function(data){
+			// 	if(data.data.Estado == 1){
+			// 		$scope.Usuarios.splice(obj.index , 1);
+			// 	}
+			// 	$scope.cargando = false;
+			// },function(data){
+			// 	$scope.cargando = false;
+			// 	console.log(data);
+			// });
+		}
+		$scope.Identifiar = function(_id){
+			var obj = {};
+			$scope.sitios.forEach(function(ele , index){
+				if(ele.id == _id){
+					obj.index = index;
+					obj.id = ele.id;
+					obj.nombre = ele.nombre;
+					obj.id_ciudad = ele.id_ciudad;
+					obj.id_departamento = ele.id_departamento;
+				}
+			});
+			return obj;
+		}
+		$scope.CancelarEditar = function(){
+			$scope.PanelTitulo = "Registro de sitios";
+			$scope.BotonTitulo = "Registrar sitios";
+			$scope.Register = {};
+		}
+
 	  	function listarsitios(){
 	  		ApiPse.getResource("Sitios/ListarDisponible/"+$scope.Usuario.id_empresa)
 			.then(function(data){
 				if(data.data.Estado==1){
 					$scope.sitios=data.data.Datos;
+					console.log(data);
           			$scope.gridOptions.data = $scope.sitios;
 				}else{
 					$scope.sitios=[];

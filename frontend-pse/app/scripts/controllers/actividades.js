@@ -8,7 +8,11 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-  .controller('ActividadesCtrl', function ($state, $scope, ApiPse,SesionUsuario,$timeout, Tabla) {
+  .controller('ActividadesCtrl', function ($state, $scope, ApiPse,SesionUsuario,$timeout, Tabla,
+  		Estados , CasillaBotones, $uibModal) {
+  	$scope.Estados = Estados;
+  	$scope.PanelTitulo = "Registro de actividades";
+	$scope.BotonTitulo = "Registrar actividad";
   	$scope.cargando = false;
   	$scope.panelAnimate='';
 	$scope.pageAnimate=''; 	
@@ -16,20 +20,30 @@ angular.module('frontendPseApp')
 		 $scope.pageAnimate='pageAnimate';
 		 $scope.panelAnimate='panelAnimate';
 	},100);
-  	var casillaDeBotones = '<div>' + 
-	'<a type="button" class="btn btn-info btn-bordered btn-xs"'+
-	' ng-click="grid.appScope.Detalles(row.entity.id)">Detalles</a>'+
-	'<a type="button" class="btn btn-info btn-bordered btn-xs"'+
-	' ng-click="grid.appScope.Editar(row.entity.id)">Editar</a>'+
-	'<a type="button" class="btn btn-info btn-bordered btn-xs"'+
-	' ng-click="grid.appScope.Borrar(row.entity.id)">Borrar</a>'+
-	'</div>';
+	var casillaDeBotones = '<div>';
+	casillaDeBotones+=CasillaBotones.Editar;
+	casillaDeBotones+=CasillaBotones.Borrar;
+	casillaDeBotones+='</div>';
 	$scope.gridOptions = {
 		columnDefs: [
-			{ field: 'id'},
-			{ name: 'nombre'},
-			{ field: 'sitio'},
-			{ name: 'Opciones', enableFiltering: false, cellTemplate : casillaDeBotones}
+			{ 
+				field: 'id',
+				minWidth: 170
+			},
+			{ 
+				name: 'nombre',
+				minWidth: 170
+			},
+			{ 
+				field: 'sitio',
+				minWidth: 170
+			},
+			{ 
+				name: 'Opciones', 
+				enableFiltering: false, 
+				cellTemplate : casillaDeBotones,
+				minWidth: 170
+			}
 
 	    ]
 	}
@@ -61,6 +75,49 @@ angular.module('frontendPseApp')
 			console.log(data);
 		});
   	}
+  	$scope.Editar = function(id) {
+		var obj = $scope.Identifiar(id);
+		$scope.Register = obj;
+		$scope.PanelTitulo = "Editar Sitio";
+		$scope.BotonTitulo = "Guardar Cambios";
+	}
+	$scope.Borrar = function(id) {
+		$scope.cargando = true;
+		var obj = $scope.Identifiar(id);
+		// var ruta = "Usuarios/Eliminar/"+obj.id;
+		// ApiPse.getResource(ruta)
+		// .then(function(data){
+		// 	if(data.data.Estado == 1){
+		// 		$scope.Usuarios.splice(obj.index , 1);
+		// 	}
+		// 	$scope.cargando = false;
+		// },function(data){
+		// 	$scope.cargando = false;
+		// 	console.log(data);
+		// });
+	}
+	$scope.Identifiar = function(_id){
+		var obj = {};
+		$scope.actividades.forEach(function(ele , index){
+			if(ele.id == _id){
+				console.log(ele);
+				obj.index = index;
+				obj.id = ele.id;
+				obj.nombre = ele.nombre;
+				obj.id_escenario = ""+ele.id_escenario;
+			}
+		});
+		return obj;
+	}
+	$scope.CancelarEditar = function(){
+		$scope.PanelTitulo = "Registro de sitios";
+		$scope.BotonTitulo = "Registrar sitios";
+		$scope.Register = {};
+	}
+
+
+
+
   	function listarSitios(){
 		ApiPse.getResource("Sitios/ListarDisponible/"+$scope.Usuario.id_empresa)
 		.then(function(data){

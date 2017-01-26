@@ -8,7 +8,7 @@
 <div class="col-sm-12">
 	<div class="panel {{panelAnimate}}">
 		<div class="panel-heading">
-			<h3 class="panel-title">Registrar actividades</h3>
+			<h3 class="panel-title">{{PanelTitulo}}</h3>
 		</div>
 		<div class="panel-body" >
 			<form name="RegisterForm" novalidate ng-submit="Registrar()">
@@ -22,7 +22,10 @@
 						<option ng-repeat="sitio in sitios" value="{{sitio.id}}">{{sitio.nombre}}</option>
 					</select>
 				</div>
-				<button class="btn btn-success" type="submit" ng-disabled="RegisterForm.$invalid">Registrar Actividad</button>
+				<div class="form-group col-sm-12">
+					<button class="btn btn-success" type="submit" ng-disabled="RegisterForm.$invalid">{{BotonTitulo}}</button>
+					<button class="btn btn-danger" type="button" ng-show="BotonTitulo == 'Guardar Cambios'" ng-click="CancelarEditar()">Cancelar</button>
+				</div>
 			</form>
 		</div>
 	</div>
@@ -33,7 +36,7 @@
 			<h3 class="panel-title">Lista de Actividades</h3>
 		</div>
 		<div class="panel-body" >
-			<div class="gridStyle grid" ui-grid="gridOptions" ui-grid-pagination ui-grid-auto-resize></div>
+			<div class="gridStyle grid" ui-grid="gridOptions" ui-grid-pagination ui-grid-auto-resize ui-grid-resize-columns ui-grid-move-columns></div>
 		</div>			
 	</div>
 </div>
