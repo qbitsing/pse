@@ -16,16 +16,16 @@
 					<label for="Nombre">Nombre</label>
 					<input type="text" class="form-control" id="Nombre" placeholder="Cueva Antigua" required ng-model="Register.nombre">
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-6" ng-hide="BotonTitulo == 'Guardar Cambios'">
 					<label for="Ciudad">Departamento</label>
-					<select id="Ciudad" class="form-control" required ng-model="Register.id_departamento">
-						<option ng-repeat="departamento in departamentos" value="{{departamento.id}}">{{departamento.nombre}}</option>
+					<select id="Ciudad" class="form-control" ng-required="BotonTitulo != 'Guardar Cambios'" ng-model="Register.id_departamento">
+						<option ng-repeat="departamento in departamentos" value="{{departamento.id}}" >{{departamento.nombre}}</option>
 					</select>
 				</div>
-				<div class="form-group col-sm-6">
+				<div class="form-group col-sm-6" ng-hide="BotonTitulo == 'Guardar Cambios'">
 					<label for="Ciudad">Ciudad</label>
-					<select id="Ciudad" class="form-control" required ng-model="Register.id_ciudad">
-						<option ng-repeat="ciudad in ciudades" ng-if="ciudad.id_departamento == Register.id_departamento " value="{{ciudad.id}}">{{ciudad.nombre}}</option>
+					<select id="Ciudad" class="form-control" ng-required="BotonTitulo != 'Guardar Cambios'" ng-model="Register.id_ciudad">
+						<option ng-repeat="ciudad in ciudades" ng-if="ciudad.id_departamento == Register.id_departamento " value="{{ciudad.id}}" >{{ciudad.nombre}}</option>
 					</select>
 				</div>
 				<div class="form-group col-sm-12">

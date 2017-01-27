@@ -78,17 +78,21 @@ class EscenariosCtrl extends Controlador
 	{
 		$parsedBody = json_decode($request->getBody()->getContents());
 		$user=escenarios::where('id','=',$args['id'])->limit(1)->update([
-			'nombre' => $parsedBody->nombre,
-			'id_ciudad' => $parsedBody->id_ciudad,
-			'id_empresa' =>$parsedBody->id_empresa
+			'nombre' => $parsedBody->nombre
 			]
 		);
 		if ($user>0) {
-			$respuesta="Información actualizada correctamente";
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>"Información actualizada correctamente"
+			];
 		}else{
-			$respuesta="No se pudo actualizar la información";
+			$respuesta=[
+				'Estado'=>0,
+				'Datos'=>"No se pudo actualizar la información"
+			];
 		}	
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 
 	public function Eliminar($request , $response , $args)
@@ -97,21 +101,27 @@ class EscenariosCtrl extends Controlador
 			'estado' => 4
 		]);
 		if ($user>0) {
+			$select=actividades::where('id_escenario','=',$args['id'])->count();
 			$actividades=actividades::where('id_escenario','=',$args['id'])->update([
 				'estado'=> 4
 			]);
-			if($actividades>0){
+			if($actividades==$select){
 				$respuesta=[
 					"Estado"=>1,
 					"Datos" => "Se ha eliminado exitosamente el escenario"
 				];
+			}else{
+				$respuesta=[
+					"Estado"=>0,
+					"Datos" => "No se ha podido eliminar el escenario"
+				];
 			}
 		}else{
 			$respuesta=[
-					"Estado"=>1,
-					"Datos" => "No se ha podido eliminar el escenario"
-				];
+				"Estado"=>0,
+				"Datos" => "No se ha podido eliminar el escenario"
+			];
 		}	
-		$response->getBody()->write($respuesta);
+		$response->getBody()->write(json_encode($respuesta));
 	}
 }
