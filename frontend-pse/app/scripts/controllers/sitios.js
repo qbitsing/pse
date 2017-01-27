@@ -117,7 +117,6 @@ angular.module('frontendPseApp')
 			.then(function(data){
 				if(data.data.Estado==1){
 					$scope.sitios=data.data.Datos;
-					console.log(data);
           			$scope.gridOptions.data = $scope.sitios;
 				}else{
 					$scope.sitios=[];
