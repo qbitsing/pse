@@ -85,8 +85,7 @@ class ActividadesCtrl extends Controlador
 		$user=actividades::where('id','=',$args['id'])->limit(1)->update([
 			'nombre' => $parsedBody->nombre,
 			'id_escenario' => $parsedBody->id_escenario
-			]
-		);
+		]);
 		if ($user>0) {
 			$respuesta=[
 				'Estado'=>1,
@@ -109,7 +108,6 @@ class ActividadesCtrl extends Controlador
 				'Estado'=>1,
 				'Datos'=>'Se ha eliminado exitosamente la actividad'
 			];
-			$respuesta="Se ha eliminado exitosamente";
 		}else{
 			$respuesta=[
 				'Estado'=>0,
