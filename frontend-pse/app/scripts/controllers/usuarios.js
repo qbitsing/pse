@@ -203,7 +203,7 @@ angular.module('frontendPseApp')
 				$scope.gridOptions.data = $scope.Usuarios;
 			}
 		},function(data){
-			
+			console.log(data);
 		});
 	}
 	ListarEmpresa();

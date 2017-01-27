@@ -54,9 +54,13 @@ angular.module('frontendPseApp')
   	}
   	$scope.Registrar=function(){
   		$scope.cargando = true;
+  		var ruta = "Actividades/Crear";
   		$scope.Register.id_empresa=$scope.Usuario.id_empresa;
+  		if($scope.BotonTitulo == "Guardar Cambios"){
+  			ruta = "Actividades/Actualizar/"+$scope.Register.id;
+  		}
   		console.log($scope.Register);
-  		ApiPse.getResource("Actividades/Crear",$scope.Register)
+  		ApiPse.getResource(ruta,$scope.Register)
 		.then(function(data){
 			$scope.cargando = false;
 			if(data.data.Estado==1){
@@ -65,8 +69,14 @@ angular.module('frontendPseApp')
 						$scope.Register.sitio=$scope.sitios[i].nombre;
 					}
 				}
-				$scope.Register.id=data.data.Datos.id;
-				$scope.actividades.push($scope.Register);
+				if(ruta == "Actividades/Crear"){
+					$scope.Register.id=data.data.Datos.id;
+					$scope.actividades.push($scope.Register);
+				}else{
+					$scope.actividades[$scope.Register.index] = $scope.Register;
+				}
+				$scope.PanelTitulo = "Registro de sitios";
+				$scope.BotonTitulo = "Registrar sitios";
 				$scope.Register={};
 			}else{
 				alert(data.data.Datos);
@@ -84,17 +94,17 @@ angular.module('frontendPseApp')
 	$scope.Borrar = function(id) {
 		$scope.cargando = true;
 		var obj = $scope.Identifiar(id);
-		// var ruta = "Usuarios/Eliminar/"+obj.id;
-		// ApiPse.getResource(ruta)
-		// .then(function(data){
-		// 	if(data.data.Estado == 1){
-		// 		$scope.Usuarios.splice(obj.index , 1);
-		// 	}
-		// 	$scope.cargando = false;
-		// },function(data){
-		// 	$scope.cargando = false;
-		// 	console.log(data);
-		// });
+		var ruta = "Actividades/Eliminar/"+obj.id;
+		ApiPse.getResource(ruta)
+		.then(function(data){
+			if(data.data.Estado == 1){
+				$scope.actividades.splice(obj.index , 1);
+			}
+			$scope.cargando = false;
+		},function(data){
+			$scope.cargando = false;
+			console.log(data);
+		});
 	}
 	$scope.Identifiar = function(_id){
 		var obj = {};
