@@ -11,7 +11,7 @@ class UsuariosCtrl extends Controlador
 	public function Listar($request , $response )
 	{
 		$parsedBody = json_decode($request->getBody()->getContents());
-		$user=users::where('id','!=',$parsedBody->userAction)->get();
+		$user=users::join('empresas','usuarios.id_empresa','=','empresas.id')->select('usuarios.*','empresas.nombre as empresa')->where('usuarios.id','!=',$parsedBody->userAction)->get();
 		if($user!="[]"){
 			$respuesta=[
 				"Estado" => 1,
@@ -42,28 +42,6 @@ class UsuariosCtrl extends Controlador
 			];
 		}
 		$response->getBody()->write(json_encode($respuesta));
-	}
-
-	public function ListarDisponible($request , $response, $args)
-	{
-		$user=users::where('estado','=','1')->get();
-		if($user!="[]"){
-			$respuesta=$user;
-		}else{
-			$respuesta="No hay ningun usuario disponible";
-		}
-		$response->getBody()->write($respuesta);
-	}
-
-	public function ListarNoDisponible($request , $response, $args)
-	{
-		$user=users::where('estado','=','0')->get();
-		if($user!="[]"){
-			$respuesta=$user;
-		}else{
-			$respuesta="No hay ningun usuario eliminado";
-		}
-		$response->getBody()->write($respuesta);
 	}
 
 	public function ListarId($request , $response, $args)

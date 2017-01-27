@@ -3,6 +3,7 @@
 namespace Pse\Controladores;
 
 use Pse\Modelos\Escenarios as escenarios;
+use Pse\Modelos\Actividades as actividades;
 
 class EscenariosCtrl extends Controlador
 {
@@ -92,11 +93,24 @@ class EscenariosCtrl extends Controlador
 
 	public function Eliminar($request , $response , $args)
 	{
-		$user=escenarios::where('id','=',$args['id'])->delete();
+		$user=escenarios::where('id','=',$args['id'])->update([
+			'estado' => 4
+		]);
 		if ($user>0) {
-			$respuesta="Se ha eliminado exitosamente el escenario";
+			$actividades=actividades::where('id_escenario','=',$args['id'])->update([
+				'estado'=> 4
+			]);
+			if($actividades>0){
+				$respuesta=[
+					"Estado"=>1,
+					"Datos" => "Se ha eliminado exitosamente el escenario"
+				];
+			}
 		}else{
-			$respuesta="No se ha podido eliminar el escenario";
+			$respuesta=[
+					"Estado"=>1,
+					"Datos" => "No se ha podido eliminar el escenario"
+				];
 		}	
 		$response->getBody()->write($respuesta);
 	}

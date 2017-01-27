@@ -79,6 +79,7 @@ angular.module('frontendPseApp')
 			$scope.BotonTitulo = "Guardar Cambios";
 		}
 		$scope.Borrar = function(id) {
+			
 			$scope.cargando = true;
 			var obj = $scope.Identifiar(id);
 			// var ruta = "Usuarios/Eliminar/"+obj.id;
