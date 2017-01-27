@@ -3,6 +3,7 @@
 namespace Pse\Controladores;
 
 use Pse\Modelos\Herramientas as herramientas;
+use Pse\Modelos\Items as items;
 
 class HerramientasCtrl extends Controlador
 {
@@ -103,15 +104,29 @@ class HerramientasCtrl extends Controlador
 
 	public function Eliminar($request , $response , $args)
 	{
-		$user=herramientas::where('id','=',$args['id'])->delete();
-		if ($user>0) {$respuesta=[
-				'Estado'=>1,
-				'Datos'=>"Se ha eliminado exitosamente la herramienta"
-			];
+		$user=herramientas::where('id','=',$args['id'])->update([
+			'estado'=> 4
+		]);
+		if ($user>0) {
+			$select=items::where('id_herramienta','=',$args['id'])->count();
+			$items=items::where('id_herramienta','=',$args['id'])->update([
+				'estado'=> 4
+			]);
+			if($items==$select){
+				$respuesta=[
+					"Estado"=>1,
+					"Datos" => "Se ha eliminado exitosamente la herramienta"
+				];
+			}else{
+				$respuesta=[
+					"Estado"=>0,
+					"Datos" => "No se ha podido eliminar la herramienta"
+				];
+			}
 		}else{
 			$respuesta=[
-				'Estado'=>1,
-				'Datos'=>"No se ha podido eliminar la herramienta"
+				"Estado"=>0,
+				"Datos" => "No se ha podido eliminar la herramienta"
 			];
 		}	
 		$response->getBody()->write(json_encode($respuesta));

@@ -42,32 +42,35 @@ class ItemsCtrl extends Controlador
 
 	public function Create($request , $response)
 	{
+		$codigos=[];
+		$contador=0;
 		$parsedBody = json_decode($request->getBody()->getContents());
-		$select=items::where('codigo_unico','=',$parsedBody->codigo_unico)->where('id_herramienta','=',$parsedBody->id_herramienta)->count();
+		$select=items::where('modelo','=',$parsedBody->modelo)->where('id_herramienta','!=',$parsedBody->id_herramienta)->where('id_empresa','=',$parsedBody->id_empresa)->count();
 		if($select>0){
 			$respuesta=[
 				'Estado'=>0,
-				'Datos'=>"El codigo unico ya existe"
+				'Datos'=>"El modelo ya esta asociada a otra herramienta"
 			];
 		}else{
-			$user = items::create([
-				'id_herramienta' => $parsedBody->id_herramienta,
-				'modelo' => $parsedBody->modelo,
-				'codigo_unico' => $parsedBody->codigo_unico,
-				'id_empresa'=>$parsedBody->id_empresa
-			]);
-			if ($user) {
-				$respuesta=[
-					'Estado'=>1,
-					'Datos'=>$user
-				];
+			$id=items::where('modelo','=',$parsedBody->modelo)->where('id_herramienta','=',$parsedBody->id_herramienta)->where('id_empresa','=',$parsedBody->id_empresa)->orderBy('codigo_unico','desc')->get();
+			$codigo=$id[0]->codigo_unico+1;
+			while($contador<$parsedBody->cantidad){
+				$result = items::create([
+					'id_herramienta' => $parsedBody->id_herramienta,
+					'modelo' => $parsedBody->modelo,
+					'codigo_unico' => $codigo,
+					'id_empresa'=>$parsedBody->id_empresa
+				]);
+				if ($result) {
+					$codigos[$contador]={'id':$result['id'],'codigo':$codigo};	
+					$contador++;
+					$codigo++;
+				}
 			}
-			else{
-				$respuesta=[
-					'Estado'=>0,
-					'Datos'=>"No se ha podido completar el registro"
-				];
-			}
+			$respuesta=[
+				'Estado'=>1,
+				'Datos'=>$codigos
+			];
 		}
 		$response->getBody()->write(json_encode($respuesta));
 	}
