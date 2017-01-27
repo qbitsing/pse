@@ -52,16 +52,24 @@ angular.module('frontendPseApp')
 				field: 'estado', 
 				cellTemplate : '<div>{{grid.appScope.Estados.Estados[row.entity.estado]}}</div>',
 				width: '15%', minWidth: 170
-			},
-			{ 
-				name: 'Opciones', 
-				enableFiltering: false, 
-				cellTemplate : casillaDeBotones,
-				width: '25%',minWidth: 250
 			}
 
 	    ]
 	}
+	if($scope.Usuario.rol == "Super Administrador"){
+		$scope.gridOptions.columnDefs.push({
+			field : 'empresa',
+			width: '15%', minWidth: 170
+		});
+	}
+
+	$scope.gridOptions.columnDefs.push({ 
+		name: 'Opciones', 
+		enableFiltering: false, 
+		cellTemplate : casillaDeBotones,
+		width: '25%',minWidth: 250
+	});
+
 	angular.extend($scope.gridOptions , Tabla);
 	$scope.Registrar=function(){
 		var ruta = "Usuarios/Crear";
