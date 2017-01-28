@@ -5,6 +5,10 @@
 			<nav class="gn-menu-wrapper gn-open-part {{ClickMenu}}">
 				<div class="gn-scroller">
 					<ul class="gn-menu">
+						<li class="usuario">
+							<img src="http://lorempixel.com/120/120" />
+							<h3>{{Usuario.nombres +' '+ Usuario.apellidos}}</h3>
+						</li>
 						<li ng-class="{activate: $state.includes('Home')}" ng-mouseenter="hover = true"ng-mouseleave="hover = false" ng-click="menu()"><a ui-sref="Home"><i class="fa fa-address-card animated" ng-class="{wobble:hover}"></i>Perfil</a></li>
 						<li ng-class="{activate: $state.includes('Empresas')}" ng-mouseenter="hover2 = true"ng-mouseleave="hover2 = false" ng-click="menu()" ng-hide="Usuario.rol!='Super Administrador'"><a ui-sref="Empresas"><i class="fa fa-building animated" ng-class="{wobble:hover2}"></i>Empresas</a></li>
 						<li ng-class="{activate: $state.includes('Sitios')}" ng-mouseenter="hover3 = true"ng-mouseleave="hover3 = false" ng-click="menu()" ng-hide="Usuario.rol=='Super Administrador'"><a ui-sref="Sitios"><i class="fa fa-map animated" ng-class="{wobble:hover3}"></i>Sitios</a></li>

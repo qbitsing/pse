@@ -109,15 +109,15 @@ gulp.task('connect', ['styles'], function() {
     .use(serveIndex('app'));
 
   require('http').createServer(app)
-    .listen(9600)
+    .listen(9500)
     .on('listening', function() {
-      console.log('Started connect web server on http://localhost:9600');
+      console.log('Started connect web server on http://localhost:9500');
     });
 });
 
 gulp.task('serve', ['wiredep', 'connect', 'fonts', 'watch'], function() {
   if (argv.open) {
-    require('opn')('http://localhost:9600');
+    require('opn')('http://localhost:9500');
   }
 });
 
