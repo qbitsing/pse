@@ -52,7 +52,7 @@ class ItemsCtrl extends Controlador
 				'Datos'=>"El modelo ya esta asociada a otra herramienta"
 			];
 		}else{
-			$id=items::where('modelo','=',$parsedBody->modelo)->where('id_herramienta','=',$parsedBody->id_herramienta)->where('id_empresa','=',$parsedBody->id_empresa)->orderBy('codigo_unico','desc')->get();
+			$id=items::where('modelo','=',$parsedBody->modelo)->where('id_empresa','=',$parsedBody->id_empresa)->orderBy('codigo_unico','desc')->get();
 			$codigo=$id[0]->codigo_unico+1;
 			while($contador<$parsedBody->cantidad){
 				$result = items::create([
