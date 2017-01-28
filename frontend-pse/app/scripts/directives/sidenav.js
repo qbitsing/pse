@@ -16,9 +16,6 @@ angular.module('frontendPseApp')
 			},
 			controller: function($scope, SesionUsuario,$state){
 				$scope.Usuario=SesionUsuario.ObtenerSesion();
-				$scope.nombres= $scope.Usuario.nombres;
-				$scope.apellidos= $scope.Usuario.apellidos;
-				$scope.correo= $scope.Usuario.correo;
 
 				if ($scope.ClickMenu != 'gn-open-all') {
 					angular.element('.main-view').css('margin-left', '48px');
