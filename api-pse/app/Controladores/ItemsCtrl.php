@@ -8,7 +8,7 @@ class ItemsCtrl extends Controlador
 {
 	public function ListarDisponible($request , $response , $args)
 	{
-		$user=items::join('herramientas','items.id_herramienta','=','herramientas.id')->select('items.*','herramientas.nombre as herramienta')->where('items.estado','=',1)->where('items.id_empresa','=',$args['id'])->get();
+		$user=items::join('herramientas','items.id_herramienta','=','herramientas.id')->select('items.*','herramientas.nombre as herramienta')->where('items.id_empresa','=',$args['id'])->get();
 		if($user!="[]"){
 			$respuesta=[
 				'Estado'=>1,

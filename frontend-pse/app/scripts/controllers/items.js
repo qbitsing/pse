@@ -31,12 +31,30 @@ angular.module('frontendPseApp')
 	casillaDeBotonesDates+='</div>';
     $scope.gridOptions = {
       columnDefs: [
-        { field: 'id'},
-        { field: 'herramienta'},
-        { field: 'modelo'},
-        { field: 'codigo_unico'},
-        { name: 'Opciones', enableFiltering: false, cellTemplate : casillaDeBotones}
-        ]
+        { 
+        	field: 'herramienta',
+        	width: '20%', minWidth: 170
+        },
+        { 
+        	field: 'modelo',
+        	width: '20%', minWidth: 170
+        },
+        { 
+        	field: 'codigo_unico',
+        	width: '20%', minWidth: 170
+    	},
+        { 
+			field: 'estado', 
+			cellTemplate : '<div>{{grid.appScope.Estados.Estados[row.entity.estado]}}</div>',
+			width: '20%', minWidth: 170
+		},
+        { 
+        	name: 'Opciones', 
+        	enableFiltering: false, 
+        	cellTemplate : casillaDeBotones,
+        	width: '20%', minWidth: 170
+        }
+   		]
     }
     $scope.gridDates = {
       columnDefs: [
