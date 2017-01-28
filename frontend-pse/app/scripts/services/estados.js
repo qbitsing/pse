@@ -9,7 +9,7 @@
  */
 angular.module('frontendPseApp')
 	.constant('Estados', {
-		Estados : ['Inactivo' , 'Activo', 'Prestado' , 'Mantenimiento' , 'Eliminado'],
+		Estados : ['No Disponible' , 'Disponible', 'Prestado' , 'En Mantenimiento' , 'Eliminado'],
 		Clases : [
 			'btn btn-bordered btn-xs btn-success btn-bordered btn-xs',
 			'btn btn-bordered btn-xs btn-warning btn-bordered btn-xs',
@@ -19,7 +19,10 @@ angular.module('frontendPseApp')
 		],
 		Contenidos : [
 			'Activar',
-			'Desactivar'
+			'Desactivar',
+			'Activar',
+			'Activar',
+			'Activar'
 		]
 	});
   	
