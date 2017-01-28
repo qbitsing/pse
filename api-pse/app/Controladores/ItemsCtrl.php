@@ -82,7 +82,8 @@ class ItemsCtrl extends Controlador
 			'id_herramienta' => $parsedBody->id_herramienta,
 			'modelo' => $parsedBody->modelo,
 			'codigo_unico' => $parsedBody->codigo_unico,
-			'id_empresa'=>$parsedBody->id_empresa
+			'id_empresa'=>$parsedBody->id_empresa,
+			'estado'=>$parsedBody->estado
 			]
 		);
 		if ($user>0) {
@@ -98,21 +99,5 @@ class ItemsCtrl extends Controlador
 		}	
 		$response->getBody()->write(json_encode($respuesta));
 	}
-
-	public function Eliminar($request , $response , $args)
-	{
-		$user=items::where('id','=',$args['id'])->delete();
-		if ($user>0) {
-			$respuesta=[
-				'Estado'=>1,
-				'Datos'=>"Se ha eliminado exitosamente el item"
-			];
-		}else{
-			$respuesta=[
-				'Estado'=>0,
-				'Datos'=>"No se ha podido eliminar el item"
-			];
-		}	
-		$response->getBody()->write(json_encode($respuesta));
-	}
+	
 }

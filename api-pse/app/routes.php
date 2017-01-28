@@ -91,7 +91,6 @@ $app->group('/Items' , function() use($app){
 	$app->post('/ListarId/{id}' , 'ItemsCtrl:ListarId');
 	$app->post('/Crear' , 'ItemsCtrl:Create');
 	$app->post('/Actualizar/{id}' , 'ItemsCtrl:Actualizar');
-	$app->post('/Eliminar/{id}' , 'ItemsCtrl:Eliminar');
 });
 $app->group('/Mantenimientos' , function() use($app){
 	$app->post('/Listar' , 'EmpresasCtrl:Listar');
