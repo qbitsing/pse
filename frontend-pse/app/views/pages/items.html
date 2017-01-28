@@ -26,8 +26,8 @@
 					<input type="text" class="form-control" id="Modelo" placeholder="lo que sea" required ng-model="Register.modelo">
 				</div>
 				<div class="form-group col-sm-6">
-					<label for="CodigoUnico">Codigo Unico</label>
-					<input type="number" class="form-control" id="CodigoUnico" placeholder="35243764" required ng-model="Register.codigo_unico">
+					<label for="Cantidad">Cantidad</label>
+					<input type="number" class="form-control" id="Cantidad" placeholder="15" required ng-model="Register.cantidad">
 				</div>
 				<div class="col-xs-12">
 					<button class="btn btn-success" type="submit" ng-disabled="RegisterForm.$invalid">Registrar Herramientas</button>					
@@ -49,7 +49,7 @@
 <script type="text/ng-template" id="myModalContent.html">
 	<cargando ng-show="cargandodos"></cargando>
 	<div class="modal-header">
-		<h3 class="modal-title">Agregar Herramienta</h3>
+		<h3 class="modal-title">{{PanelTitulo}}</h3>
 	</div>
 	<div class="modal-body">
 		<form name="HerramientaForm" novalidate>
@@ -60,9 +60,10 @@
 		</form>
 	</div>
 	<div class="modal-footer">
-		<button type="button" ng-click="RegisterHerramienta()" class="btn btn-success" ng-disabled="HerramientaForm.$invalid">Registrar Herramienta</button>
+		<button type="button" ng-click="RegisterHerramienta()" class="btn btn-success" ng-disabled="HerramientaForm.$invalid">{{BotonTitulo}}</button>
+		<button class="btn btn-danger" type="button" ng-click="CancelarEditar()" ng-show="BotonTitulo == 'Guardar Cambios'">Cancelar</button>
+		<div class="gridStyle grid" ui-grid="gridDates" ui-grid-pagination></div>		
 		<button class="btn btn-danger" type="button" ng-click="cerrar()">Cerrar</button>
 	</div>
-		<div class="gridStyle grid" ui-grid="gridDates" ui-grid-pagination></div>		
 </script>
 </div>

@@ -22,9 +22,11 @@ angular.module('frontendPseApp')
 		$scope.panelAnimate='panelAnimate';
 	},100);
 	var casillaDeBotones = '<div>';
+	casillaDeBotones+=CasillaBotones.Editar;
 	casillaDeBotones+=CasillaBotones.Borrar;
 	casillaDeBotones+='</div>';
 	var casillaDeBotonesDates = '<div>';
+	casillaDeBotonesDates+=CasillaBotones.Editar;
 	casillaDeBotonesDates+=CasillaBotones.Borrar;
 	casillaDeBotonesDates+='</div>';
     $scope.gridOptions = {
@@ -131,28 +133,78 @@ angular.module('frontendPseApp')
 })
 .controller('CrearHerramientaCtrl' , function($scope , Scope, $uibModal,ApiPse , Estados){
 	$scope.Estados = Estados;
+	$scope.PanelTitulo = "Registro de Herramientas";
+	$scope.BotonTitulo = "Registrar Herramienta";
 	$scope.cargandodos=false;
 	$scope.gridDates=Scope.gridDates;
-	
+	$scope.Herramientas = $scope.gridDates.data;
 	$scope.RegisterHerramienta=function(){
 		$scope.cargandodos=true;
+		var ruta = "Herramientas/Crear";
+		if($scope.BotonTitulo == "Guardar Cambios"){
+			ruta = "Herramientas/Actualizar/"+$scope.Herramienta.id;
+		}
 		$scope.Herramienta.id_empresa=Scope.Usuario.id_empresa;
-		ApiPse.getResource('Herramientas/Crear',$scope.Herramienta)
+		ApiPse.getResource(ruta,$scope.Herramienta)
 		.then(
 			function(data){
-				$scope.cargandodos = false;
 				if(data.data.Estado==1){
-					$scope.Herramienta.id=data.data.Datos.id;
-					$scope.Herramienta.estado=1;
-					Scope.herramientas.push($scope.Herramienta);
-				}else{
-					alert(data.data.Datos);
+					if(ruta == "Herramientas/Crear"){
+						$scope.Herramienta.id=data.data.Datos.id;
+						$scope.Herramienta.estado=1;
+						Scope.herramientas.push($scope.Herramienta);
+					}else{
+						Scope.herramientas[$scope.Herramienta.index] = $scope.Herramienta;
+						$scope.PanelTitulo = "Registro de Herramientas";
+						$scope.BotonTitulo = "Registrar Herramienta";
+					}
+					$scope.Herramienta = {};
 				}
+				$scope.cargandodos = false;
 			},function(data){
+				console.log(data);
+				$scope.cargando = false;
 			}
 		);
 	}
 
+	$scope.Editar = function(id) {
+		var obj = $scope.Identifiar(id);
+		$scope.Herramienta = obj;
+		$scope.PanelTitulo = "Editar Herramienta";
+		$scope.BotonTitulo = "Guardar Cambios";
+	}
+	$scope.Borrar = function(id) {
+		$scope.cargando = true;
+		var obj = $scope.Identifiar(id);
+		var ruta = "Herramientas/Eliminar/"+obj.id;
+		ApiPse.getResource(ruta)
+		.then(function(data){
+			if(data.data.Estado == 1){
+				$scope.Herramientas.splice(obj.index , 1);
+			}
+			$scope.cargando = false;
+		},function(data){
+			$scope.cargando = false;
+			console.log(data);
+		});
+	}
+	$scope.CancelarEditar = function(){
+		$scope.PanelTitulo = "Registro de Herramientas";
+		$scope.BotonTitulo = "Registrar Herramienta";
+		$scope.Herramienta = {};
+	}
+	$scope.Identifiar = function(_id){
+		var obj = {};
+		$scope.Herramientas.forEach(function(ele , index){
+			if(ele.id == _id){
+				obj.index = index;
+				obj.id = ele.id;
+				obj.nombre = ele.nombre;
+			}
+		});
+		return obj;
+	}
 	$scope.cerrar=function(){
 		Scope.cerrarModal();
 	}

@@ -11,7 +11,8 @@ class Actividades extends Model
 	protected $fillable = [
 		'id',
 		'nombre',
-		'id_escenario'
+		'id_escenario',
+		'id_empresa'
 	];
 
 	public $timestamps = false;

@@ -53,8 +53,12 @@ angular.module('frontendPseApp')
 	  	}
 	  	$scope.Registrar=function(){
 	  		$scope.cargando = true;
+	  		var ruta = "Sitios/Crear";
+			if($scope.BotonTitulo == "Guardar Cambios"){
+				ruta = "Sitios/Actualizar/"+$scope.Register.id;
+			}
 	  		$scope.Register.id_empresa=$scope.Usuario.id_empresa;
-	  		ApiPse.getResource('Sitios/Crear',$scope.Register)
+	  		ApiPse.getResource(ruta,$scope.Register)
 	  		.then(
 	  			function(data){
 	  				$scope.cargando = false;
@@ -65,10 +69,19 @@ angular.module('frontendPseApp')
 							}
 						}
 						$scope.Register.id=data.data.Datos.id;
-						$scope.sitios.push($scope.Register);
-						$scope.Register={};
+						$scope.PanelTitulo = "Registro de usuarios";
+						$scope.BotonTitulo = "Registrar Sitio"
+						if(ruta == "Sitios/Crear"){
+							$scope.sitios.push($scope.Register);
+							$scope.Register={};
+						}else{
+							$scope.sitios[$scope.Register.index] = $scope.Register;
+							$scope.Register={};
+						}
 	  				}
 	  			},function(data){
+	  				console.log(data);
+	  				$scope.cargando=false;
 
 	  		});
 	  	}
@@ -81,17 +94,18 @@ angular.module('frontendPseApp')
 		$scope.Borrar = function(id) {
 			$scope.cargando = true;
 			var obj = $scope.Identifiar(id);
-			// var ruta = "Usuarios/Eliminar/"+obj.id;
-			// ApiPse.getResource(ruta)
-			// .then(function(data){
-			// 	if(data.data.Estado == 1){
-			// 		$scope.Usuarios.splice(obj.index , 1);
-			// 	}
-			// 	$scope.cargando = false;
-			// },function(data){
-			// 	$scope.cargando = false;
-			// 	console.log(data);
-			// });
+			ApiPse.getResource("Sitios/Eliminar/"+obj.id)
+			.then(function(data){
+				if(data.data.Estado == 1){
+					$scope.sitios.splice(obj.index , 1);
+				}else{
+					alert('El sitio no se ha podido eliminar');
+				}
+				$scope.cargando = false;
+			},function(data){
+				$scope.cargando = false;
+				console.log(data);
+			});
 		}
 		$scope.Identifiar = function(_id){
 			var obj = {};
@@ -117,7 +131,6 @@ angular.module('frontendPseApp')
 			.then(function(data){
 				if(data.data.Estado==1){
 					$scope.sitios=data.data.Datos;
-					console.log(data);
           			$scope.gridOptions.data = $scope.sitios;
 				}else{
 					$scope.sitios=[];
