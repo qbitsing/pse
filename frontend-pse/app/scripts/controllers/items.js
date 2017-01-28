@@ -63,8 +63,17 @@ angular.module('frontendPseApp')
 							$scope.Register.herramienta=$scope.herramientas[i].nombre;
 						}
 					}
+					for (var i = 0; i < $scope.Register.cantidad; i++) {
+						var obj = {
+							id : data.data.Datos[i].id,
+							herramienta : $scope.Register.herramienta,
+							modelo : $scope.Register.modelo,
+							codigo_unico : data.data.Datos[i].codigo
+						};
+						$scope.items.push(obj);
+					}
 					$scope.Register.id=data.data.Datos.id;
-					$scope.items.push($scope.Register);
+					
 					$scope.Register={};
 				}else{
 					alert(data.data.Datos);
