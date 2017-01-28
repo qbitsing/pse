@@ -62,7 +62,7 @@ class ItemsCtrl extends Controlador
 					'id_empresa'=>$parsedBody->id_empresa
 				]);
 				if ($result) {
-					$codigos[$contador]={'id':$result['id'],'codigo':$codigo};	
+					$codigos[$contador]=['id'=>$result['id'],'codigo'=>$codigo];	
 					$contador++;
 					$codigo++;
 				}
