@@ -123,6 +123,7 @@ angular.module('frontendPseApp')
 	$scope.Borrar = function(id) {
 		$scope.cargando = true;
 		var obj = $scope.Identifiar(id);
+		
 		// var ruta = "Herramientas/Eliminar/"+obj.id;
 		// ApiPse.getResource(ruta)
 		// .then(function(data){
