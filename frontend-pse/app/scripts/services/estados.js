@@ -19,7 +19,10 @@ angular.module('frontendPseApp')
 		],
 		Contenidos : [
 			'Activar',
-			'Desactivar'
+			'Desactivar',
+			'Activar',
+			'Activar',
+			'Activar'
 		]
 	});
   	
