@@ -60,15 +60,22 @@ class UsuariosCtrl extends Controlador
 		
 		$parsedBody = json_decode($request->getBody()->getContents());
 
-		$user=users::where('correo','=',$parsedBody->correo)->where('estado','=',1)->get();
+		$user=users::join('empresas','usuarios.id_empresa','=','empresas.id')->select('usuarios.*')->where('usuarios.correo','=',$parsedBody->correo)->where('empresas.estado','=','1')->get();
 		if($user!="[]"){
 			$r= $user;
 			if(password_verify($parsedBody->contrasenaa, $r[0]->contrasena)){
-				$respuesta=[
-					"Estado" => 1,
-					"Mensaje" => "Bienvenido señor@ : ".$r[0]->nombres,
-					"user" => $r[0]
+				if($user[0]->estado==1){
+					$respuesta=[
+						"Estado" => 1,
+						"Mensaje" => "Bienvenido señor@ : ".$r[0]->nombres,
+						"user" => $r[0]
+					];
+				}else{
+					$respuesta=[
+					"Estado"=>0,
+					"Datos"=>"El usuario esta inactivo en el sistema"
 				];
+				}
 			}else{
 				$respuesta=[
 					"Estado"=>0,

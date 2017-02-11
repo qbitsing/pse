@@ -8,7 +8,7 @@ class ItemsCtrl extends Controlador
 {
 	public function ListarDisponible($request , $response , $args)
 	{
-		$user=items::join('herramientas','items.id_herramienta','=','herramientas.id')->select('items.*','herramientas.nombre as herramienta')->where('items.estado','=',1)->where('items.id_empresa','=',$args['id'])->get();
+		$user=items::join('herramientas','items.id_herramienta','=','herramientas.id')->where('items.estado','!=',4)->select('items.*','herramientas.nombre as herramienta')->where('items.id_empresa','=',$args['id'])->get();
 		if($user!="[]"){
 			$respuesta=[
 				'Estado'=>1,
@@ -17,7 +17,7 @@ class ItemsCtrl extends Controlador
 		}else{
 			$respuesta=[
 				'Estado'=>0,
-				'Datos'=>"No hay ningun item registrado en el sistema"
+				'Datos'=>'No hay ningun item registrado en el sistema'
 			];
 		}
 		$response->getBody()->write(json_encode($respuesta));
@@ -34,7 +34,7 @@ class ItemsCtrl extends Controlador
 		}else{
 			$respuesta=[
 				'Estado'=>0,
-				'Datos'=>"No hay ningun item registrado con ese ID"
+				'Datos'=>'No hay ningun item registrado con ese ID'
 			];
 		}
 		$response->getBody()->write(json_encode($respuesta));
@@ -49,7 +49,7 @@ class ItemsCtrl extends Controlador
 		if($select>0){
 			$respuesta=[
 				'Estado'=>0,
-				'Datos'=>"El modelo ya esta asociada a otra herramienta"
+				'Datos'=>'El modelo ya esta asociada a otra herramienta'
 			];
 		}else{
 			$id=items::where('modelo','=',$parsedBody->modelo)->where('id_empresa','=',$parsedBody->id_empresa)->orderBy('codigo_unico','desc')->get();
@@ -82,37 +82,22 @@ class ItemsCtrl extends Controlador
 			'id_herramienta' => $parsedBody->id_herramienta,
 			'modelo' => $parsedBody->modelo,
 			'codigo_unico' => $parsedBody->codigo_unico,
-			'id_empresa'=>$parsedBody->id_empresa
+			'id_empresa'=>$parsedBody->id_empresa,
+			'estado'=>$parsedBody->estado
 			]
 		);
 		if ($user>0) {
 			$respuesta=[
 				'Estado'=>1,
-				'Datos'=>"Información actualizada correctamente"
+				'Datos'=>'Información actualizada correctamente'
 			];
 		}else{
 			$respuesta=[
 				'Estado'=>0,
-				'Datos'=>"No se pudo actualizar la información"
+				'Datos'=>'No se pudo actualizar la información'
 			];
 		}	
 		$response->getBody()->write(json_encode($respuesta));
 	}
-
-	public function Eliminar($request , $response , $args)
-	{
-		$user=items::where('id','=',$args['id'])->delete();
-		if ($user>0) {
-			$respuesta=[
-				'Estado'=>1,
-				'Datos'=>"Se ha eliminado exitosamente el item"
-			];
-		}else{
-			$respuesta=[
-				'Estado'=>0,
-				'Datos'=>"No se ha podido eliminar el item"
-			];
-		}	
-		$response->getBody()->write(json_encode($respuesta));
-	}
+	
 }

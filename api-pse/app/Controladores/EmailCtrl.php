@@ -241,7 +241,7 @@ class EmailCtrl extends Controlador
 								}
 								$mensaje.='
 								<p class="callout" align="center">
-									Este correo ha sido auto-generado por PRINES S.A.S
+									Este correo ha sido auto-generado por el sistema
 								</p>
 							</td>
 						</tr>
