@@ -27,7 +27,8 @@ angular
     'ui.grid.moveColumns',
     'ui.grid.pagination', 
     'ui.grid.cellNav',
-    'duScroll'
+    'duScroll',
+    'ngImgCrop'
   ])
   .config(function (localStorageServiceProvider) {
     localStorageServiceProvider

@@ -56,6 +56,7 @@ module.exports = function(config) {
       '../bower_components/angular-ui-grid/ui-grid.min.js',
       '../bower_components/aos/dist/aos.js',
       '../bower_components/angular-scroll/angular-scroll.js',
+      '../bower_components/ng-img-crop-full-extended/compile/minified/ng-img-crop.js',
       '../bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

@@ -1,1 +1,42 @@
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam possimus, perspiciatis neque porro non maxime. Id repellat vero ratione dicta? Itaque totam veritatis est iure saepe repellendus quos, delectus ea animi maiores labore assumenda consectetur.</p>
+<cargando ng-show="cargando"></cargando>
+<div ng-hide="cargando">
+<div class="page-title clearfix {{pageAnimate}}">
+	<div class="pull-right">
+		<h1>Gestion de perfil</h1>
+	</div>
+</div>
+<div class="col-sm-12">
+	<div class="panel {{panelAnimate}}">
+		<div class="panel-heading">
+			<h3 class="panel-title">Perfil</h3>
+		</div>
+		<div class="panel-body" >
+			<form name="RegisterForm" novalidate ng-submit="Registrar()">
+				<div class="form-group col-sm-6">
+					<label for="imagen">Seleccione imagen</label>
+					<div class="input__row uploader form-group">
+					  <div id="inputval" class="input-value">    </div>
+					  <label for="fileInput"><i class="fa fa-upload"></i></label>
+					  <input id="fileInput" type="file" accept="image/*">
+					</div>
+					<div class="cropArea">
+				    	<img-crop image="myImage" result-image="myCroppedImage" on-load-done="cambiar(1)" on-change="cambiar(2)"></img-crop>
+					</div>
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="Nombres">Nombres</label>
+					<input type="text" class="form-control" id="Nombres" placeholder="Ingrese los nombres" required ng-model="Register.nombre">
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="Apellidos">Apellidos</label>
+					<input type="text" class="form-control" id="Apellidos" placeholder="Ingrese los apellidos" required ng-model="Register.nombre">
+				</div>
+				<div class="form-group col-sm-12">
+					<button class="btn btn-success" type="button">Guardar</button>
+					<button class="btn btn-danger" type="button">Cancelar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</div>

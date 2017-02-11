@@ -33,6 +33,49 @@ body{
 section{
 	overflow:hidden;
 }
+.cropArea {
+	background: @gray-lighter;
+	overflow: hidden;
+	height:430px;
+    }
+
+input[type=file]{
+  display: none;
+}
+.uploader {
+  border: 1px solid #ccc;
+  position: relative;
+  height:33.9px;
+  display: flex;
+}
+.uploader .input-value{
+  padding: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 25px;
+  font-size: 16px;
+}
+.uploader label {
+  cursor: pointer;
+  margin: 0;
+  width:80px;
+  height: 32.9px;
+  position: absolute;
+  right: 0;
+  background-color:@brand-success;
+}
+.uploader label i{
+	position:absolute;
+	height:20px;
+	width:20px;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+	margin:auto;
+	color:white;
+	font-size:20px;
+}
 .navbar-inverse{
 	background-color:fade(@sidenav, 95%);
 	border:none;
