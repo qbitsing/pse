@@ -6,11 +6,11 @@ angular.module('frontendPseApp')
 		},
 		ActualizarSesion : function(user){
 			var sesion=localStorageService.get("SesionUsuario");
-			sesion[3] = user.nombres;
-			sesion[4] = user.apellidos;
-			sesion[5] = user.telefono;
-			sesion[6] = user.direccion;
-			sesion[7] = user.correo;
+			sesion['nombres'] = user.nombres;
+			sesion['apellidos'] = user.apellidos;
+			sesion['telefono'] = user.telefono;
+			sesion['direccion'] = user.direccion;
+			sesion['correo'] = user.correo;
 			localStorageService.set("SesionUsuario",sesion);
 		},
 		ObtenerSesion : function(){

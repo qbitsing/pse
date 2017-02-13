@@ -140,26 +140,26 @@ $app->group('/Usuarios' , function() use($app){
 });
 $app->group('/Images',function() use($app){
 	$app->get('/Avatar/{id}', function($request, $response, $args){
-		if(file_exists('../Assets/Images/Usuarios/'.$args['id'].'/avatar.jpg')){
-			$ruta='../Assets/Images/Usuarios/'.$args['id'].'/avatar.jpg';
+		if(file_exists('../app/Assets/Images/Usuarios/'.$args['id'].'/avatar.jpg')){
+			$ruta='../app/Assets/Images/Usuarios/'.$args['id'].'/avatar.jpg';
 		}else{
-			$ruta='../Assets/Images/Usuarios/default/avatar.jpg';
+			$ruta='../app/Assets/Images/Usuarios/default/avatar.jpg';
 		}
 		$imagen = file_get_contents($ruta);
 		return $imagen;
 	});
 	$app->get('/Recarga/{id}', function($request, $response, $args){
-		if(file_exists('../Assets/Images/Usuarios/'.$args['id'].'/avatar.jpg')){
-			$ruta='../Assets/Images/Usuarios/'.$args['id'].'/avatar.jpg';
+		if(file_exists('../app/Assets/Images/Usuarios/'.$args['id'].'/avatar.jpg')){
+			$ruta='../app/Assets/Images/Usuarios/'.$args['id'].'/avatar.jpg';
 		}else{
-			$ruta='../Assets/Images/Usuarios/default/avatar.jpg';
+			$ruta='../app/Assets/Images/Usuarios/default/avatar.jpg';
 		}
 		$imagen = file_get_contents($ruta);
 		return $imagen;
 	});
 	$app->post('/Profile/{id}', function($request, $response, $args){
-		if(file_exists('../Assets/Images/Usuarios/'.$args['id'].'/profile.jpg')){
-			$ruta='../Assets/Images/Usuarios/'.$args['id'].'/profile.jpg';
+		if(file_exists('../app/Assets/Images/Usuarios/'.$args['id'].'/profile.jpg')){
+			$ruta='../app/Assets/Images/Usuarios/'.$args['id'].'/profile.jpg';
 			$imagen = file_get_contents($ruta);
 			return base64_encode($imagen);
 		}else{
@@ -169,28 +169,28 @@ $app->group('/Images',function() use($app){
 	});
 
 	$app->get('/Logo1/{id}', function($request, $response, $args){
-		if(file_exists('../Assets/Images/Empresas/'.$args['id'].'/logo.jpg')){
-			$ruta='../Assets/Images/Empresas/'.$args['id'].'/logo.jpg';
+		if(file_exists('../app/Assets/Images/Empresas/'.$args['id'].'/logo.jpg')){
+			$ruta='../app/Assets/Images/Empresas/'.$args['id'].'/logo.jpg';
 		}else{
-			$ruta='../Assets/Images/Empresas/default/logo.jpg';
+			$ruta='../app/Assets/Images/Empresas/default/logo.jpg';
 		}
 		$imagen = file_get_contents($ruta);
 		return $imagen;
 	});
 
 	$app->get('/Logo2/{id}', function($request, $response, $args){
-		if(file_exists('../Assets/Images/Empresas/'.$args['id'].'/logo.jpg')){
-			$ruta='../Assets/Images/Empresas/'.$args['id'].'/logo.jpg';
+		if(file_exists('../app/Assets/Images/Empresas/'.$args['id'].'/logo.jpg')){
+			$ruta='../app/Assets/Images/Empresas/'.$args['id'].'/logo.jpg';
 		}else{
-			$ruta='../Assets/Images/Empresas/default/logo.jpg';
+			$ruta='../app/Assets/Images/Empresas/default/logo.jpg';
 		}
 		$imagen = file_get_contents($ruta);
 		return $imagen;
 	});
 
 	$app->post('/Completa/{id}', function($request, $response, $args){
-		if(file_exists('../Assets/Images/Empresas/'.$args['id'].'/completa.jpg')){
-			$ruta='../Assets/Images/Empresas/'.$args['id'].'/completa.jpg';
+		if(file_exists('../app/Assets/Images/Empresas/'.$args['id'].'/completa.jpg')){
+			$ruta='../app/Assets/Images/Empresas/'.$args['id'].'/completa.jpg';
 			$imagen = file_get_contents($ruta);
 			return base64_encode($imagen);
 		}else{

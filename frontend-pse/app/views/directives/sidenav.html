@@ -6,7 +6,7 @@
 				<div class="gn-scroller">
 					<ul class="gn-menu">
 						<li class="usuario">
-							<img src="http://Api-pse/Images/Avatar/{{Usuario.id}}" />
+							<img src="http://Api-pse/Images/Avatar/{{Usuario.id}}" class="dash-profile"/>
 							<h3>{{Usuario.nombres +' '+ Usuario.apellidos}}</h3>
 						</li>
 						<li ng-class="{activate: $state.includes('Home')}" ng-mouseenter="hover = true"ng-mouseleave="hover = false" ng-click="menu()"><a ui-sref="Home"><i class="fa fa-address-card animated" ng-class="{wobble:hover}"></i>Perfil</a></li>

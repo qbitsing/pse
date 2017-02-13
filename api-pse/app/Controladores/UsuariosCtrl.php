@@ -174,7 +174,7 @@ class UsuariosCtrl extends Controlador
 			'direccion' => $parsedBody->direccion,
 			'correo' => $parsedBody->correo
 		]);
-		if ($user>0) {
+		if ($user) {
 			$respuesta = [
 				'Estado' => 1,
 				'Datos' => 'Actualizado correctamente'
@@ -219,9 +219,9 @@ class UsuariosCtrl extends Controlador
 	}
 	public function ActualizarImagen($request , $response , $args){
 		$parsedBody = json_decode($request->getBody()->getContents());
-		$ruta='../Assets/Images/Usuarios/'.$args['id'];
-		if(!file_exists('../Assets/Images/Usuarios/')){
-			mkdir('../Assets/Images/Usuarios/',0777);
+		$ruta='../app/Assets/Images/Usuarios/'.$args['id'];
+		if(!file_exists('../app/Assets/Images/Usuarios')){
+			mkdir('../app/Assets/Images/Usuarios',0777);
 		}
 		if(!file_exists($ruta)){
 			mkdir($ruta,0777);
@@ -245,7 +245,7 @@ class UsuariosCtrl extends Controlador
 		}else{
 			$respuesta = [
 					'Estado' => 0,
-					'Datos' => 'Error al guardar la imagen'
+					'Datos' => 'Error al guardar la imagen grande'
 				];
 		}
 		$response->getBody()->write(json_encode($respuesta));

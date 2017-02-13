@@ -15,6 +15,7 @@ angular.module('frontendPseApp')
     $scope.panelAnimate='';
     $scope.pageAnimate=''; 
   	$scope.Usuario = SesionUsuario.ObtenerSesion();
+    $scope.Usuario.telefono=parseInt($scope.Usuario.telefono);
     $scope.myCroppedImage='';
     $scope.MiUsuario={};
     $timeout(function () {
@@ -46,12 +47,13 @@ angular.module('frontendPseApp')
       angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
 
       $scope.cambiar=function(act){
+        console.log(act);
         if(act==1){
           $scope.contador=1;
         }else if(act==2){
           $scope.contador++;
         }
-        if($scope.contador>3){
+        if($scope.contador>=3){
           $scope.cambio=true;
         }
       }
@@ -65,6 +67,9 @@ angular.module('frontendPseApp')
             .getResource('Usuarios/ActualizarImagen/'+$scope.Usuario.id , $scope.MiUsuario)
             .then(function(data){
               $scope.cargando=false;
+              console.log($scope.Usuario);
+              $scope.contador=3;
+              $scope.cambio=false;
               if(data.data.Estado == 1){
                 var imagen=document.getElementsByClassName('dash-profile');
                 var atributo=imagen[0].getAttribute('src');
@@ -75,7 +80,7 @@ angular.module('frontendPseApp')
                   src='http://Api-pse/Images/Avatar/'+$scope.Usuario.id;
                 }
                 imagen[0].setAttribute('src',src);
-                UserUpdate();
+                UserUpdate(1);
               }else{
                 alert(data.data.Datos);
               }
@@ -83,25 +88,34 @@ angular.module('frontendPseApp')
               $scope.cargando=false;
             });
         }else{
-            UserUpdate();
+          UserUpdate(0);
         }
     }
 
-    function UserUpdate(){
-        if(JSON.stringify($scope.Usuario)!=JSON.stringify(SesionUsuario.ObtenerSesion())){
-            $scope.cargando=true;
-            ApiPse
-            .getResource('Usuarios/ActualizarDatos' , $scope.Usuario)
-            .then(function(data){
-              $scope.cargando=false;
-              if(data.data.Estado == 1){
-                SesionUsuario.ActualizarSesion($scope.Usuario);
-              }else{
-                console.log(data.data.Datos);
-              }
-            },function(data){
-              $scope.cargando=false;
-            });
+    function UserUpdate(actualizo){
+      if(JSON.stringify($scope.Usuario)!=JSON.stringify(SesionUsuario.ObtenerSesion())){
+        $scope.cargando=true;
+        ApiPse
+        .getResource('Usuarios/ActualizarDatos' , $scope.Usuario)
+        .then(function(data){
+          $scope.cargando=false;
+          if(data.data.Estado == 1){
+            SesionUsuario.ActualizarSesion($scope.Usuario);
+            if(actualizo==1){
+              alert('Las imagenes y la información se actualizaron exitosamente');
+            }else{
+              alert('La información se actualizó exitosamente');
+            }
+          }else{
+            console.log(data.data.Datos);
+          }
+        },function(data){
+          $scope.cargando=false;
+        });
+      }else{
+        if(actualizo==1){
+          alert('La imagen fue actualizada exitosamente');
         }
+      }
     }
   });
