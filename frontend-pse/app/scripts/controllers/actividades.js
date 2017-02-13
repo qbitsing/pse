@@ -110,7 +110,6 @@ angular.module('frontendPseApp')
 		var obj = {};
 		$scope.actividades.forEach(function(ele , index){
 			if(ele.id == _id){
-				console.log(ele);
 				obj.index = index;
 				obj.id = ele.id;
 				obj.nombre = ele.nombre;

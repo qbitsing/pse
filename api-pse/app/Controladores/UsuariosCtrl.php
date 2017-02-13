@@ -117,6 +117,7 @@ class UsuariosCtrl extends Controlador
 		$response->getBody()->write($respuesta);
 	}
 
+
 	public function Create($request , $response)
 	{
 		$parsedBody = json_decode($request->getBody()->getContents());
@@ -163,6 +164,30 @@ class UsuariosCtrl extends Controlador
 		$response->getBody()->write(json_encode($respuesta));
 	}
 
+	public function ActualizarDatos($request , $response , $args)
+	{
+		$parsedBody = json_decode($request->getBody()->getContents());
+		$user=users::where('id','=',$parsedBody->userAction)->limit(1)->update([
+			'nombres' => $parsedBody->nombres,
+			'apellidos' => $parsedBody->apellidos,
+			'telefono' => $parsedBody->telefono,
+			'direccion' => $parsedBody->direccion,
+			'correo' => $parsedBody->correo
+		]);
+		if ($user>0) {
+			$respuesta = [
+				'Estado' => 1,
+				'Datos' => 'Actualizado correctamente'
+			];
+		}else{
+			$respuesta = [
+				'Estado' => 0,
+				'Datos' => 'No se pudo actualizar la información'
+			];
+		}
+		$response->getBody()->write(json_encode($respuesta));
+	}
+
 	public function Actualizar($request , $response , $args)
 	{
 		$parsedBody = json_decode($request->getBody()->getContents());
@@ -190,6 +215,39 @@ class UsuariosCtrl extends Controlador
 				"Datos"=>"No se pudo actualizar"
 			];
 		}	
+		$response->getBody()->write(json_encode($respuesta));
+	}
+	public function ActualizarImagen($request , $response , $args){
+		$parsedBody = json_decode($request->getBody()->getContents());
+		$ruta='../Assets/Images/Usuarios/'.$args['id'];
+		if(!file_exists('../Assets/Images/Usuarios/')){
+			mkdir('../Assets/Images/Usuarios/',0777);
+		}
+		if(!file_exists($ruta)){
+			mkdir($ruta,0777);
+		}
+		list(, $parsedBody->Image) = explode(';', $parsedBody->Image);
+		list(, $parsedBody->Image) = explode(',', $parsedBody->Image);
+		list(, $parsedBody->myImage) = explode(';', $parsedBody->myImage);
+		list(, $parsedBody->myImage) = explode(',', $parsedBody->myImage);
+		if(file_put_contents($ruta.'/profile.jpg', base64_decode($parsedBody->Image))){
+			if(file_put_contents($ruta.'/avatar.jpg', base64_decode($parsedBody->myImage))){
+				$respuesta = [
+					'Estado' => 1,
+					'Datos' => 'Las imagenes se guardaron correctamente'
+				];
+			}else{
+				$respuesta = [
+					'Estado' => 0,
+					'Datos' => 'Error al guardar la imagen'
+				];
+			}
+		}else{
+			$respuesta = [
+					'Estado' => 0,
+					'Datos' => 'Error al guardar la imagen'
+				];
+		}
 		$response->getBody()->write(json_encode($respuesta));
 	}
 

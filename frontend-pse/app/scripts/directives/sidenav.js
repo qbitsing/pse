@@ -14,9 +14,8 @@ angular.module('frontendPseApp')
 			link: function(scope, element, attrs) {
 				
 			},
-			controller: function($scope, SesionUsuario,$state){
+			controller: function($scope, SesionUsuario, $state){
 				$scope.Usuario=SesionUsuario.ObtenerSesion();
-
 				if ($scope.ClickMenu != 'gn-open-all') {
 					angular.element('.main-view').css('margin-left', '48px');
 				}
@@ -31,7 +30,6 @@ angular.module('frontendPseApp')
 				    }				    
 				}
 				$scope.sidenav = function (){
-					console.log('entro');
 					if ($scope.ClickMenu == 'gn-open-all') {
 						$scope.ClickMenu = '';
 						angular.element('.main-view').css('margin-left', '48px');

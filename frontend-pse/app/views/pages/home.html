@@ -24,15 +24,41 @@
 					</div>
 				</div>
 				<div class="form-group col-sm-6">
-					<label for="Nombres">Nombres</label>
-					<input type="text" class="form-control" id="Nombres" placeholder="Ingrese los nombres" required ng-model="Register.nombre">
+					<label for="TipoDocumento">Tipo de Documento *</label>
+					<select name="TipoDocumento" id="TipoDocumento" ng-disabled="true" ng-model="Usuario.tipo_doc" class="form-control color-negro" required>
+						<option value="0">Nit</option>
+						<option value="1">Cedula de Ciudadania</option>
+						<option value="2">Cedula de Extranjeria</option>
+						<option value="3">Pasaporte</option>
+
+					</select>
 				</div>
 				<div class="form-group col-sm-6">
-					<label for="Apellidos">Apellidos</label>
-					<input type="text" class="form-control" id="Apellidos" placeholder="Ingrese los apellidos" required ng-model="Register.nombre">
+					<label for="Documento">Documento *</label>
+					<input type="text" ng-model="Usuario.id" ng-disabled="true" name="Documento" class="form-control color-negro" id="Documento" placeholder="Ingrese el Documento del Usuario a registrar" required ng-disabled="panel_title_form == 'Editar Usuario'">
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="Nombres">Nombres *</label>
+					<input type="text" class="form-control" id="Nombres" placeholder="Ingrese los nombres" required ng-model="Usuario.nombres">
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="Apellidos">Apellidos *</label>
+					<input type="text" class="form-control" id="Apellidos" placeholder="Ingrese los apellidos" required ng-model="Usuario.apellidos">
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="Direccion">Direccion *</label>
+					<input type="text" ng-model="Usuario.direccion" class="form-control color-negro" id="Direccion" name="Direccion" placeholder="Ingrese la Direccion del Usuario a resgistrar" required>
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="Telefono">Telefono *</label>
+					<input type="number" ng-model="Usuario.telefono" class="form-control color-negro" id="Telefono" name="Telefono" placeholder="Ingrese el Telefono del Usuario a registrar" required>
+				</div>
+				<div class="form-group col-sm-6">
+					<label for="Correo">Correo *</label>
+					<input type="email" ng-model="Usuario.correo" class="form-control color-negro" id="Correo" name="Correo" placeholder="Ingrese la Correo del Usuario a resgistrar" required>
 				</div>
 				<div class="form-group col-sm-12">
-					<button class="btn btn-success" type="button">Guardar</button>
+					<button class="btn btn-success" type="button" ng-click="ImageUpdate()">Guardar</button>
 					<button class="btn btn-danger" type="button">Cancelar</button>
 				</div>
 			</form>
