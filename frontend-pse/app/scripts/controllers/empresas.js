@@ -108,7 +108,6 @@ angular.module('frontendPseApp')
 			$scope.cargando = false;
 			console.log(data);
 		});
-		console.log(obj);
 	}
 	$scope.Detalles = function(id) {
 		$scope.obj = $scope.Identifiar(id);
@@ -176,7 +175,6 @@ angular.module('frontendPseApp')
 		.then(function(data){
 			if(data.data.Estado==1){
 				$scope.empresas=data.data.Datos;
-				console.log(data);
 				$scope.gridOptions.data = $scope.empresas;
 			}
 		},function(data){
@@ -189,7 +187,6 @@ angular.module('frontendPseApp')
 })
 .controller('DetalleEmpresaModalCtrl', function ($scope ,Scope) {
 	$scope.Detalle=Scope.obj;
-	console.log($scope.Detalle);
 	$scope.Cerrar=function(){
 		Scope.cerrarModal();
 	}

@@ -57,9 +57,7 @@ class UsuariosCtrl extends Controlador
 
 	public function Login($request , $response)
 	{
-		
 		$parsedBody = json_decode($request->getBody()->getContents());
-
 		$user=users::join('empresas','usuarios.id_empresa','=','empresas.id')->select('usuarios.*')->where('usuarios.correo','=',$parsedBody->correo)->where('empresas.estado','=','1')->get();
 		if($user!="[]"){
 			$r= $user;
@@ -174,7 +172,7 @@ class UsuariosCtrl extends Controlador
 			'direccion' => $parsedBody->direccion,
 			'correo' => $parsedBody->correo
 		]);
-		if ($user) {
+		if ($user>0) {
 			$respuesta = [
 				'Estado' => 1,
 				'Datos' => 'Actualizado correctamente'

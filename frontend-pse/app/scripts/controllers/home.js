@@ -58,7 +58,7 @@ angular.module('frontendPseApp')
         }
       }
 
-      $scope.ImageUpdate=function(){
+    $scope.ImageUpdate=function(){
         if($scope.cambio){
             $scope.cargando=true;
             $scope.MiUsuario.myImage=$scope.myCroppedImage;
@@ -67,10 +67,9 @@ angular.module('frontendPseApp')
             .getResource('Usuarios/ActualizarImagen/'+$scope.Usuario.id , $scope.MiUsuario)
             .then(function(data){
               $scope.cargando=false;
-              console.log($scope.Usuario);
-              $scope.contador=3;
-              $scope.cambio=false;
               if(data.data.Estado == 1){
+                $scope.contador=3;
+                $scope.cambio=false;
                 var imagen=document.getElementsByClassName('dash-profile');
                 var atributo=imagen[0].getAttribute('src');
                 var src='';
@@ -95,8 +94,15 @@ angular.module('frontendPseApp')
     function UserUpdate(actualizo){
       if(JSON.stringify($scope.Usuario)!=JSON.stringify(SesionUsuario.ObtenerSesion())){
         $scope.cargando=true;
+        var data = {
+            nombres : $scope.Usuario.nombres,
+            apellidos : $scope.Usuario.apellidos,
+            direccion : $scope.Usuario.direccion,
+            telefono : $scope.Usuario.telefono,
+            correo : $scope.Usuario.correo
+        };
         ApiPse
-        .getResource('Usuarios/ActualizarDatos' , $scope.Usuario)
+        .getResource('Usuarios/ActualizarDatos' , data)
         .then(function(data){
           $scope.cargando=false;
           if(data.data.Estado == 1){

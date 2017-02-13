@@ -12,7 +12,6 @@ angular.module('frontendPseApp')
 					}
 				}
 			}
-			
 			var req = {
 				method : 'POST',
 				url : URL,

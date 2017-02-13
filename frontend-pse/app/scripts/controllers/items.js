@@ -156,7 +156,6 @@ angular.module('frontendPseApp')
 				obj.id_herramienta = ''+ele.id_herramienta;
 			}
 		});
-		console.log(obj);
 		return obj;
 	}
 	function listarItems(){
