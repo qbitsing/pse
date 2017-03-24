@@ -58,7 +58,7 @@
 				</div>
 				<div class="form-group col-sm-6" ng-hide="Usuario.rol!='Super Administrador' || Register.rol=='Super Administrador'">
 					<label for="Empresa">Empresa</label>
-					<select id="Empresa" class="form-control" ng-required="Usuario.rol=='Super Administrador' || Register.rol!='Super Administrador'" ng-model="Register.id_empresa">
+					<select id="Empresa" class="form-control" ng-required="Usuario.rol=='Super Administrador' && Register.rol!='Super Administrador'" ng-model="Register.id_empresa">
 						<option ng-repeat="empresa in empresas" value="{{empresa.id}}">{{empresa.nombre}}</option>
 					</select>
 				</div>

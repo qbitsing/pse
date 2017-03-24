@@ -95,7 +95,7 @@ angular.module('frontendPseApp')
 				$scope.PanelTitulo = "Registro de usuarios";
 				$scope.BotonTitulo = "Registrar Usuario"
 				if(ruta == "Usuarios/Crear"){
-					$sope.Register.estado=1;
+					$scope.Register.estado=1;
 					$scope.Usuarios.push($scope.Register);
 				}else{
 					if($scope.Register.rol!="Super Administrador"){

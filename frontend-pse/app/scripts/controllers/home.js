@@ -114,7 +114,7 @@ angular.module('frontendPseApp')
               alert('La información se actualizó exitosamente');
             }
           }else{
-            console.log(data.data.Datos);
+            alert(data.data.Datos);
           }
         },function(data){
           $scope.cargando=false;
