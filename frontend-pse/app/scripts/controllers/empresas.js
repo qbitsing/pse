@@ -155,7 +155,10 @@ angular.module('frontendPseApp')
 		.then(function(data){
 			if(data.data.Estado==1){
 				$scope.departamentos = data.data.Datos;
+			}else{
+				$scope.ciudades=[];
 			}
+			ListarCiudades();
 		},function(data){
 			console.log(data);
 		});
@@ -165,7 +168,10 @@ angular.module('frontendPseApp')
 		.then(function(data){
 			if(data.data.Estado==1){
 				$scope.ciudades = data.data.Datos;
+			}else{
+				$scope.ciudades=[];
 			}
+			listarEmpresas();
 		},function(data){
 
 		});
@@ -176,14 +182,17 @@ angular.module('frontendPseApp')
 			if(data.data.Estado==1){
 				$scope.empresas=data.data.Datos;
 				$scope.gridOptions.data = $scope.empresas;
+			}else{
+				$scope.empresas=[];
+				$scope.gridOptions.data = $scope.empresas;
 			}
 		},function(data){
+			$scope.empresas=[];
+			$scope.gridOptions.data = $scope.empresas;
 			console.log(data);
 		});
 	}
 	listarDepartamentos();
-	ListarCiudades();
-	listarEmpresas();
 })
 .controller('DetalleEmpresaModalCtrl', function ($scope ,Scope) {
 	$scope.Detalle=Scope.obj;

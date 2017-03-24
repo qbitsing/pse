@@ -49,16 +49,16 @@
 					<label for="Rol">Rol</label>
 					<select id="Rol" class="form-control" required ng-model="Register.rol">
 						<option value="Super Administrador" ng-hide="Usuario.rol!='Super Administrador'">Super Administrador</option>
-						<option value="Administrador">Administrador</option>
-						<option value="Controlador">Controlador</option>
-						<option value="Vendedor">Vendedor</option>
-						<option value="Transportador">Transportador</option>
-						<option value="Guía">Guía</option>
+						<option value="Administrador" ng-hide="Usuario.rol!='Super Administrador'">Administrador</option>
+						<option value="Controlador" ng-hide="Usuario.rol!='Administrador'">Controlador</option>
+						<option value="Vendedor" ng-hide="Usuario.rol!='Administrador'">Vendedor</option>
+						<option value="Transportador" ng-hide="Usuario.rol!='Administrador'">Transportador</option>
+						<option value="Guía" ng-hide="Usuario.rol!='Administrador'">Guía</option>
 					</select>
 				</div>
-				<div class="form-group col-sm-6" ng-hide="Usuario.rol!='Super Administrador'">
+				<div class="form-group col-sm-6" ng-hide="Usuario.rol!='Super Administrador' || Register.rol=='Super Administrador'">
 					<label for="Empresa">Empresa</label>
-					<select id="Empresa" class="form-control" ng-required="Usuario.rol=='Super Administrador'" ng-model="Register.id_empresa">
+					<select id="Empresa" class="form-control" ng-required="Usuario.rol=='Super Administrador' || Register.rol!='Super Administrador'" ng-model="Register.id_empresa">
 						<option ng-repeat="empresa in empresas" value="{{empresa.id}}">{{empresa.nombre}}</option>
 					</select>
 				</div>

@@ -47,14 +47,13 @@ angular.module('frontendPseApp')
       angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
 
       $scope.cambiar=function(act){
-        console.log(act);
-        if(act==1){
-          $scope.contador=1;
+        if(act==1 && $scope.contador<3){
+            $scope.contador=1;
         }else if(act==2){
-          $scope.contador++;
+            $scope.contador++;
         }
         if($scope.contador>=3){
-          $scope.cambio=true;
+            $scope.cambio=true;
         }
       }
 
@@ -73,10 +72,10 @@ angular.module('frontendPseApp')
                 var imagen=document.getElementsByClassName('dash-profile');
                 var atributo=imagen[0].getAttribute('src');
                 var src='';
-                if(atributo=='http://Api-pse/Images/Avatar/'+$scope.Usuario.id){
-                  src='http://Api-pse/Images/Recarga/'+$scope.Usuario.id;
-                }else if(atributo=='http://Api-pse/Images/Recarga/'+$scope.Usuario.id){
-                  src='http://Api-pse/Images/Avatar/'+$scope.Usuario.id;
+                if(atributo=='http://api.sigioth.com/Images/Avatar/'+$scope.Usuario.id){
+                  src='http://api.sigioth.com/Images/Recarga/'+$scope.Usuario.id;
+                }else if(atributo=='http://api.sigioth.com/Images/Recarga/'+$scope.Usuario.id){
+                  src='http://api.sigioth.com/Images/Avatar/'+$scope.Usuario.id;
                 }
                 imagen[0].setAttribute('src',src);
                 UserUpdate(1);

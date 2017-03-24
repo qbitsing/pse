@@ -8,7 +8,7 @@
  * Controller of the frontendPseApp
  */
 angular.module('frontendPseApp')
-.controller('UsuariosCtrl', function ($scope, ApiPse, SesionUsuario, $timeout , Tabla , 
+.controller('UsuariosCtrl', function ($state, $scope, ApiPse, SesionUsuario, $timeout , Tabla , 
 		Estados , CasillaBotones, $uibModal) {
 	$scope.PanelTitulo = "Registro de usuarios";
 	$scope.BotonTitulo = "Registrar Usuario";
@@ -16,6 +16,9 @@ angular.module('frontendPseApp')
 	$scope.Estados = Estados;
 	$scope.Register={};
 	$scope.Usuario=SesionUsuario.ObtenerSesion();
+	if($scope.Usuario.rol!="Administrador" && $scope.Usuario.rol!="Super Administrador"){
+		$state.go('Home');
+	}
 	$scope.panelAnimate='';
 	$scope.pageAnimate='';
 	var modalInstance = null;
@@ -59,6 +62,7 @@ angular.module('frontendPseApp')
 	if($scope.Usuario.rol == "Super Administrador"){
 		$scope.gridOptions.columnDefs.push({
 			field : 'empresa',
+			cellTemplate : '<div>{{row.entity.empresa.nombre || "No posee"}}</div>',
 			width: '15%', minWidth: 170
 		});
 	}
@@ -77,8 +81,9 @@ angular.module('frontendPseApp')
 			ruta = "Usuarios/Actualizar/"+$scope.Register.id;
 		}
 		$scope.cargando = true;
-		if($scope.Usuario.rol == "Administrador")
+		if($scope.Usuario.rol == "Administrador"){
 			$scope.Register.id_empresa = $scope.Usuario.id_empresa;
+		}
 		ApiPse
 		.getResource(ruta,$scope.Register)
 		.then(function(data){
@@ -86,12 +91,14 @@ angular.module('frontendPseApp')
 					$scope.PanelTitulo = "Registro de usuarios";
 					$scope.BotonTitulo = "Registrar Usuario"
 					if(ruta == "Usuarios/Crear"){
-						$scope.Usuario.push($scope.Register);
+						$sope.Register.estado=1;
+						$scope.Usuarios.push($scope.Register);
 						$scope.Register={};
 					}else{
 						$scope.Usuarios[$scope.Register.index] = $scope.Register;
 						$scope.Register={};
 					}
+					alert(data.data.Datos);
 				}
 				$scope.cargando = false;
 			},function(data){
@@ -101,14 +108,14 @@ angular.module('frontendPseApp')
 		);
 	}
 	$scope.Editar = function(id) {
-		var obj = $scope.Identifiar(id);
+		var obj = $scope.Identificar(id);
 		$scope.Register = obj;
 		$scope.PanelTitulo = "Editar usuario";
 		$scope.BotonTitulo = "Guardar Cambios";
 	}
 	$scope.Borrar = function(id) {
 		$scope.cargando = true;
-		var obj = $scope.Identifiar(id);
+		var obj = $scope.Identificar(id);
 		var ruta = "Usuarios/Eliminar/"+obj.id;
 		ApiPse.getResource(ruta)
 		.then(function(data){
@@ -123,7 +130,7 @@ angular.module('frontendPseApp')
 	}
 	$scope.Toggle = function(id) {
 		$scope.cargando = true;
-		var obj = $scope.Identifiar(id);
+		var obj = $scope.Identificar(id);
 		if(obj.estado == 1){
 			obj.estado = 0;
 		}else{
@@ -140,10 +147,9 @@ angular.module('frontendPseApp')
 			$scope.cargando = false;
 			console.log(data);
 		});
-		console.log(obj);
 	}
 	$scope.Detalles = function(id) {
-		$scope.obj = $scope.Identifiar(id);
+		$scope.obj = $scope.Identificar(id);
 		modalInstance = $uibModal.open({
 			animation: true,
 			ariaLabelledBy: 'modal-title',
@@ -165,7 +171,7 @@ angular.module('frontendPseApp')
 		$scope.BotonTitulo = "Registrar Usuario";
 		$scope.Register = {};
 	}
-	$scope.Identifiar = function(_id){
+	$scope.Identificar = function(_id){
 		var obj = {};
 		$scope.Usuarios.forEach(function(ele , index){
 			if(ele.id == _id){
@@ -179,6 +185,7 @@ angular.module('frontendPseApp')
 				obj.correo = ele.correo;
 				obj.estado = ele.estado;
 				obj.id_empresa = ele.id_empresa;
+				obj.empresa=ele.empresa;
 				obj.tipo_doc = ele.tipo_doc.toString();
 
 			}
@@ -209,8 +216,13 @@ angular.module('frontendPseApp')
 			if(data.data.Estado==1){
 				$scope.Usuarios=data.data.Datos;
 				$scope.gridOptions.data = $scope.Usuarios;
+			}else{
+				$scope.Usuarios=[];
+				$scope.gridOptions.data = $scope.Usuarios;
 			}
 		},function(data){
+			$scope.Usuarios=[];
+			$scope.gridOptions.data = $scope.Usuarios;
 			console.log(data);
 		});
 	}
@@ -219,7 +231,6 @@ angular.module('frontendPseApp')
 })
 .controller('DetalleUsuarioModalCtrl', function ($scope ,Scope) {
 	$scope.Detalle=Scope.obj;
-	console.log($scope.Detalle);
 	$scope.Cerrar=function(){
 		Scope.cerrarModal();
 	}

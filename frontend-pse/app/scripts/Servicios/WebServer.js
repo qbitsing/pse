@@ -2,7 +2,7 @@ angular.module('frontendPseApp')
 .factory('ApiPse', function($http , SesionUsuario) {
 	return{
 		getResource: function(resource , data) {
-			var URL = "http://Api-pse/"+resource;
+			var URL = "http://api.sigioth.com/"+resource;
 			if(SesionUsuario.ObtenerSesion() != null){
 				if(data != undefined)
 					data.userAction = SesionUsuario.ObtenerSesion().id;
