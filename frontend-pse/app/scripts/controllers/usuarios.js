@@ -36,25 +36,25 @@ angular.module('frontendPseApp')
 		columnDefs: [
 			{ 
 				field: 'nombres',
-				width: '15%', minWidth: 170
+				width: '17%', minWidth: 170
 			},
 			{ 
 				field: 'apellidos',
-				width: '15%', minWidth: 170
+				width: '17%', minWidth: 170
 			},
 			{ 
 				name: 'Documento',
 				field: 'id',
-				width: '15%', minWidth: 170
+				width: '17%', minWidth: 170
 			},
 			{ 
 				field: 'rol',
-				width: '15%', minWidth: 170
+				width: '17%', minWidth: 170
 			},
 			{ 
 				field: 'estado', 
 				cellTemplate : '<div>{{grid.appScope.Estados.Estados[row.entity.estado]}}</div>',
-				width: '15%', minWidth: 170
+				width: '16%', minWidth: 170
 			}
 
 	    ]
@@ -63,7 +63,7 @@ angular.module('frontendPseApp')
 		$scope.gridOptions.columnDefs.push({
 			field : 'empresa',
 			cellTemplate : '<div>{{row.entity.empresa.nombre || "No posee"}}</div>',
-			width: '15%', minWidth: 170
+			width: '16%', minWidth: 170
 		});
 	}
 
@@ -76,6 +76,9 @@ angular.module('frontendPseApp')
 
 	angular.extend($scope.gridOptions , Tabla);
 	$scope.Registrar=function(){
+		if($scope.Register.rol=="Super Administrador"){
+			$scope.Register.id_empresa=null;
+		}
 		var ruta = "Usuarios/Crear";
 		if($scope.BotonTitulo == "Guardar Cambios"){
 			ruta = "Usuarios/Actualizar/"+$scope.Register.id;
@@ -87,24 +90,29 @@ angular.module('frontendPseApp')
 		ApiPse
 		.getResource(ruta,$scope.Register)
 		.then(function(data){
-				if(data.data.Estado==1){
-					$scope.PanelTitulo = "Registro de usuarios";
-					$scope.BotonTitulo = "Registrar Usuario"
-					if(ruta == "Usuarios/Crear"){
-						$sope.Register.estado=1;
-						$scope.Usuarios.push($scope.Register);
-						$scope.Register={};
-					}else{
-						$scope.Usuarios[$scope.Register.index] = $scope.Register;
-						$scope.Register={};
-					}
-					alert(data.data.Datos);
+			$scope.cargando = false;
+			if(data.data.Estado==1){
+				$scope.PanelTitulo = "Registro de usuarios";
+				$scope.BotonTitulo = "Registrar Usuario"
+				if(ruta == "Usuarios/Crear"){
+					$sope.Register.estado=1;
+					$scope.Usuarios.push($scope.Register);
+					$scope.Register={};
+				}else{
+					$scope.empresas.forEach(function(ele , index){
+						if(ele.id == $scope.Register.id_empresa){
+							$scope.Register.empresa=ele;
+						}
+					});
+					$scope.Usuarios[$scope.Register.index] = $scope.Register;
+					$scope.Register={};
 				}
-				$scope.cargando = false;
-			},function(data){
-				$scope.Register={};
-				$scope.cargando = false;
 			}
+			alert(data.data.Datos);
+		},function(data){
+			$scope.Register={};
+			$scope.cargando = false;
+		}
 		);
 	}
 	$scope.Editar = function(id) {
@@ -196,8 +204,11 @@ angular.module('frontendPseApp')
 		ApiPse
 		.getResource('Empresas/ListarDisponible')
 		.then(function(data){
+			ListarUsuarios();
 			if(data.data.Estado==1){
 				$scope.empresas=data.data.Datos;
+			}else{
+				$scope.empresas=[{"id":"0","nombre":"No hay ninguna empresa registrada"}];
 			}
 		},function(data){
 			
@@ -227,7 +238,6 @@ angular.module('frontendPseApp')
 		});
 	}
 	ListarEmpresa();
-	ListarUsuarios();
 })
 .controller('DetalleUsuarioModalCtrl', function ($scope ,Scope) {
 	$scope.Detalle=Scope.obj;

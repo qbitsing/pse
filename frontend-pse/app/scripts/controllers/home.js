@@ -91,7 +91,9 @@ angular.module('frontendPseApp')
     }
 
     function UserUpdate(actualizo){
-      if(JSON.stringify($scope.Usuario)!=JSON.stringify(SesionUsuario.ObtenerSesion())){
+      var usuario_a_comparar=SesionUsuario.ObtenerSesion();
+      usuario_a_comparar.telefono=parseInt(usuario_a_comparar.telefono);
+      if(JSON.stringify($scope.Usuario)!=JSON.stringify(usuario_a_comparar)){
         $scope.cargando=true;
         var data = {
             nombres : $scope.Usuario.nombres,

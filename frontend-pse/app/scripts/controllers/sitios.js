@@ -28,21 +28,21 @@ angular.module('frontendPseApp')
 	      columnDefs: [
 	        { 
 	        	field: 'id',
-	        	minWidth: 170
+	        	width: '25%', minWidth: 170
 	        },
 	        { 
 	        	field: 'nombre',
-	        	minWidth: 170
+	        	width: '25%', minWidth: 170
 	        },
 	        { 
 	        	field: 'ciudad',
-	        	minWidth: 170
+	        	width: '25%', minWidth: 170
 	        },
 	        { 
 	        	name: 'Opciones', 
 	        	enableFiltering: false, 
 	        	cellTemplate : casillaDeBotones,
-	        	minWidth: 170
+	        	width: '25%', minWidth: 170
 	        }
 	    ]
 	    }
@@ -144,6 +144,7 @@ angular.module('frontendPseApp')
   		function listarDepartamentos(){
 			ApiPse.getResource("Empresas/ListarDepartamentos")
 			.then(function(data){
+				ListarCiudades();
 				if(data.data.Estado==1){
 					$scope.departamentos = data.data.Datos;
 				}
@@ -154,6 +155,7 @@ angular.module('frontendPseApp')
 		function ListarCiudades(){
 			ApiPse.getResource("Empresas/ListarCiudades")
 			.then(function(data){
+				listarsitios();
 				if(data.data.Estado==1){
 					$scope.ciudades = data.data.Datos;
 				}
@@ -162,6 +164,4 @@ angular.module('frontendPseApp')
 			});
 		}
 		listarDepartamentos();
-		ListarCiudades();
-		listarsitios();
   });

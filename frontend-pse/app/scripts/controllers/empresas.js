@@ -34,25 +34,31 @@ angular.module('frontendPseApp')
 		columnDefs: [
 			{ 
 				name:'NIT', 
-				field: 'id'
+				field: 'id',
+				width: '17%', minWidth: 170
 			},
 			{ 
-				field: 'nombre'
+				field: 'nombre',
+				width: '17%', minWidth: 170
 			},
 			{ 
-				field: 'direccion'
+				field: 'direccion',
+				width: '17%', minWidth: 170
 			},
 			{ 
-				field: 'telefono'
+				field: 'telefono',
+				width: '17%', minWidth: 170
 			},
 			{ 
 				field: 'estado',
-				cellTemplate : '<div>{{grid.appScope.Estados.Estados[row.entity.estado]}}</div>'
+				cellTemplate : '<div>{{grid.appScope.Estados.Estados[row.entity.estado]}}</div>',
+				width: '16%', minWidth: 170
 			},
 			{ 
 				name: 'Opciones', 
 				enableFiltering: false, 
-				cellTemplate : casillaDeBotones
+				cellTemplate : casillaDeBotones,
+				width: '16%', minWidth: 170
 			}
 		]
 	}

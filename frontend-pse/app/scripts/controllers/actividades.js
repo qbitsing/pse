@@ -28,21 +28,21 @@ angular.module('frontendPseApp')
 		columnDefs: [
 			{ 
 				field: 'id',
-				minWidth: 170
+				width: '25%', minWidth: 170
 			},
 			{ 
 				name: 'nombre',
-				minWidth: 170
+				width: '25%', minWidth: 170
 			},
 			{ 
 				field: 'sitio',
-				minWidth: 170
+				width: '25%', minWidth: 170
 			},
 			{ 
 				name: 'Opciones', 
 				enableFiltering: false, 
 				cellTemplate : casillaDeBotones,
-				minWidth: 170
+				width: '25%', minWidth: 170
 			}
 
 	    ]
@@ -86,19 +86,21 @@ angular.module('frontendPseApp')
 		});
   	}
   	$scope.Editar = function(id) {
-		var obj = $scope.Identifiar(id);
+		var obj = $scope.Identificar(id);
 		$scope.Register = obj;
 		$scope.PanelTitulo = "Editar Sitio";
 		$scope.BotonTitulo = "Guardar Cambios";
 	}
 	$scope.Borrar = function(id) {
 		$scope.cargando = true;
-		var obj = $scope.Identifiar(id);
+		var obj = $scope.Identificar(id);
 		var ruta = "Actividades/Eliminar/"+obj.id;
 		ApiPse.getResource(ruta)
 		.then(function(data){
 			if(data.data.Estado == 1){
 				$scope.actividades.splice(obj.index , 1);
+			}else{
+				alert(data.data.Datos);
 			}
 			$scope.cargando = false;
 		},function(data){
@@ -106,7 +108,7 @@ angular.module('frontendPseApp')
 			console.log(data);
 		});
 	}
-	$scope.Identifiar = function(_id){
+	$scope.Identificar = function(_id){
 		var obj = {};
 		$scope.actividades.forEach(function(ele , index){
 			if(ele.id == _id){
@@ -124,14 +126,14 @@ angular.module('frontendPseApp')
 		$scope.Register = {};
 	}
 
-
-
-
   	function listarSitios(){
 		ApiPse.getResource("Sitios/ListarDisponible/"+$scope.Usuario.id_empresa)
 		.then(function(data){
+			listarActividades();
 			if(data.data.Estado==1){
 				$scope.sitios = data.data.Datos;
+			}else{
+				$scope.sitios=[{"id":"0","nombre":"No hay ningun sitio registrado"}];
 			}
 		},function(data){
 			console.log(data);
@@ -146,12 +148,10 @@ angular.module('frontendPseApp')
 			}else{
 				$scope.actividades=[];
 				$scope.gridOptions.data = $scope.actividades;
-				alert(data.data.Datos);
 			}
 		},function(data){
 			console.log(data);
 		});
 	}
 	listarSitios();
-	listarActividades();
   });

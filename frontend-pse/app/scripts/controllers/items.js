@@ -123,7 +123,6 @@ angular.module('frontendPseApp')
 	$scope.Borrar = function(id) {
 		$scope.cargando = true;
 		var obj = $scope.Identifiar(id);
-		
 		// var ruta = "Herramientas/Eliminar/"+obj.id;
 		// ApiPse.getResource(ruta)
 		// .then(function(data){
@@ -188,13 +187,13 @@ angular.module('frontendPseApp')
 					$scope.gridDates.data = $scope.herras;
 					alert(data.data.Datos);
 				}
+				listarItems();
 			},function(data){
 			}
 		);
 	}
 
 	$scope.AbrirModal = function(){
-
 		modal = $uibModal.open({
 			animation: true,
 			ariaLabelledBy: 'modal-title',
@@ -213,7 +212,6 @@ angular.module('frontendPseApp')
 		modal.close();
 	}
 	ListarHerramientas();
-	listarItems();
 })
 .controller('CrearHerramientaCtrl' , function($scope , Scope, $uibModal,ApiPse , Estados){
 	$scope.Estados = Estados;
