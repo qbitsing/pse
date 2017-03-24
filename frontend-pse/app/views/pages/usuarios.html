@@ -87,12 +87,15 @@
 	</div>
 	<div class="modal-body">
 		<ul>
-			<li> Documento: {{Detalle.id}}</li>
+			<li> Tipo de documento: {{Detalle.tipo_documento}}</li>
+			<li> Documento de identidad: {{Detalle.id}}</li>
 			<li> Nombres: {{Detalle.nombres}}</li>
 			<li> Apellidos: {{Detalle.apellidos}}</li>
 			<li> Telefono: {{Detalle.telefono}}</li>
 			<li> Direccion : {{Detalle.direccion }}</li>
 			<li> Correo: {{Detalle.correo}}</li>
+			<li> Cargo: {{Detalle.rol}}</li>
+			<li> Empresa: {{Detalle.empresa.nombre}}</li>
 		</ul>
 	</div>
 	<div class="modal-footer">

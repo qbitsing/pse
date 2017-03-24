@@ -59,31 +59,31 @@ angular.module('frontendPseApp')
 			}
 	  		$scope.Register.id_empresa=$scope.Usuario.id_empresa;
 	  		ApiPse.getResource(ruta,$scope.Register)
-	  		.then(
-	  			function(data){
-	  				$scope.cargando = false;
-	  				if(data.data.Estado==1){
-	  					for (var i = 0; i < $scope.ciudades.length; i++) {
-							if($scope.ciudades[i].id==parseInt($scope.Register.id_ciudad)){
-								$scope.Register.ciudad=$scope.ciudades[i].nombre;
-							}
+	  		.then(function(data){
+	  			$scope.cargando = false;
+				if(data.data.Estado==1){
+					for (var i = 0; i < $scope.ciudades.length; i++) {
+						if($scope.ciudades[i].id==parseInt($scope.Register.id_ciudad)){
+							$scope.Register.ciudad=$scope.ciudades[i].nombre;
 						}
-						$scope.Register.id=data.data.Datos.id;
-						$scope.PanelTitulo = "Registro de usuarios";
-						$scope.BotonTitulo = "Registrar Sitio"
-						if(ruta == "Sitios/Crear"){
-							$scope.sitios.push($scope.Register);
-							$scope.Register={};
-						}else{
-							$scope.sitios[$scope.Register.index] = $scope.Register;
-							$scope.Register={};
-						}
-	  				}
-	  			},function(data){
-	  				console.log(data);
-	  				$scope.cargando=false;
-
-	  		});
+					}
+					$scope.Register.id=data.data.Datos.id;
+					$scope.PanelTitulo = "Registro de usuarios";
+					$scope.BotonTitulo = "Registrar Sitio"
+					if(ruta == "Sitios/Crear"){
+						$scope.sitios.push($scope.Register);
+						$scope.Register={};
+					}else{
+						$scope.sitios[$scope.Register.index] = $scope.Register;
+						$scope.Register={};
+					}
+	  			}
+				alert(data.data.Datos);
+	  		},function(data){
+				console.log(data);
+				$scope.cargando=false;
+			}
+			);
 	  	}
 	  	$scope.Editar = function(id) {
 			var obj = $scope.Identifiar(id);
@@ -96,12 +96,11 @@ angular.module('frontendPseApp')
 			var obj = $scope.Identifiar(id);
 			ApiPse.getResource("Sitios/Eliminar/"+obj.id)
 			.then(function(data){
+				$scope.cargando = false;
 				if(data.data.Estado == 1){
 					$scope.sitios.splice(obj.index , 1);
-				}else{
-					alert('El sitio no se ha podido eliminar');
 				}
-				$scope.cargando = false;
+				alert(data.data.Datos);
 			},function(data){
 				$scope.cargando = false;
 				console.log(data);

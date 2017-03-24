@@ -36,25 +36,25 @@ angular.module('frontendPseApp')
 		columnDefs: [
 			{ 
 				field: 'nombres',
-				width: '17%', minWidth: 170
+				width: '15%', minWidth: 170
 			},
 			{ 
 				field: 'apellidos',
-				width: '17%', minWidth: 170
+				width: '15%', minWidth: 170
 			},
 			{ 
 				name: 'Documento',
 				field: 'id',
-				width: '17%', minWidth: 170
+				width: '15%', minWidth: 170
 			},
 			{ 
 				field: 'rol',
-				width: '17%', minWidth: 170
+				width: '15%', minWidth: 170
 			},
 			{ 
 				field: 'estado', 
 				cellTemplate : '<div>{{grid.appScope.Estados.Estados[row.entity.estado]}}</div>',
-				width: '16%', minWidth: 170
+				width: '15%', minWidth: 170
 			}
 
 	    ]
@@ -63,7 +63,7 @@ angular.module('frontendPseApp')
 		$scope.gridOptions.columnDefs.push({
 			field : 'empresa',
 			cellTemplate : '<div>{{row.entity.empresa.nombre || "No posee"}}</div>',
-			width: '16%', minWidth: 170
+			width: '15%', minWidth: 170
 		});
 	}
 
@@ -83,10 +83,10 @@ angular.module('frontendPseApp')
 		if($scope.BotonTitulo == "Guardar Cambios"){
 			ruta = "Usuarios/Actualizar/"+$scope.Register.id;
 		}
-		$scope.cargando = true;
 		if($scope.Usuario.rol == "Administrador"){
 			$scope.Register.id_empresa = $scope.Usuario.id_empresa;
 		}
+		$scope.cargando = true;
 		ApiPse
 		.getResource(ruta,$scope.Register)
 		.then(function(data){
@@ -97,16 +97,19 @@ angular.module('frontendPseApp')
 				if(ruta == "Usuarios/Crear"){
 					$sope.Register.estado=1;
 					$scope.Usuarios.push($scope.Register);
-					$scope.Register={};
 				}else{
-					$scope.empresas.forEach(function(ele , index){
-						if(ele.id == $scope.Register.id_empresa){
-							$scope.Register.empresa=ele;
-						}
-					});
-					$scope.Usuarios[$scope.Register.index] = $scope.Register;
-					$scope.Register={};
+					if($scope.Register.rol!="Super Administrador"){
+						$scope.empresas.forEach(function(ele , index){
+							if(ele.id == $scope.Register.id_empresa){
+								$scope.Register.empresa=ele;
+							}
+						});
+						$scope.Usuarios[$scope.Register.index] = $scope.Register;
+					}else{
+						$scope.Usuarios.splice($scope.Register.index , 1);
+					}
 				}
+				$scope.Register={};
 			}
 			alert(data.data.Datos);
 		},function(data){
@@ -158,6 +161,20 @@ angular.module('frontendPseApp')
 	}
 	$scope.Detalles = function(id) {
 		$scope.obj = $scope.Identificar(id);
+		switch($scope.obj.tipo_doc) {
+			case '0':
+				$scope.obj.tipo_documento="Nit";
+				break;
+			case '1':
+				$scope.obj.tipo_documento="Cedula de Ciudadania";
+				break;
+			case '2':
+				$scope.obj.tipo_documento="Cedula de Extranjeria";
+				break;
+			case '3':
+				$scope.obj.tipo_documento="Pasaporte";
+				break;
+		}
 		modalInstance = $uibModal.open({
 			animation: true,
 			ariaLabelledBy: 'modal-title',
@@ -195,7 +212,6 @@ angular.module('frontendPseApp')
 				obj.id_empresa = ele.id_empresa;
 				obj.empresa=ele.empresa;
 				obj.tipo_doc = ele.tipo_doc.toString();
-
 			}
 		});
 		return obj;
@@ -244,5 +260,4 @@ angular.module('frontendPseApp')
 	$scope.Cerrar=function(){
 		Scope.cerrarModal();
 	}
-
 });

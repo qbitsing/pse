@@ -121,7 +121,7 @@ angular.module('frontendPseApp')
 		$scope.BotonTitulo = "Guardar Cambios";
 	}
 	$scope.Borrar = function(id) {
-		$scope.cargando = true;
+		//$scope.cargando = true;
 		var obj = $scope.Identifiar(id);
 		// var ruta = "Herramientas/Eliminar/"+obj.id;
 		// ApiPse.getResource(ruta)
@@ -231,6 +231,7 @@ angular.module('frontendPseApp')
 		.then(
 			function(data){
 				if(data.data.Estado==1){
+					$scope.cargandodos = false;
 					if(ruta == "Herramientas/Crear"){
 						$scope.Herramienta.id=data.data.Datos.id;
 						$scope.Herramienta.estado=1;
@@ -242,7 +243,7 @@ angular.module('frontendPseApp')
 					}
 					$scope.Herramienta = {};
 				}
-				$scope.cargandodos = false;
+				alert(data.data.Datos);
 			},function(data){
 				console.log(data);
 				$scope.cargando = false;
@@ -257,17 +258,18 @@ angular.module('frontendPseApp')
 		$scope.BotonTitulo = "Guardar Cambios";
 	}
 	$scope.Borrar = function(id) {
-		$scope.cargando = true;
+		$scope.cargandodos = true;
 		var obj = $scope.Identifiar(id);
 		var ruta = "Herramientas/Eliminar/"+obj.id;
 		ApiPse.getResource(ruta)
 		.then(function(data){
+			$scope.cargandodos = false;
 			if(data.data.Estado == 1){
 				$scope.Herramientas.splice(obj.index , 1);
 			}
-			$scope.cargando = false;
+			alert(data.data.Datos);
 		},function(data){
-			$scope.cargando = false;
+			$scope.cargandodos = false;
 			console.log(data);
 		});
 	}

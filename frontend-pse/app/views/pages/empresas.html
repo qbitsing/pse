@@ -51,7 +51,7 @@
 <div  class="col-sm-12">
 	<div class="panel {{panelAnimate}}">
 		<div class="panel-heading">
-			<h3 class="panel-title">Lista de Actividades</h3>
+			<h3 class="panel-title">Lista de Empresas</h3>
 		</div>
 		<div class="panel-body" >
 			<div class="gridStyle grid" ui-grid="gridOptions" ui-grid-pagination ui-grid-auto-resize ui-grid-resize-columns ui-grid-move-columns></div>
@@ -65,11 +65,12 @@
 	</div>
 	<div class="modal-body">
 		<ul>
-			<li> Documento: {{Detalle.id}}</li>
+			<li> NIT: {{Detalle.id}}</li>
 			<li> Nombres: {{Detalle.nombre}}</li>
-			<li> Apellidos: {{Detalle.direccion}}</li>
+			<li> Direccion: {{Detalle.direccion}}</li>
 			<li> Telefono: {{Detalle.telefono}}</li>
-			<li> Direccion : {{Detalle.ciudad }}</li>
+			<li> Ciudad: {{Detalle.nombre_ciudad}}</li>
+			<li> Departamento: {{Detalle.nombre_departamento}}</li>
 		</ul>
 	</div>
 	<div class="modal-footer">

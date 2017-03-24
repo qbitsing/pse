@@ -59,7 +59,6 @@ angular.module('frontendPseApp')
   		if($scope.BotonTitulo == "Guardar Cambios"){
   			ruta = "Actividades/Actualizar/"+$scope.Register.id;
   		}
-  		console.log($scope.Register);
   		ApiPse.getResource(ruta,$scope.Register)
 		.then(function(data){
 			$scope.cargando = false;
@@ -78,10 +77,10 @@ angular.module('frontendPseApp')
 				$scope.PanelTitulo = "Registro de sitios";
 				$scope.BotonTitulo = "Registrar sitios";
 				$scope.Register={};
-			}else{
-				alert(data.data.Datos);
 			}
+			alert(data.data.Datos);
 		},function(data){
+			$scope.cargando = false;
 			console.log(data);
 		});
   	}
@@ -97,12 +96,11 @@ angular.module('frontendPseApp')
 		var ruta = "Actividades/Eliminar/"+obj.id;
 		ApiPse.getResource(ruta)
 		.then(function(data){
+			$scope.cargando = false;
 			if(data.data.Estado == 1){
 				$scope.actividades.splice(obj.index , 1);
-			}else{
-				alert(data.data.Datos);
 			}
-			$scope.cargando = false;
+			alert(data.data.Datos);
 		},function(data){
 			$scope.cargando = false;
 			console.log(data);
