@@ -134,7 +134,6 @@ angular.module('frontendPseApp')
 				}else{
 					$scope.sitios=[];
 					$scope.gridOptions.data = $scope.sitios;
-					alert(data.data.Datos);
 				}
 			},function(data){
 

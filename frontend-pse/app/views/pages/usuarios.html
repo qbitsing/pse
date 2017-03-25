@@ -95,7 +95,7 @@
 			<li> Direccion : {{Detalle.direccion }}</li>
 			<li> Correo: {{Detalle.correo}}</li>
 			<li> Cargo: {{Detalle.rol}}</li>
-			<li> Empresa: {{Detalle.empresa.nombre}}</li>
+			<li ng-show="Usuario.rol=='Super Administrador'"> Empresa: {{Detalle.empresa.nombre}}</li>
 		</ul>
 	</div>
 	<div class="modal-footer">

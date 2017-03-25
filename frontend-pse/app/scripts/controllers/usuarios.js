@@ -223,8 +223,6 @@ angular.module('frontendPseApp')
 			ListarUsuarios();
 			if(data.data.Estado==1){
 				$scope.empresas=data.data.Datos;
-			}else{
-				$scope.empresas=[{"id":"0","nombre":"No hay ninguna empresa registrada"}];
 			}
 		},function(data){
 			
@@ -256,6 +254,7 @@ angular.module('frontendPseApp')
 	ListarEmpresa();
 })
 .controller('DetalleUsuarioModalCtrl', function ($scope ,Scope) {
+	$scope.Usuario=Scope.Usuario;
 	$scope.Detalle=Scope.obj;
 	$scope.Cerrar=function(){
 		Scope.cerrarModal();

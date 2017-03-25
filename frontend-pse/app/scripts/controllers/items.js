@@ -62,18 +62,14 @@ angular.module('frontendPseApp')
     $scope.gridDates = {
 		columnDefs: [
 			{ 
-				field: 'id',
-				width: '33.99%', minWidth: 170
-			},
-			{ 
 				field: 'nombre',
-				width: '33.99%', minWidth: 170
+				width: '50%', minWidth: 170
 			},
 			{ 
 				name: 'Opciones', 
 				enableFiltering: false, 
 				cellTemplate : casillaDeBotonesDates,
-				width: '33.99%', minWidth: 170
+				width: '50%', minWidth: 170
 			}
 		]
     }
@@ -167,7 +163,6 @@ angular.module('frontendPseApp')
 				}else{
 					$scope.items=[];
 					$scope.gridOptions.data = $scope.items;
-					alert(data.data.Datos);
 				}
 			},function(data){
 			}
@@ -179,13 +174,10 @@ angular.module('frontendPseApp')
 			function(data){
 				if(data.data.Estado==1){
 					$scope.herramientas=data.data.Datos;
-					$scope.herras=data.data.Datos;
-          			$scope.gridDates.data = $scope.herras;
+          			$scope.gridDates.data = $scope.herramientas;
 				}else{
 					$scope.herramientas=[];
-					$scope.herras=[];
-					$scope.gridDates.data = $scope.herras;
-					alert(data.data.Datos);
+					$scope.gridDates.data = $scope.herramientas;
 				}
 				listarItems();
 			},function(data){
@@ -219,7 +211,6 @@ angular.module('frontendPseApp')
 	$scope.BotonTitulo = "Registrar Herramienta";
 	$scope.cargandodos=false;
 	$scope.gridDates=Scope.gridDates;
-	$scope.Herramientas = $scope.gridDates.data;
 	$scope.RegisterHerramienta=function(){
 		$scope.cargandodos=true;
 		var ruta = "Herramientas/Crear";
@@ -236,14 +227,18 @@ angular.module('frontendPseApp')
 						$scope.Herramienta.id=data.data.Datos.id;
 						$scope.Herramienta.estado=1;
 						Scope.herramientas.push($scope.Herramienta);
+						alert('Herramienta creada exitosamente');
 					}else{
 						Scope.herramientas[$scope.Herramienta.index] = $scope.Herramienta;
 						$scope.PanelTitulo = "Registro de Herramientas";
 						$scope.BotonTitulo = "Registrar Herramienta";
+						alert(data.data.Datos);
 					}
 					$scope.Herramienta = {};
+				}else{
+					alert(data.data.Datos);
 				}
-				alert(data.data.Datos);
+				
 			},function(data){
 				console.log(data);
 				$scope.cargando = false;
@@ -265,7 +260,7 @@ angular.module('frontendPseApp')
 		.then(function(data){
 			$scope.cargandodos = false;
 			if(data.data.Estado == 1){
-				$scope.Herramientas.splice(obj.index , 1);
+				Scope.herramientas.splice(obj.index , 1);
 			}
 			alert(data.data.Datos);
 		},function(data){

@@ -130,8 +130,6 @@ angular.module('frontendPseApp')
 			listarActividades();
 			if(data.data.Estado==1){
 				$scope.sitios = data.data.Datos;
-			}else{
-				$scope.sitios=[{"id":"0","nombre":"No hay ningun sitio registrado"}];
 			}
 		},function(data){
 			console.log(data);
